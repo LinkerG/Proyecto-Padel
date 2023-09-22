@@ -2,6 +2,7 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.sql.*;
 
 public class Court {
     // Attributes
