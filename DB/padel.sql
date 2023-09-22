@@ -7,7 +7,7 @@ CREATE TABLE user(
     name varchar(20),
     surname1 varchar(30),
     surname2 varchar(30),
-    DNI varchar(9),
+    DNI varchar(9) unique,
     email varchar(20),
     birthDate date,
     accesName varchar(20) unique not null,
