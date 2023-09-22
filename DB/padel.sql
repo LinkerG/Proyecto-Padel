@@ -28,7 +28,7 @@ CREATE TABLE booking(
     courtId int,
     day date,
     hour int,
-    status enum("FREE", "PAID", "BOOKED", "BLOCKED"),
+    status enum("FREE", "PAID", "BOOKED", "BLOCKED", "CANCELLED"),
     PRIMARY KEY (bookingId, userId, courtId),
     FOREIGN KEY (userId) REFERENCES user(userId),
     FOREIGN KEY (courtId) REFERENCES court(courtId)
