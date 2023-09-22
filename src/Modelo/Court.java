@@ -1,5 +1,5 @@
 package Modelo;
 
-public class User {
+public class Court {
     
 }
