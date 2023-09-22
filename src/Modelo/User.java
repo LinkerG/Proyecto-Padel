@@ -1,5 +1,8 @@
 package Modelo;
 
+import java.sql.*;
+import java.util.Calendar;
+
 public class User {
     //Attributes
     private String name;
@@ -55,20 +58,13 @@ public class User {
     
     //Methods
     //As admin, creates a new Court
-    public void createCourt(){
-        
+    public void createCourt(String name, boolean isEnabled, Statement connection){
+        //TO-DO SQL INSERT INTO pista
     }
-    //As client or admin, books a court and changes it state to block other bookings
-    public void bookCourt(){
-        
-    }
-    //As admin, sets a booked court as payed, this blocks court state in a certain hour that cannot be changed anymore
-    public void payCourt(){
-        
-    }
-    //As client or admin, cancels a booked court and sets that certain hour free
-    public void cancelCourt(){
-        
+    //As client or admin, books a court and changes the state
+    public void modifyCourt(CourtState state, Court targetCourt, Calendar day, Statement connection){
+        //TO-DO comprobar user/admin
+        //TO-DO actualizar informacion de la pista con CourtState
     }
     //As admin, sets a court as blocked that cannot be booked, if the court has a book programmed that certain hour, it will dissapear
     public void blockCourt(Court targetCourt){

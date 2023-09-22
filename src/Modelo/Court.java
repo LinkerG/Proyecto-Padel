@@ -7,13 +7,13 @@ public class Court {
     // Attributes
     private int ID;
     private String name;
-    private String status;
+    private boolean isActive;
     
     // Constructor
-    public Court(int ID, String name, String status) {
+    public Court(int ID, String name, boolean isActive) {
         this.ID = ID;
         this.name = name;
-        this.status = status;
+        this.isActive = isActive;
     }
     
     // Get / Set
@@ -33,13 +33,7 @@ public class Court {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    
     
     // Methods
     public void changeStatus(String status) {
