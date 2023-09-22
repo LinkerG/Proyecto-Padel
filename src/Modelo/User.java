@@ -8,16 +8,16 @@ public class User {
     private String name;
     private String surname;
     private String DNI;
-    private boolean isActive;
-    private boolean isAdmin;
+    private boolean active;
+    private boolean admin;
     
     //Constructor
-    User(String name, String surname, String DNI, boolean isActive, boolean isAdmin){
+    User(String name, String surname, String DNI, boolean active, boolean admin){
         this.name = name;
         this.surname = surname;
         this.DNI = DNI;
-        this.isActive = isActive;
-        this.isAdmin = isAdmin;
+        this.active = active;
+        this.admin = admin;
     }
     
     //Setters & Getters
@@ -42,18 +42,18 @@ public class User {
         this.DNI = DNI;
     }
 
-    public boolean isIsActive() {
-        return isActive;
+    public boolean isActive() {
+        return active;
     }
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
+    public boolean isAdmin() {
+        return admin;
     }
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
     
     //Methods
@@ -62,20 +62,22 @@ public class User {
         //TO-DO SQL INSERT INTO pista
     }
     //As client or admin, books a court and changes the state
-    public void modifyCourt(CourtState state, Court targetCourt, Calendar day, Statement connection){
-        //TO-DO comprobar user/admin
+    public void modifyBook(CourtState state, Court targetCourt, Calendar day, Statement connection){
         //TO-DO actualizar informacion de la pista con CourtState
     }
-    //As admin, sets a court as blocked that cannot be booked, if the court has a book programmed that certain hour, it will dissapear
-    public void blockCourt(Court targetCourt){
-        
+    //As admin, sets a court as blocked that cannot be booked, if the court has a book programmed at a certain hour, it will change the book state to CANCELED
+    public void toggleCourt(Court targetCourt){
+        //TO-DO actualiza el estado de la pista (activo/no activo)
+        //Si la pista ahora esta inactiva, CANCELA todas las reservas futuras relacionadas y comprueba la disponibilidad espejo de otras pistas, si hay una libre, la asigna automaticamente
     }
     //As admin, registers a new user to the database
-    public void registerUser(){
-        
+    public void registerUser(String name, String surname, String DNI, boolean admin){
+        //TO-DO SQL INSERT INTO user
+        //Default ACTIVO
     }
     //As admin, unsubscribes a user from the database (deactivates the user)
-    public void unsubscribeUser(){
-        
+    public void toggleUserSubscription(User targetUser){
+        //UPDATE USER userDNI !active
+        //Si el usuario tiene reservas proximas a su nombre, se cancela
     }
 }

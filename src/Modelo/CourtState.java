@@ -4,5 +4,6 @@ public enum CourtState {
     FREE,
     BOOKED,
     PAID,
-    BLOCKED;
+    BLOCKED,
+    CANCELED;
 }
