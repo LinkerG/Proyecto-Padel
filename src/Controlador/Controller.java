@@ -8,6 +8,7 @@ import java.sql.*;
 
 public class Controller {
     public static LoginMenu loginMenu = new LoginMenu();
+    public static AdminMenu adminMenu = new AdminMenu();
     private static Statement statement = connectToDatabase();
 
     public static void startApp(){
@@ -55,9 +56,11 @@ public class Controller {
                 prepareQuery.setString(2, hexString.toString());
                 ResultSet queryResult = prepareQuery.executeQuery();
                 while(queryResult.next()){
-                    System.out.println("hola");
-                    System.out.println(queryResult.getInt("isActive"));
-                    System.out.println(queryResult.getInt("isAdmin"));
+                    if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 1){
+                        adminMenu.setTitle("Admin menu");
+                        adminMenu.setVisible(true);
+                        loginMenu.setVisible(false);
+                    }
                 }
             } catch(SQLException ex){
                 ex.printStackTrace();
