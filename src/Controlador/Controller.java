@@ -35,7 +35,6 @@ public class Controller {
     }
     public static void checkUser(String username, char[] password){
         String stringPassw = String.valueOf(password);
-        System.out.println(password);
         String consultaSQL = "SELECT * FROM user WHERE name = ? AND password = ?";
         try {
             // Obtener una instancia del objeto MessageDigest con el algoritmo MD5
@@ -53,7 +52,7 @@ public class Controller {
 
             try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
                 prepareQuery.setString(1, username);
-                prepareQuery.setString(2, stringPassw);
+                prepareQuery.setString(2, hexString.toString());
                 ResultSet queryResult = prepareQuery.executeQuery();
                 while(queryResult.next()){
                     System.out.println("hola");
