@@ -15,7 +15,7 @@ public class Controller {
     public static Statement connectToDatabase(){
         Connection connection;
         Statement statement = null;
-        String driver = "com.mysql.jdbc.Driver";
+        String driver = "com.mysql.cj.jdbc.Driver";
         String connectionUrl = "jdbc:mysql://localhost/padel";
         String user = "root";
         String passw = "";
