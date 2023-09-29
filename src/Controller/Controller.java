@@ -1,16 +1,18 @@
 package Controller;
 
-import View.AdminMenu;
+import View.AdminSelect;
 import View.LoginMenu;
+import Model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 public class Controller {
-    public static LoginMenu loginMenu = new LoginMenu();
-    public static AdminMenu adminMenu = new AdminMenu();
     private static Statement statement = connectToDatabase();
+    public static LoginMenu loginMenu = new LoginMenu();
+    public static AdminSelect adminMenu = new AdminSelect();
 
     public static void startApp(){
         loginMenu.setTitle("Log in");
@@ -80,24 +82,24 @@ public class Controller {
         }
     }
     
-    public static void printCourts(boolean available, javax.swing.JPanel parent) {
+    public static ArrayList getCourts(boolean available) {
         String consultaSQL = "SELECT * FROM court WHERE isAvailable = ?";
-        String isAvailable = available ? "1" : "0";
+        int isAvailable = available ? 1 : 0;
+        ArrayList<Court> courtList = new ArrayList<>();
         try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
-            prepareQuery.setString(1, isAvailable);
+            prepareQuery.setInt(1, isAvailable);
             ResultSet queryResult = prepareQuery.executeQuery();
-            while(queryResult.next()){
-                javax.swing.JButton boton = new javax.swing.JButton(queryResult.getString("name"));
-                
-                boton.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        abrirPista(evt);
-                    }
-                });
-                parent.add(boton);
+            while(queryResult.next()){ 
+                int id = queryResult.getInt("courtId");
+                String name = queryResult.getString("name");
+                boolean isActive = queryResult.getInt("isAvailable") == 1 ? true : false;
+                Court newCourt = new Court(id, name, isActive);
+                courtList.add(newCourt);
             }
-        } catch(SQLException ex) {
+        } catch(Exception ex) {
             ex.printStackTrace();
+        } finally {
+            return courtList;
         }
     }
     
@@ -105,7 +107,7 @@ public class Controller {
         JOptionPane.showMessageDialog(null, error);
     }
     
-    private static void abrirPista(java.awt.event.ActionEvent evt) {                                             
+    private static void abrirPista() {                                             
         System.out.println("Hola");
     } 
 }
