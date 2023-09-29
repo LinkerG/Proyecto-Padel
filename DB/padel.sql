@@ -8,9 +8,8 @@ CREATE TABLE user(
     surname1 varchar(30),
     surname2 varchar(30),
     DNI varchar(9) unique,
-    email varchar(20),
     birthDate date,
-    accesName varchar(20) unique not null,
+    email varchar(20) unique not null,
     password varchar(50) not null,
     isActive tinyint(1) not null,
     isAdmin tinyint(1) not null
@@ -34,5 +33,8 @@ CREATE TABLE booking(
     FOREIGN KEY (courtId) REFERENCES court(courtId)
 );
 
-INSERT INTO user (name, accesName, password, isActive, isAdmin) 
-VALUES("admin", "admin", md5("admin"), 1, 1);
+INSERT INTO user (name, email, password, isActive, isAdmin) 
+VALUES("admin", "admin@admin.com", md5("admin"), 1, 1);
+
+INSERT INTO `user` (`name`, `surname1`, `surname2`, `DNI`, `email`, `birthDate`, `password`, `isActive`, `isAdmin`) 
+VALUES ('test', 'test', 'test', '54545454B', 'test@gmail.com', '0000-00-00', md5('test'), '1', '0')
