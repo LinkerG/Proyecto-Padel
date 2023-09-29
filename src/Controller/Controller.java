@@ -5,6 +5,7 @@ import View.LoginMenu;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 public class Controller {
     public static LoginMenu loginMenu = new LoginMenu();
@@ -34,9 +35,9 @@ public class Controller {
         }
         return estado;
     }
-    public static void checkUser(String username, char[] password){
+    public static void checkUser(String email, char[] password){
         String stringPassw = String.valueOf(password);
-        String consultaSQL = "SELECT * FROM user WHERE name = ? AND password = ?";
+        String consultaSQL = "SELECT * FROM user WHERE email = ? AND password = ?";
         try {
             // Obtener una instancia del objeto MessageDigest con el algoritmo MD5
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -52,15 +53,24 @@ public class Controller {
             }
 
             try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
-                prepareQuery.setString(1, username);
+                prepareQuery.setString(1, email);
                 prepareQuery.setString(2, hexString.toString());
                 ResultSet queryResult = prepareQuery.executeQuery();
+                boolean exists = false;
                 while(queryResult.next()){
+                    exists = true;
                     if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 1){
                         adminMenu.setTitle("Admin menu");
                         adminMenu.setVisible(true);
                         loginMenu.setVisible(false);
+                    } else if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 0) {
+                        System.out.println("Normal user");
+                    } else if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 0) {
+                        mostrarError("The user you tried to log in is currently inactive");
                     }
+                }
+                if(!exists) {
+                    mostrarError("Email or password incorrect");
                 }
             } catch(SQLException ex){
                 ex.printStackTrace();
@@ -69,5 +79,23 @@ public class Controller {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+    }
+    
+    public static void printCourts(boolean available, javax.swing.JPanel parent) {
+        String consultaSQL = "SELECT * FROM court WHERE isAvailable = ?";
+        String isAvailable = available ? "1" : "0";
+        try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
+            prepareQuery.setString(1, isAvailable);
+            ResultSet queryResult = prepareQuery.executeQuery();
+            while(queryResult.next()){
+                javax.swing.JButton boton = new javax.swing.JButton();
+            }
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void mostrarError(String error) {
+        JOptionPane.showMessageDialog(null, error);
     }
 }
