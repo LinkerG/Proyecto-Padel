@@ -1,7 +1,7 @@
-package Controlador;
+package Controller;
 
-import Modelo.*;
-import Vista.*;
+import View.AdminMenu;
+import View.LoginMenu;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
