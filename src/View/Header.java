@@ -3,11 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-/**
- *
- * @author isard
- */
 public class Header extends javax.swing.JFrame {
 
     /**
@@ -30,13 +28,11 @@ public class Header extends javax.swing.JFrame {
         LabelLogo = new javax.swing.JLabel();
         LabelTitle = new javax.swing.JLabel();
         LabelTitle1 = new javax.swing.JLabel();
-        BtnLogout = new javax.swing.JButton();
         BtnClose = new javax.swing.JButton();
+        BtnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1192, 100));
         setMinimumSize(new java.awt.Dimension(1192, 100));
-        setPreferredSize(new java.awt.Dimension(1192, 100));
 
         PanelBackground.setBackground(new java.awt.Color(0, 56, 64));
         PanelBackground.setMaximumSize(new java.awt.Dimension(1192, 100));
@@ -45,9 +41,6 @@ public class Header extends javax.swing.JFrame {
         PanelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/headerLogo.png"))); // NOI18N
-        LabelLogo.setMaximumSize(new java.awt.Dimension(100, 100));
-        LabelLogo.setMinimumSize(new java.awt.Dimension(100, 100));
-        LabelLogo.setPreferredSize(new java.awt.Dimension(100, 100));
         PanelBackground.add(LabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         LabelTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
@@ -63,20 +56,25 @@ public class Header extends javax.swing.JFrame {
         LabelTitle1.setText("Booking of Padel Courts");
         PanelBackground.add(LabelTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 36, -1, -1));
 
+        BtnClose.setBackground(new java.awt.Color(0, 56, 64));
+        BtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
+        BtnClose.setBorder(null);
+        BtnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCloseActionPerformed(evt);
+            }
+        });
+        PanelBackground.add(BtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 36, -1, -1));
+
         BtnLogout.setBackground(new java.awt.Color(0, 56, 64));
-        BtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
+        BtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout.png"))); // NOI18N
         BtnLogout.setBorder(null);
         BtnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLogoutActionPerformed(evt);
             }
         });
-        PanelBackground.add(BtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 36, -1, -1));
-
-        BtnClose.setBackground(new java.awt.Color(0, 56, 64));
-        BtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout.png"))); // NOI18N
-        BtnClose.setBorder(null);
-        PanelBackground.add(BtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 36, -1, -1));
+        PanelBackground.add(BtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 36, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,8 +90,12 @@ public class Header extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+    private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
         System.exit(0);
+    }//GEN-LAST:event_BtnCloseActionPerformed
+
+    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
 
