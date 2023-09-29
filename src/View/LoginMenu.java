@@ -4,6 +4,10 @@ import Controller.Controller;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class LoginMenu extends javax.swing.JFrame {
     
@@ -13,6 +17,18 @@ public class LoginMenu extends javax.swing.JFrame {
         initComponents();
         getContentPane().setBackground(new Color(0, 56, 64));
         setLocationRelativeTo(null);
+        
+        BufferedImage iconImage = null;
+        try {
+            iconImage = ImageIO.read(new File("src/img/iconImage.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Establece la imagen como ícono de la ventana
+        if (iconImage != null) {
+            setIconImage(iconImage);
+        }
         
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -45,9 +61,9 @@ public class LoginMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 56, 64));
+        setMaximumSize(new java.awt.Dimension(417, 582));
         setMinimumSize(new java.awt.Dimension(417, 582));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(417, 582));
         setResizable(false);
         setSize(new java.awt.Dimension(417, 582));
 
@@ -94,6 +110,7 @@ public class LoginMenu extends javax.swing.JFrame {
         BtnLogin.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         BtnLogin.setForeground(new java.awt.Color(255, 255, 255));
         BtnLogin.setText("Login");
+        BtnLogin.setBorder(null);
         BtnLogin.setMaximumSize(new java.awt.Dimension(236, 50));
         BtnLogin.setMinimumSize(new java.awt.Dimension(236, 50));
         BtnLogin.setPreferredSize(new java.awt.Dimension(236, 50));
@@ -115,9 +132,6 @@ public class LoginMenu extends javax.swing.JFrame {
         BtnClose.setBackground(new java.awt.Color(0, 56, 64));
         BtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         BtnClose.setBorder(null);
-        BtnClose.setMaximumSize(new java.awt.Dimension(32, 32));
-        BtnClose.setMinimumSize(new java.awt.Dimension(32, 32));
-        BtnClose.setPreferredSize(new java.awt.Dimension(32, 32));
         BtnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCloseActionPerformed(evt);
