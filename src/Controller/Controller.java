@@ -75,7 +75,6 @@ public class Controller {
             } catch(SQLException ex){
                 ex.printStackTrace();
             }
-
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -88,7 +87,14 @@ public class Controller {
             prepareQuery.setString(1, isAvailable);
             ResultSet queryResult = prepareQuery.executeQuery();
             while(queryResult.next()){
-                javax.swing.JButton boton = new javax.swing.JButton();
+                javax.swing.JButton boton = new javax.swing.JButton(queryResult.getString("name"));
+                
+                boton.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        abrirPista(evt);
+                    }
+                });
+                parent.add(boton);
             }
         } catch(SQLException ex) {
             ex.printStackTrace();
@@ -98,4 +104,8 @@ public class Controller {
     public static void mostrarError(String error) {
         JOptionPane.showMessageDialog(null, error);
     }
+    
+    private static void abrirPista(java.awt.event.ActionEvent evt) {                                             
+        System.out.println("Hola");
+    } 
 }
