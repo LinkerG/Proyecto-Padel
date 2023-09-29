@@ -75,7 +75,7 @@ public class Controller {
                     mostrarError("Email or password incorrect");
                 }
             } catch(SQLException ex){
-                ex.printStackTrace();
+                System.out.print("ErrorMySQL");
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

@@ -2,12 +2,32 @@ package View;
 
 import Controller.Controller;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginMenu extends javax.swing.JFrame {
-
+    
+    private int posX, posY;
+    
     public LoginMenu() {
         initComponents();
         getContentPane().setBackground(new Color(0, 56, 64));
+        setLocationRelativeTo(null);
+        
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();
+                posY = e.getY();
+            }
+        });
+
+        addMouseMotionListener(new MouseAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getXOnScreen() - posX;
+                int y = e.getYOnScreen() - posY;
+                setLocation(x, y);
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -21,14 +41,20 @@ public class LoginMenu extends javax.swing.JFrame {
         TxtboxPassword = new javax.swing.JPasswordField();
         BtnLogin = new javax.swing.JButton();
         LabelLogo = new javax.swing.JLabel();
+        BtnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 56, 64));
         setMinimumSize(new java.awt.Dimension(417, 582));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(417, 582));
         setResizable(false);
         setSize(new java.awt.Dimension(417, 582));
 
         PanelBackground.setBackground(new java.awt.Color(0, 56, 64));
+        PanelBackground.setMaximumSize(new java.awt.Dimension(417, 582));
+        PanelBackground.setMinimumSize(new java.awt.Dimension(417, 582));
+        PanelBackground.setPreferredSize(new java.awt.Dimension(417, 582));
         PanelBackground.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
@@ -78,18 +104,36 @@ public class LoginMenu extends javax.swing.JFrame {
         });
         PanelBackground.add(BtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 486, -1, -1));
 
+        LabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
         LabelLogo.setText("jLabel1");
-        PanelBackground.add(LabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
+        LabelLogo.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png"))); // NOI18N
+        LabelLogo.setMaximumSize(new java.awt.Dimension(265, 257));
+        LabelLogo.setMinimumSize(new java.awt.Dimension(265, 257));
+        LabelLogo.setPreferredSize(new java.awt.Dimension(265, 257));
+        PanelBackground.add(LabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 14, -1, 257));
+
+        BtnClose.setBackground(new java.awt.Color(0, 56, 64));
+        BtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
+        BtnClose.setBorder(null);
+        BtnClose.setMaximumSize(new java.awt.Dimension(32, 32));
+        BtnClose.setMinimumSize(new java.awt.Dimension(32, 32));
+        BtnClose.setPreferredSize(new java.awt.Dimension(32, 32));
+        BtnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCloseActionPerformed(evt);
+            }
+        });
+        PanelBackground.add(BtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 14, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+            .addComponent(PanelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -107,8 +151,13 @@ public class LoginMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtboxPasswordActionPerformed
 
+    private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BtnCloseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton BtnClose;
     public javax.swing.JButton BtnLogin;
     public javax.swing.JLabel LabelLogo;
     public javax.swing.JLabel LabelPassword;
