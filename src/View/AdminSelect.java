@@ -36,7 +36,7 @@ public class AdminSelect extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1192, 582));
         setMinimumSize(new java.awt.Dimension(1192, 582));
-        setPreferredSize(new java.awt.Dimension(1192, 582));
+        setUndecorated(true);
 
         PanelBackground.setBackground(new java.awt.Color(0, 56, 64));
         PanelBackground.setMaximumSize(new java.awt.Dimension(1192, 100));

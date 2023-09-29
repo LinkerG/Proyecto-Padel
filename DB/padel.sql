@@ -3,7 +3,7 @@ CREATE DATABASE padel;
 USE padel;
 
 CREATE TABLE user(
-    email varchar(20) PRIMARY KEY not null,
+    email varchar(50) PRIMARY KEY not null,
     password varchar(50) not null,
     name varchar(20),
     surname varchar(100),
@@ -20,13 +20,13 @@ CREATE TABLE court(
 
 CREATE TABLE booking(
     bookingId int AUTO_INCREMENT,
-    userId int,
+    email varchar(50),
     courtId int,
     day date,
     hour int,
     status enum("FREE", "PAID", "BOOKED", "BLOCKED", "CANCELLED"),
-    PRIMARY KEY (bookingId, userId, courtId),
-    FOREIGN KEY (userId) REFERENCES user(userId),
+    PRIMARY KEY (bookingId, email, courtId),
+    FOREIGN KEY (email) REFERENCES user(email),
     FOREIGN KEY (courtId) REFERENCES court(courtId)
 );
 
