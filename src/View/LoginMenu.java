@@ -20,6 +20,7 @@ public class LoginMenu extends javax.swing.JFrame {
         LabelPassword = new javax.swing.JLabel();
         TxtboxPassword = new javax.swing.JPasswordField();
         BtnLogin = new javax.swing.JButton();
+        LabelLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 56, 64));
@@ -54,6 +55,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
         TxtboxPassword.setBackground(new java.awt.Color(0, 90, 91));
         TxtboxPassword.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
         TxtboxPassword.setPreferredSize(new java.awt.Dimension(236, 50));
         TxtboxPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +77,9 @@ public class LoginMenu extends javax.swing.JFrame {
             }
         });
         PanelBackground.add(BtnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 486, -1, -1));
+
+        LabelLogo.setText("jLabel1");
+        PanelBackground.add(LabelLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +110,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnLogin;
+    public javax.swing.JLabel LabelLogo;
     public javax.swing.JLabel LabelPassword;
     public javax.swing.JPanel PanelBackground;
     public javax.swing.JTextField TxtboxEmail;
