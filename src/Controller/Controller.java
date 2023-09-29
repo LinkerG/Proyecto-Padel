@@ -2,6 +2,7 @@ package Controller;
 
 import View.AdminSelect;
 import View.LoginMenu;
+import View.LoginError;
 import Model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,10 +14,23 @@ public class Controller {
     private static Statement statement = connectToDatabase();
     public static LoginMenu loginMenu = new LoginMenu();
     public static AdminSelect adminMenu = new AdminSelect();
+    public static LoginError loginError = new LoginError();
 
     public static void startApp(){
-        loginMenu.setTitle("Log in");
-        loginMenu.setVisible(true);
+        if(checkStatement()) {
+            loginMenu.setTitle("Log in");
+            loginMenu.setVisible(true);
+        } else {
+            loginError.setTitle("Connection Error");
+            loginError.setVisible(true);
+        }
+    }
+    
+    public static boolean checkStatement() {
+        if(statement == null) {
+            return false;
+        }
+        return true;
     }
     public static Statement connectToDatabase(){
         Connection connection;
@@ -53,7 +67,7 @@ public class Controller {
             for (byte b : digest) {
                 hexString.append(String.format("%02x", b));
             }
-
+            
             try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
                 prepareQuery.setString(1, email);
                 prepareQuery.setString(2, hexString.toString());
@@ -76,9 +90,11 @@ public class Controller {
                 }
             } catch(SQLException ex){
                 System.out.print("ErrorMySQL");
+                ex.printStackTrace();
             }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
+            System.out.print("ErrorFatal");
         }
     }
     
