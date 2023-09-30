@@ -3,27 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-import Controller.ButtonActions;
-import Controller.Controller;
-
+import Controller.*;
 /**
  *
- * @author isard
+ * @author linke
  */
 
-public class AdminSelect extends javax.swing.JFrame {
+public class AdminUsers extends javax.swing.JFrame {
     private int posX, posY;
     /**
-     * Creates new form AdminSelect
+     * Creates new form AdminUsers
      */
-    
-    
-    public AdminSelect() {
+    public AdminUsers() {
         initComponents();
-        LabelCompleteName.setText(Controller.getUserName());
-        setLocationRelativeTo(null);
-        
-        
     }
 
     /**
@@ -39,14 +31,9 @@ public class AdminSelect extends javax.swing.JFrame {
         Content = new javax.swing.JPanel();
         BtnReturn = new javax.swing.JButton();
         LabelAdminPanel = new javax.swing.JLabel();
-        PanelContent = new javax.swing.JPanel();
-        LabelCourts = new javax.swing.JLabel();
-        LabelCourtsImage = new javax.swing.JLabel();
-        BtnCourts = new javax.swing.JButton();
-        LabelUsers = new javax.swing.JLabel();
-        LabelUsersImage = new javax.swing.JLabel();
-        BtnUsers = new javax.swing.JButton();
         BtnAdd = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         Header = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         LabelCompleteName = new javax.swing.JLabel();
@@ -55,10 +42,6 @@ public class AdminSelect extends javax.swing.JFrame {
         BtnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1192, 582));
-        setMinimumSize(new java.awt.Dimension(1192, 582));
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1192, 582));
 
         PanelBackground.setBackground(new java.awt.Color(0, 56, 64));
         PanelBackground.setMaximumSize(new java.awt.Dimension(1192, 582));
@@ -82,54 +65,58 @@ public class AdminSelect extends javax.swing.JFrame {
         LabelAdminPanel.setText("Administrator Panel");
         Content.add(LabelAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
-        PanelContent.setBackground(new java.awt.Color(0, 90, 91));
-        PanelContent.setMaximumSize(new java.awt.Dimension(934, 362));
-        PanelContent.setMinimumSize(new java.awt.Dimension(934, 362));
-        PanelContent.setPreferredSize(new java.awt.Dimension(934, 362));
-        PanelContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LabelCourts.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        LabelCourts.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCourts.setText("Courts");
-        PanelContent.add(LabelCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 70, -1, -1));
-
-        LabelCourtsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/courts.png"))); // NOI18N
-        PanelContent.add(LabelCourtsImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
-
-        BtnCourts.setBackground(new java.awt.Color(0, 115, 105));
-        BtnCourts.setBorder(null);
-        BtnCourts.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        BtnCourts.setMaximumSize(new java.awt.Dimension(350, 311));
-        BtnCourts.setMinimumSize(new java.awt.Dimension(350, 311));
-        BtnCourts.setPreferredSize(new java.awt.Dimension(350, 311));
-        PanelContent.add(BtnCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 25, -1, -1));
-
-        LabelUsers.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        LabelUsers.setForeground(new java.awt.Color(255, 255, 255));
-        LabelUsers.setText("Users");
-        PanelContent.add(LabelUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(659, 70, -1, -1));
-
-        LabelUsersImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/users.png"))); // NOI18N
-        PanelContent.add(LabelUsersImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(636, 150, -1, -1));
-
-        BtnUsers.setBackground(new java.awt.Color(0, 115, 105));
-        BtnUsers.setBorder(null);
-        BtnUsers.setMaximumSize(new java.awt.Dimension(350, 311));
-        BtnUsers.setMinimumSize(new java.awt.Dimension(350, 311));
-        BtnUsers.setPreferredSize(new java.awt.Dimension(350, 311));
-        BtnUsers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnUsersActionPerformed(evt);
-            }
-        });
-        PanelContent.add(BtnUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 25, -1, -1));
-
-        Content.add(PanelContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
         BtnAdd.setBackground(new java.awt.Color(0, 56, 64));
         BtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         BtnAdd.setBorder(null);
         Content.add(BtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 30, -1, -1));
+
+        jScrollPane1.setBackground(new java.awt.Color(0, 90, 91));
+
+        jTable1.setAutoCreateColumnsFromModel(false);
+        jTable1.setBackground(new java.awt.Color(0, 90, 91));
+        jTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "", "Name", "Last names", "DNI", "Email", "Active", "Edit"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setGridColor(new java.awt.Color(0, 90, 91));
+        jTable1.setMaximumSize(new java.awt.Dimension(934, 362));
+        jTable1.setMinimumSize(new java.awt.Dimension(934, 362));
+        jTable1.setPreferredSize(new java.awt.Dimension(934, 362));
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        Content.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 930, 360));
 
         PanelBackground.add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -212,32 +199,54 @@ public class AdminSelect extends javax.swing.JFrame {
         posY = evt.getYOnScreen() - getY();
     }//GEN-LAST:event_HeaderMousePressed
 
-    private void BtnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsersActionPerformed
-        ButtonActions.SelectToUser();
-    }//GEN-LAST:event_BtnUsersActionPerformed
-
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AdminUsers.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminUsers().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAdd;
     private javax.swing.JButton BtnClose;
-    private javax.swing.JButton BtnCourts;
     private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnReturn;
-    private javax.swing.JButton BtnUsers;
     private javax.swing.JPanel Content;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel LabelAdminPanel;
     private javax.swing.JLabel LabelCompleteName;
-    private javax.swing.JLabel LabelCourts;
-    private javax.swing.JLabel LabelCourtsImage;
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel LabelTitle;
-    private javax.swing.JLabel LabelUsers;
-    private javax.swing.JLabel LabelUsersImage;
     private javax.swing.JPanel PanelBackground;
-    private javax.swing.JPanel PanelContent;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
