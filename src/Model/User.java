@@ -5,22 +5,29 @@ import java.util.Calendar;
 
 public class User {
     //Attributes
-    private String name;
-    private String surname;
-    private String DNI;
-    private boolean active;
-    private boolean admin;
+    private String email = "";
+    private String name = "";
+    private String surname = "";
+    private boolean admin = false;
     
     //Constructor
-    User(String name, String surname, String DNI, boolean active, boolean admin){
+    public User(String email, String name, String surname, boolean admin){
+        this.email = email;
         this.name = name;
         this.surname = surname;
-        this.DNI = DNI;
-        this.active = active;
         this.admin = admin;
     }
     
+    public User() {}
+    
     //Setters & Getters
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public String getName() {
         return name;
     }
@@ -33,20 +40,6 @@ public class User {
     }
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getDNI() {
-        return DNI;
-    }
-    public void setDNI(String DNI) {
-        this.DNI = DNI;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public boolean isAdmin() {
@@ -71,7 +64,7 @@ public class User {
         //Si la pista ahora esta inactiva, CANCELA todas las reservas futuras relacionadas y comprueba la disponibilidad espejo de otras pistas, si hay una libre, la asigna automaticamente
     }
     //As admin, registers a new user to the database
-    public void registerUser(String name, String surname, String DNI, boolean admin){
+    public void registerUser(String name, String surname, boolean admin){
         //TO-DO SQL INSERT INTO user
         //Default ACTIVO
     }

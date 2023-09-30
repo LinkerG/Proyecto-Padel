@@ -6,13 +6,13 @@ import java.util.Calendar;
 public class Court {
     // Attributes
     private int ID;
-    private String name;
+    private String notes;
     private boolean isActive;
     
     // Constructor
-    public Court(int ID, String name, boolean isActive) {
+    public Court(int ID, String notes, boolean isActive) {
         this.ID = ID;
-        this.name = name;
+        this.notes = notes;
         this.isActive = isActive;
     }
     
@@ -25,12 +25,12 @@ public class Court {
         this.ID = ID;
     }
 
-    public String getName() {
-        return name;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     

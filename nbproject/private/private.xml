@@ -5,9 +5,12 @@
         <group>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/LoginMenu.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Controller/Controller.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/AdminSelect.java</file>
+            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/Model.java</file>
+            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/User.java</file>
+            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/Court.java</file>
+            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/CourtState.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/Header.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Controller/ButtonActions.java</file>
+            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/AdminSelect.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/LoginError.java</file>
         </group>
     </open-files>

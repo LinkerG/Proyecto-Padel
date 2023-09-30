@@ -1,8 +1,6 @@
 package Controller;
 
-import View.AdminSelect;
-import View.LoginMenu;
-import View.LoginError;
+import View.*;
 import Model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +13,7 @@ public class Controller {
     public static LoginMenu loginMenu = new LoginMenu();
     public static AdminSelect adminMenu = new AdminSelect();
     public static LoginError loginError = new LoginError();
-
+    private static User currentUser;
     public static void startApp(){
         if(checkStatement()) {
             loginMenu.setTitle("Log in");
@@ -27,22 +25,19 @@ public class Controller {
     }
     
     public static boolean checkStatement() {
-        if(statement == null) {
-            return false;
-        }
-        return true;
+        return statement != null;
     }
     public static Statement connectToDatabase(){
         Connection connection;
         Statement estado = null;
         String driver = "com.mysql.cj.jdbc.Driver";
         String connectionUrl = "jdbc:mysql://localhost/padel";
-        String user = "root";
+        String userDB = "root";
         String passw = "";
 
         try {
             Class.forName(driver);
-            connection = DriverManager.getConnection(connectionUrl, user, passw);
+            connection = DriverManager.getConnection(connectionUrl, userDB, passw);
             if(connection != null){
                 estado = connection.createStatement();
             }
@@ -75,27 +70,43 @@ public class Controller {
                 boolean exists = false;
                 while(queryResult.next()){
                     exists = true;
-                    if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 1){
-                        adminMenu.setTitle("Admin menu");
-                        adminMenu.setVisible(true);
-                        loginMenu.setVisible(false);
-                    } else if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 0) {
-                        System.out.println("Normal user");
-                    } else if(queryResult.getInt("isActive") == 1 && queryResult.getInt("isAdmin") == 0) {
+                    boolean isActive = queryResult.getInt("isActive") == 1;
+                    boolean isAdmin = queryResult.getInt("isAdmin") == 1;
+                    
+                    if(isActive) {
+                        String name = queryResult.getString("name");
+                        String surname = queryResult.getString("surname");
+                        currentUser = new User(email, name, surname, isAdmin);
+                        
+                        if(isAdmin) {
+                            adminMenu.setTitle("Administrator Panel");
+                            adminMenu.setVisible(true);
+                            loginMenu.setVisible(false);
+                        } else {
+                            System.out.println("Normal user");
+                        }
+                    } else {
                         mostrarError("The user you tried to log in is currently inactive");
                     }
                 }
                 if(!exists) {
-                    mostrarError("Email or password incorrect");
+                    loginMenu.TxtboxEmail.setText("");
+                    loginMenu.TxtboxPassword.setText("");
+                    loginMenu.LabelIncorrectCredentials.setText("Incorrect credentials");
                 }
             } catch(SQLException ex){
                 System.out.print("ErrorMySQL");
-                ex.printStackTrace();
             }
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
             System.out.print("ErrorFatal");
         }
+    }
+    
+    public static String getUserName() {
+        if(currentUser != null) {
+            return currentUser.getName() + " " + currentUser.getSurname();
+        }
+        return "";
     }
     
     public static ArrayList getCourts(boolean available) {

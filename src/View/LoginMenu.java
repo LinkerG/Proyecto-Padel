@@ -58,10 +58,10 @@ public class LoginMenu extends javax.swing.JFrame {
         BtnLogin = new javax.swing.JButton();
         LabelLogo = new javax.swing.JLabel();
         BtnClose = new javax.swing.JButton();
+        LabelIncorrectCredentials = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 56, 64));
-        setMaximumSize(new java.awt.Dimension(417, 582));
         setMinimumSize(new java.awt.Dimension(417, 582));
         setUndecorated(true);
         setResizable(false);
@@ -111,6 +111,7 @@ public class LoginMenu extends javax.swing.JFrame {
         BtnLogin.setForeground(new java.awt.Color(255, 255, 255));
         BtnLogin.setText("Login");
         BtnLogin.setBorder(null);
+        BtnLogin.setFocusable(false);
         BtnLogin.setMaximumSize(new java.awt.Dimension(236, 50));
         BtnLogin.setMinimumSize(new java.awt.Dimension(236, 50));
         BtnLogin.setPreferredSize(new java.awt.Dimension(236, 50));
@@ -139,6 +140,13 @@ public class LoginMenu extends javax.swing.JFrame {
         });
         PanelBackground.add(BtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 14, -1, -1));
 
+        LabelIncorrectCredentials.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        LabelIncorrectCredentials.setForeground(new java.awt.Color(255, 51, 51));
+        LabelIncorrectCredentials.setMaximumSize(new java.awt.Dimension(137, 17));
+        LabelIncorrectCredentials.setMinimumSize(new java.awt.Dimension(137, 17));
+        LabelIncorrectCredentials.setPreferredSize(new java.awt.Dimension(137, 17));
+        PanelBackground.add(LabelIncorrectCredentials, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, -1, 17));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,7 +162,7 @@ public class LoginMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
-        Controller.checkUser(TxtboxEmail.getText(), TxtboxPassword.getPassword());
+        Controller.checkUser(TxtboxEmail.getText(), TxtboxPassword.getPassword()); 
     }//GEN-LAST:event_BtnLoginActionPerformed
 
     private void TxtboxEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxEmailActionPerformed
@@ -173,6 +181,7 @@ public class LoginMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnClose;
     public javax.swing.JButton BtnLogin;
+    public javax.swing.JLabel LabelIncorrectCredentials;
     public javax.swing.JLabel LabelLogo;
     public javax.swing.JLabel LabelPassword;
     public javax.swing.JPanel PanelBackground;
