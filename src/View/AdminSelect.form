@@ -363,7 +363,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Complete Name"/>
+                <Property name="horizontalAlignment" type="int" value="4"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[280, 28]"/>
                 </Property>
@@ -374,6 +374,9 @@
                   <Dimension value="[280, 28]"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="LabelCompleteName.setText(Controller.currentUser.getName() + Controller.currentUser.getSurname());"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="LabelTitle">
               <Properties>

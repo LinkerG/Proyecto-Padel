@@ -144,7 +144,7 @@ public class AdminSelect extends javax.swing.JFrame {
 
         LabelCompleteName.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         LabelCompleteName.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCompleteName.setText("Complete Name");
+        LabelCompleteName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabelCompleteName.setMaximumSize(new java.awt.Dimension(280, 28));
         LabelCompleteName.setMinimumSize(new java.awt.Dimension(280, 28));
         LabelCompleteName.setPreferredSize(new java.awt.Dimension(280, 28));
@@ -204,6 +204,8 @@ public class AdminSelect extends javax.swing.JFrame {
                                 .addComponent(BtnClose))))
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        LabelCompleteName.setText(Controller.currentUser.getName() + Controller.currentUser.getSurname());
 
         PanelBackground.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 

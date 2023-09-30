@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class Controller {
     private static Statement statement = connectToDatabase();
     public static LoginMenu loginMenu = new LoginMenu();
-    public static AdminSelect adminMenu = new AdminSelect();
+    public static AdminSelect adminMenu;
     public static LoginError loginError = new LoginError();
-    private static User currentUser;
+    public static User currentUser;
     public static void startApp(){
         if(checkStatement()) {
             loginMenu.setTitle("Log in");
@@ -79,9 +79,17 @@ public class Controller {
                         currentUser = new User(email, name, surname, isAdmin);
                         
                         if(isAdmin) {
+                            String userName = queryResult.getString("name");
+                            String userSurname = "";
+                            //String userSurname = queryResult.getString("surname");
+                            
+                            currentUser = new User(email, userName, userSurname, isAdmin);
+                            
+                            adminMenu = new AdminSelect();
                             adminMenu.setTitle("Administrator Panel");
                             adminMenu.setVisible(true);
                             loginMenu.setVisible(false);
+                            
                         } else {
                             System.out.println("Normal user");
                         }
