@@ -120,6 +120,7 @@ public class AdminUsers extends javax.swing.JFrame {
 
         PanelBackground.add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
+        private int posX, posY;
         Header.setBackground(new java.awt.Color(0, 56, 64));
         Header.setMaximumSize(new java.awt.Dimension(1192, 100));
         Header.setMinimumSize(new java.awt.Dimension(1192, 100));

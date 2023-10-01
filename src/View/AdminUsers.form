@@ -243,6 +243,9 @@
             <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="HeaderMouseDragged"/>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="HeaderMousePressed"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="private int posX, posY;"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
