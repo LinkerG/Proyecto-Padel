@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Controller {
     private static Statement statement = connectToDatabase();
     public static LoginMenu loginMenu = new LoginMenu();
-    public static AdminSelect adminMenu;
+    public static AdminView adminMenu;
     public static LoginError loginError = new LoginError();
     public static User currentUser;
     
@@ -86,7 +86,7 @@ public class Controller {
                             
                             currentUser = new User(email, userName, userSurname, isAdmin);
                             
-                            adminMenu = new AdminSelect();
+                            adminMenu = new AdminView();
                             adminMenu.setTitle("Administrator Panel");
                             adminMenu.setVisible(true);
                             loginMenu.setVisible(false);
