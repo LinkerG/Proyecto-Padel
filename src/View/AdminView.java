@@ -87,6 +87,7 @@ public class AdminView extends javax.swing.JFrame {
         LabelAdminPanel.setText("Administrator Panel");
         Content.add(LabelAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
+        CreateUser.setVisible(false);
         CreateUser.setBackground(new java.awt.Color(0, 90, 91));
         CreateUser.setMaximumSize(new java.awt.Dimension(934, 362));
         CreateUser.setMinimumSize(new java.awt.Dimension(934, 362));
@@ -94,6 +95,7 @@ public class AdminView extends javax.swing.JFrame {
         CreateUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Content.add(CreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
+        UserInfo.setVisible(false);
         UserInfo.setBackground(new java.awt.Color(0, 90, 91));
         UserInfo.setMaximumSize(new java.awt.Dimension(934, 362));
         UserInfo.setMinimumSize(new java.awt.Dimension(934, 362));
@@ -101,6 +103,7 @@ public class AdminView extends javax.swing.JFrame {
         UserInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Content.add(UserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
+        Users.setVisible(false);
         Users.setBackground(new java.awt.Color(0, 90, 91));
         Users.setMaximumSize(new java.awt.Dimension(934, 362));
         Users.setMinimumSize(new java.awt.Dimension(934, 362));
@@ -108,6 +111,7 @@ public class AdminView extends javax.swing.JFrame {
         Users.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Content.add(Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
+        CreateCourt.setVisible(false);
         CreateCourt.setBackground(new java.awt.Color(0, 90, 91));
         CreateCourt.setMaximumSize(new java.awt.Dimension(934, 362));
         CreateCourt.setMinimumSize(new java.awt.Dimension(934, 362));
@@ -115,6 +119,7 @@ public class AdminView extends javax.swing.JFrame {
         CreateCourt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Content.add(CreateCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
+        CourtInfo.setVisible(false);
         CourtInfo.setBackground(new java.awt.Color(0, 90, 91));
         CourtInfo.setMaximumSize(new java.awt.Dimension(934, 362));
         CourtInfo.setMinimumSize(new java.awt.Dimension(934, 362));
@@ -122,6 +127,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Content.add(CourtInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
+        Courts.setVisible(false);
         Courts.setBackground(new java.awt.Color(0, 90, 91));
         Courts.setMaximumSize(new java.awt.Dimension(934, 362));
         Courts.setMinimumSize(new java.awt.Dimension(934, 362));

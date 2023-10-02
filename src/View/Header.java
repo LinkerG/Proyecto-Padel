@@ -5,6 +5,7 @@
 package View;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import Controller.*;
 
 public class Header extends javax.swing.JFrame {
 
@@ -95,7 +96,7 @@ public class Header extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCloseActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
-        // TODO add your handling code here:
+        ButtonActions.logOut(this);
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
 
