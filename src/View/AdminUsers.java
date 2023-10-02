@@ -42,6 +42,7 @@ public class AdminUsers extends javax.swing.JFrame {
         BtnLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         PanelBackground.setBackground(new java.awt.Color(0, 56, 64));
         PanelBackground.setMaximumSize(new java.awt.Dimension(1192, 582));

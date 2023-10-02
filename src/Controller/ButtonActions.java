@@ -7,9 +7,15 @@ import View.*;
 
 public class ButtonActions {
     public static AdminUsers adminUsers;
+    
     public static void SelectToUser(){
+        Point location = Controller.adminMenu.getLocationOnScreen();
+        
         adminUsers = new AdminUsers();
         Controller.adminMenu.setVisible(false);
+        adminUsers.setLocation(location);
         adminUsers.setVisible(true);
     }
+    
+    
 }

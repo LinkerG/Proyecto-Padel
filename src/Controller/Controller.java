@@ -14,6 +14,7 @@ public class Controller {
     public static AdminSelect adminMenu;
     public static LoginError loginError = new LoginError();
     public static User currentUser;
+    
     public static void startApp(){
         if(checkStatement()) {
             loginMenu.setTitle("Log in");
