@@ -136,6 +136,25 @@ public class Controller {
         }
     }
     
+    public static void mostrarCourts() {
+        ArrayList<Court> courtList = getCourts(false);
+        for(int i = 0; i < courtList.size(); i++) {
+            Court court = courtList.get(i);
+            int id = court.getID();
+            boolean isActive = court.isIsActive();
+            String componentName = "Court" + id;
+            String courtName = "Court " + id;
+            String status = "";
+            if(isActive) {
+                status = "Active";
+                // Add function to check if someone is playing at this moment
+            } else {
+                status = "In maintenance";
+            }
+            // Añadir crear boton
+        }
+    }
+    
     public static void mostrarError(String error) {
         JOptionPane.showMessageDialog(null, error);
     }

@@ -40,12 +40,4 @@ public class Court {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
-    
-    
-    
-    // Methods
-    public void changeStatus(String status) {
-        // llamar a la BD y update status = String status where court id = int id
-        
-    }
 }
