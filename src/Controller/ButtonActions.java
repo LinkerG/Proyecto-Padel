@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import View.*;
 
 public class ButtonActions {
-    public static AdminUsers adminUsers;
     public static AdminView adminView;
     
     public static void logIn(Boolean admin){
@@ -17,20 +16,11 @@ public class ButtonActions {
         loginMenu.setVisible(false);
     }
     
-    public static void logOut(JFrame frame) {
+    public static void logOut(Boolean admin) {
         Controller.currentUser = null;
-        frame.setVisible(false);
+        if(admin){
+            adminView.setVisible(false);
+        }
         loginMenu.setVisible(true);
-    }
-    
-    public static void SelectToUser(){
-        Point location = adminView.getLocationOnScreen();
-        
-        adminUsers = new AdminUsers();
-        adminView.setVisible(false);
-        adminUsers.setLocation(location);
-        adminUsers.setVisible(true);
-    }
-    
-    
+    }    
 }

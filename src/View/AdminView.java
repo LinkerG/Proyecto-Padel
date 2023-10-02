@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-import Controller.ButtonActions;
-import Controller.Controller;
+import Controller.*;
 
 /**
  *
@@ -231,6 +230,11 @@ public class AdminView extends javax.swing.JFrame {
         BtnLogout.setBackground(new java.awt.Color(0, 56, 64));
         BtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout.png"))); // NOI18N
         BtnLogout.setBorder(null);
+        BtnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLogoutActionPerformed(evt);
+            }
+        });
         Header.add(BtnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1075, 36, -1, -1));
 
         PanelBackground.add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -266,8 +270,13 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_HeaderMousePressed
 
     private void BtnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUsersActionPerformed
-        ButtonActions.SelectToUser();
+        Selector.setVisible(false);
+        Users.setVisible(true);
     }//GEN-LAST:event_BtnUsersActionPerformed
+
+    private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
+        ButtonActions.logOut(true);
+    }//GEN-LAST:event_BtnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -280,11 +289,11 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnReturn;
     private javax.swing.JButton BtnUsers;
-    private javax.swing.JPanel Content;
-    private javax.swing.JPanel CourtInfo;
-    private javax.swing.JPanel Courts;
-    private javax.swing.JPanel CreateCourt;
-    private javax.swing.JPanel CreateUser;
+    public javax.swing.JPanel Content;
+    public javax.swing.JPanel CourtInfo;
+    public javax.swing.JPanel Courts;
+    public javax.swing.JPanel CreateCourt;
+    public javax.swing.JPanel CreateUser;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel LabelAdminPanel;
     private javax.swing.JLabel LabelCompleteName;
@@ -294,9 +303,9 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel LabelTitle;
     private javax.swing.JLabel LabelUsers;
     private javax.swing.JLabel LabelUsersImage;
-    private javax.swing.JPanel PanelBackground;
-    private javax.swing.JPanel Selector;
-    private javax.swing.JPanel UserInfo;
-    private javax.swing.JPanel Users;
+    public javax.swing.JPanel PanelBackground;
+    public javax.swing.JPanel Selector;
+    public javax.swing.JPanel UserInfo;
+    public javax.swing.JPanel Users;
     // End of variables declaration//GEN-END:variables
 }

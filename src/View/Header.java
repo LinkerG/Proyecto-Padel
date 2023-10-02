@@ -96,7 +96,7 @@ public class Header extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCloseActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
-        ButtonActions.logOut(this);
+        ButtonActions.logOut(false);
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
 
