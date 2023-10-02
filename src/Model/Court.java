@@ -33,6 +33,14 @@ public class Court {
         this.notes = notes;
     }
 
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
     
     
     // Methods
