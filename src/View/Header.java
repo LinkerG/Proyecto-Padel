@@ -60,6 +60,7 @@ public class Header extends javax.swing.JFrame {
         BtnClose.setBackground(new java.awt.Color(0, 56, 64));
         BtnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/close.png"))); // NOI18N
         BtnClose.setBorder(null);
+        BtnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCloseActionPerformed(evt);
@@ -68,8 +69,12 @@ public class Header extends javax.swing.JFrame {
         PanelBackground.add(BtnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 36, -1, -1));
 
         BtnLogout.setBackground(new java.awt.Color(0, 56, 64));
+        BtnLogout.setForeground(new java.awt.Color(60, 63, 65));
         BtnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logout.png"))); // NOI18N
         BtnLogout.setBorder(null);
+        BtnLogout.setBorderPainted(false);
+        BtnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnLogout.setFocusPainted(false);
         BtnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLogoutActionPerformed(evt);

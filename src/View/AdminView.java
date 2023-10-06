@@ -71,7 +71,22 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfoContent = new javax.swing.JPanel();
         CreateUsers = new javax.swing.JPanel();
         BtnReturn2 = new javax.swing.JButton();
-        CreateUsersContent = new javax.swing.JPanel();
+        CreateUserContent = new javax.swing.JPanel();
+        CreateUserPanel = new javax.swing.JPanel();
+        UserImageCreateUser = new javax.swing.JLabel();
+        CreateUserLabel = new javax.swing.JLabel();
+        CreateUserNameLabel = new javax.swing.JLabel();
+        TxtboxNameCreateUser = new javax.swing.JTextField();
+        CreateUserLastnamesLabel = new javax.swing.JLabel();
+        TxtboxLastnamesCreateUser = new javax.swing.JTextField();
+        CreateUserDniLabel = new javax.swing.JLabel();
+        TxtboxDniCreateUser = new javax.swing.JTextField();
+        CreateUserEmailLabel = new javax.swing.JLabel();
+        TxtboxEmailCreateUser = new javax.swing.JTextField();
+        CreateUserPasswordLabel = new javax.swing.JLabel();
+        TxtboxEmailCreateUser1 = new javax.swing.JTextField();
+        TxtboxPassword = new javax.swing.JPasswordField();
+        CreateUserBtnSave = new javax.swing.JButton();
         Users = new javax.swing.JPanel();
         BtnReturn3 = new javax.swing.JButton();
         BtnAdd3 = new javax.swing.JButton();
@@ -384,11 +399,154 @@ public class AdminView extends javax.swing.JFrame {
         });
         CreateUsers.add(BtnReturn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
 
-        CreateUsersContent.setBackground(new java.awt.Color(0, 90, 91));
-        CreateUsersContent.setMaximumSize(new java.awt.Dimension(934, 362));
-        CreateUsersContent.setMinimumSize(new java.awt.Dimension(934, 362));
-        CreateUsersContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        CreateUsers.add(CreateUsersContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+        CreateUserContent.setBackground(new java.awt.Color(0, 90, 91));
+        CreateUserContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        CreateUserContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        CreateUserContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CreateUserPanel.setBackground(new java.awt.Color(0, 115, 105));
+        CreateUserPanel.setMaximumSize(new java.awt.Dimension(528, 315));
+        CreateUserPanel.setMinimumSize(new java.awt.Dimension(528, 315));
+        CreateUserPanel.setPreferredSize(new java.awt.Dimension(528, 315));
+        CreateUserPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UserImageCreateUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userinfo.png"))); // NOI18N
+        CreateUserPanel.add(UserImageCreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 16, -1, -1));
+
+        CreateUserLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        CreateUserLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserLabel.setText("Create user");
+        CreateUserPanel.add(CreateUserLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 33, -1, -1));
+
+        CreateUserNameLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        CreateUserNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserNameLabel.setText("Email");
+        CreateUserPanel.add(CreateUserNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 93, -1, -1));
+
+        TxtboxNameCreateUser.setBackground(new java.awt.Color(0, 90, 91));
+        TxtboxNameCreateUser.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxNameCreateUser.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxNameCreateUser.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxNameCreateUser.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxNameCreateUser.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxNameCreateUser.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxNameCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxNameCreateUserActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(TxtboxNameCreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 123, -1, -1));
+
+        CreateUserLastnamesLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        CreateUserLastnamesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserLastnamesLabel.setText("Last Names");
+        CreateUserPanel.add(CreateUserLastnamesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 165, -1, -1));
+
+        TxtboxLastnamesCreateUser.setBackground(new java.awt.Color(0, 90, 91));
+        TxtboxLastnamesCreateUser.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxLastnamesCreateUser.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxLastnamesCreateUser.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxLastnamesCreateUser.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxLastnamesCreateUser.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxLastnamesCreateUser.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxLastnamesCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxLastnamesCreateUserActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(TxtboxLastnamesCreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 195, -1, -1));
+
+        CreateUserDniLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        CreateUserDniLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserDniLabel.setText("DNI");
+        CreateUserPanel.add(CreateUserDniLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 237, -1, -1));
+
+        TxtboxDniCreateUser.setBackground(new java.awt.Color(0, 90, 91));
+        TxtboxDniCreateUser.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxDniCreateUser.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxDniCreateUser.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxDniCreateUser.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxDniCreateUser.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxDniCreateUser.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxDniCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxDniCreateUserActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(TxtboxDniCreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 265, -1, -1));
+
+        CreateUserEmailLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        CreateUserEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserEmailLabel.setText("Name");
+        CreateUserPanel.add(CreateUserEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 93, -1, -1));
+
+        TxtboxEmailCreateUser.setBackground(new java.awt.Color(0, 90, 91));
+        TxtboxEmailCreateUser.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxEmailCreateUser.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxEmailCreateUser.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxEmailCreateUser.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxEmailCreateUser.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxEmailCreateUser.setName(""); // NOI18N
+        TxtboxEmailCreateUser.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxEmailCreateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxEmailCreateUserActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(TxtboxEmailCreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 123, -1, -1));
+
+        CreateUserPasswordLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        CreateUserPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserPasswordLabel.setText("Password");
+        CreateUserPanel.add(CreateUserPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 165, -1, -1));
+
+        TxtboxEmailCreateUser1.setBackground(new java.awt.Color(0, 90, 91));
+        TxtboxEmailCreateUser1.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxEmailCreateUser1.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxEmailCreateUser1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxEmailCreateUser1.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxEmailCreateUser1.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxEmailCreateUser1.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxEmailCreateUser1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxEmailCreateUser1ActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(TxtboxEmailCreateUser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 123, -1, -1));
+
+        TxtboxPassword.setBackground(new java.awt.Color(0, 90, 91));
+        TxtboxPassword.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxPassword.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxPassword.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxPassword.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxPassword.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxPasswordActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(TxtboxPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 195, -1, -1));
+
+        CreateUserBtnSave.setBackground(new java.awt.Color(2, 166, 118));
+        CreateUserBtnSave.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        CreateUserBtnSave.setForeground(new java.awt.Color(255, 255, 255));
+        CreateUserBtnSave.setText("Save");
+        CreateUserBtnSave.setBorder(null);
+        CreateUserBtnSave.setFocusable(false);
+        CreateUserBtnSave.setMaximumSize(new java.awt.Dimension(220, 34));
+        CreateUserBtnSave.setMinimumSize(new java.awt.Dimension(220, 34));
+        CreateUserBtnSave.setPreferredSize(new java.awt.Dimension(220, 34));
+        CreateUserBtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateUserBtnSaveActionPerformed(evt);
+            }
+        });
+        CreateUserPanel.add(CreateUserBtnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 265, -1, -1));
+
+        CreateUserContent.add(CreateUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 23, -1, -1));
+
+        CreateUsers.add(CreateUserContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
 
         Content.add(CreateUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
@@ -621,6 +779,33 @@ public class AdminView extends javax.swing.JFrame {
     private void CourtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtStateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CourtStateActionPerformed
+    private void TxtboxNameCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxNameCreateUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxNameCreateUserActionPerformed
+
+    private void TxtboxLastnamesCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxLastnamesCreateUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxLastnamesCreateUserActionPerformed
+
+    private void TxtboxDniCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxDniCreateUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxDniCreateUserActionPerformed
+
+    private void TxtboxEmailCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxEmailCreateUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxEmailCreateUserActionPerformed
+
+    private void TxtboxEmailCreateUser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxEmailCreateUser1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxEmailCreateUser1ActionPerformed
+
+    private void TxtboxPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxPasswordActionPerformed
+
+    private void CreateUserBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserBtnSaveActionPerformed
+
+    }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -653,8 +838,16 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel CourtsContent;
     private javax.swing.JPanel CreateCourts;
     private javax.swing.JPanel CreateCourtsContent;
+    private javax.swing.JButton CreateUserBtnSave;
+    private javax.swing.JPanel CreateUserContent;
+    private javax.swing.JLabel CreateUserDniLabel;
+    private javax.swing.JLabel CreateUserEmailLabel;
+    private javax.swing.JLabel CreateUserLabel;
+    private javax.swing.JLabel CreateUserLastnamesLabel;
+    private javax.swing.JLabel CreateUserNameLabel;
+    private javax.swing.JPanel CreateUserPanel;
+    private javax.swing.JLabel CreateUserPasswordLabel;
     private javax.swing.JPanel CreateUsers;
-    private javax.swing.JPanel CreateUsersContent;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel LabelAdminPanel;
     private javax.swing.JLabel LabelCompleteName;
@@ -671,6 +864,13 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBtnCourts;
     private javax.swing.JPanel PanelBtnUsers;
     public javax.swing.JPanel Selector;
+    private javax.swing.JTextField TxtboxDniCreateUser;
+    private javax.swing.JTextField TxtboxEmailCreateUser;
+    private javax.swing.JTextField TxtboxEmailCreateUser1;
+    private javax.swing.JTextField TxtboxLastnamesCreateUser;
+    private javax.swing.JTextField TxtboxNameCreateUser;
+    private javax.swing.JPasswordField TxtboxPassword;
+    private javax.swing.JLabel UserImageCreateUser;
     private javax.swing.JPanel UserInfo;
     private javax.swing.JPanel UserInfoContent;
     private javax.swing.JPanel Users;
