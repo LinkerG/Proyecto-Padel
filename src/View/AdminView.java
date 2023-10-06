@@ -754,7 +754,7 @@ public class AdminView extends javax.swing.JFrame {
         Selector.setVisible(false);
         Courts.setVisible(true);
         CourtButtons.removeAll();
-        ArrayList<Court> courtList = Controller.getCourts(true);
+        ArrayList<Court> courtList = Controller.getCourts(false);
         for (Court court : courtList) {
             javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
             CourtButtons.add(courtLabelAdd);
@@ -770,7 +770,7 @@ public class AdminView extends javax.swing.JFrame {
     private void BtnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn1ActionPerformed
         Courts.setVisible(true);
         CreateCourts.setVisible(false);
-        ArrayList<Court> courtList = Controller.getCourts(true);
+        ArrayList<Court> courtList = Controller.getCourts(false);
         CourtButtons.removeAll();
         for (Court court : courtList) {
             javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
@@ -864,7 +864,7 @@ public class AdminView extends javax.swing.JFrame {
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
         Controller.createCourt(CourtNotes.getText(), CourtState.getSelectedIndex());
-        ArrayList<Court> courtList = Controller.getCourts(true);
+        ArrayList<Court> courtList = Controller.getCourts(false);
         CourtButtons.removeAll();
         for (Court court : courtList) {
             javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));

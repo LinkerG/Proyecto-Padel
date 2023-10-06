@@ -297,11 +297,15 @@ public class Controller {
     public static ArrayList getCourts(boolean available) {
         // FUNCTION returns all courts in DB as object Court in a list
         
-        String consultaSQL = "SELECT * FROM court WHERE isAvailable = ?";
-        int isAvailable = available ? 1 : 0;
+        String consultaSQL;
+        if(available) {
+            consultaSQL = "SELECT * FROM court WHERE isAvailable = 1";
+        } else {
+            consultaSQL = "SELECT * FROM court";
+        }
+        
         ArrayList<Court> courtList = new ArrayList<>();
         try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
-            prepareQuery.setInt(1, isAvailable);
             ResultSet queryResult = prepareQuery.executeQuery();
             while(queryResult.next()){ 
                 int id = queryResult.getInt("courtId");
