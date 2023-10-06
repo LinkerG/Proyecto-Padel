@@ -13,10 +13,12 @@ public class User {
     private boolean admin = false;
     
     //Constructor
-    public User(String email, String name, String surname, boolean admin){
+    public User(String email, String name, String surname, String dni, boolean isActive, boolean admin){
         this.email = email;
         this.name = name;
         this.surnames = surname;
+        this.dni = dni;
+        this.isActive = isActive;
         this.admin = admin;
     }
     
@@ -50,6 +52,23 @@ public class User {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
+    
     
     //Methods
     //As admin, creates a new Court

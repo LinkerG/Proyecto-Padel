@@ -82,14 +82,16 @@ public class Controller {
                     if(isActive) {
                         String name = queryResult.getString("name");
                         String surname = queryResult.getString("surname");
-                        currentUser = new User(email, name, surname, isAdmin);
+                        String dni = queryResult.getString("dni");
+                        currentUser = new User(email, name, surname, dni, isActive, isAdmin);
                         
                         if(isAdmin) {
                             String userName = queryResult.getString("name");
                             String userSurname = "";
+                            String userdni = "";
                             //String userSurname = queryResult.getString("surname");
                             
-                            currentUser = new User(email, userName, userSurname, isAdmin);
+                            currentUser = new User(email, userName, userSurname, userdni, isActive, isAdmin);
                             
                             ButtonActions.logIn(true);
                             
@@ -323,18 +325,22 @@ public class Controller {
     
     public static ArrayList getUsers(boolean available) {
         // FUNCTION returns all users in DB as object User in a list
-        
-        String consultaSQL = "SELECT * FROM users WHERE isAdmin = 0 AND isActive = ?";
-        int isAvailable = available ? 1 : 0;
+        String consultaSQL;
+        if(available){
+            consultaSQL = "SELECT * FROM user WHERE isAdmin = 0 AND isActive = 1";
+        } else {
+            consultaSQL = "SELECT * FROM user WHERE isAdmin = 0";
+        }
         ArrayList<User> userList = new ArrayList<>();
         try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
-            prepareQuery.setInt(1, isAvailable);
             ResultSet queryResult = prepareQuery.executeQuery();
             while(queryResult.next()){ 
                 String email = queryResult.getString("email");
                 String name = queryResult.getString("name");
                 String surname = queryResult.getString("surname");
-                User newUser = new User(email, name, surname, false);
+                String dni = queryResult.getString("dni");
+                boolean isActive = queryResult.getInt("isActive") == 1 ? true : false;
+                User newUser = new User(email, name, surname, dni, isActive, false);
                 userList.add(newUser);
             }
         } catch(Exception ex) {

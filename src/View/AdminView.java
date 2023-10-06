@@ -2,6 +2,8 @@ package View;
 import Controller.*;
 import java.util.ArrayList;
 import Model.*;
+import javax.swing.*;
+import javax.swing.table.*;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
@@ -80,6 +82,8 @@ public class AdminView extends javax.swing.JFrame {
         BtnReturn3 = new javax.swing.JButton();
         BtnAdd3 = new javax.swing.JButton();
         UsersContent = new javax.swing.JPanel();
+        UsersTableScrollPane = new javax.swing.JScrollPane();
+        UsersTable = new javax.swing.JTable();
         UserInfo = new javax.swing.JPanel();
         BtnReturn4 = new javax.swing.JButton();
         UserInfoContent = new javax.swing.JPanel();
@@ -159,7 +163,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtButtons.setVerifyInputWhenFocusTarget(false);
         CourtButtons.setLayout(new java.awt.GridLayout(0, 5, 50, 10));
         CourtButtonsScrollPane.setViewportView(CourtButtons);
-        ArrayList<Court> courtList = Controller.getCourts(true);
+        ArrayList<Court> courtList = Controller.getCourts(false);
         for (Court court : courtList) {
             javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
             CourtButtons.add(courtLabelAdd);
@@ -624,6 +628,61 @@ public class AdminView extends javax.swing.JFrame {
         UsersContent.setMaximumSize(new java.awt.Dimension(934, 362));
         UsersContent.setMinimumSize(new java.awt.Dimension(934, 362));
         UsersContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UsersTableScrollPane.setBackground(new java.awt.Color(0, 90, 91));
+        UsersTableScrollPane.setBorder(null);
+        UsersTableScrollPane.setForeground(new java.awt.Color(255, 255, 255));
+        UsersTableScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        UsersTableScrollPane.setMaximumSize(new java.awt.Dimension(850, 310));
+        UsersTableScrollPane.setMinimumSize(new java.awt.Dimension(850, 310));
+        UsersTableScrollPane.setOpaque(false);
+        UsersTableScrollPane.setPreferredSize(new java.awt.Dimension(850, 310));
+
+        UsersTable.setAutoCreateRowSorter(true);
+        UsersTable.setBackground(new java.awt.Color(0, 90, 91));
+        UsersTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UsersTable.setForeground(new java.awt.Color(255, 255, 255));
+        UsersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "", "Name", "Last names", "DNI", "Email", "Active", "Edit"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+
+        ArrayList<User> userList = Controller.getUsers(false);
+        for (User user : userList) {
+            Object[] rowData = {"img", user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), "1/0", "edit"};
+            model.addRow(rowData);
+            System.out.println("hola");
+        }
+        UsersTable.setToolTipText("");
+        UsersTable.setGridColor(new java.awt.Color(0, 90, 91));
+        UsersTable.setOpaque(false);
+        UsersTableScrollPane.setViewportView(UsersTable);
+
+        UsersContent.add(UsersTableScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
         Users.add(UsersContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
 
         Content.add(Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
@@ -949,6 +1008,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel UserInfoContent;
     private javax.swing.JPanel Users;
     private javax.swing.JPanel UsersContent;
+    private javax.swing.JTable UsersTable;
+    private javax.swing.JScrollPane UsersTableScrollPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
