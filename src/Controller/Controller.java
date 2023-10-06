@@ -1,5 +1,6 @@
 package Controller;
 
+import static Controller.ButtonActions.adminView;
 import View.*;
 import Model.*;
 import java.security.MessageDigest;
@@ -7,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Controller {
     private static Statement statement = connectToDatabase();
@@ -117,7 +120,41 @@ public class Controller {
         return "";
     }
     
-   public static void createUser(String email, String password, String name, String surnames, String dni) {
+    public static void createUser(String email, String password, String name, String surnames, String dni) {
+        boolean insert = true;
+        if(!checkEmail(email)) {
+           insert = false;
+           adminView.CreateUserEmailErrorLabel.setVisible(true);
+           adminView.TxtboxEmailCreateUser.setText("");
+        }
+        if(!checkPassword(password)) {
+           insert = false;
+           adminView.CreateUserPasswordErrorLabel.setVisible(true);
+           adminView.CreateUserPasswordRequirementLabel.setVisible(true);
+           adminView.TxtboxPasswordCreateUser.setText("");
+           
+        }
+        if(!checkName(name)) {
+            insert = false;
+            adminView.CreateUserNameErrorLabel.setVisible(true);
+            adminView.TxtboxNameCreateUser.setText("");
+        }
+        if(!checkName(surnames)) {
+            insert = false;
+            adminView.CreateUserLastnamesErrorLabel.setVisible(true);
+            adminView.TxtboxLastnamesCreateUser.setText("");
+        }
+        if(!checkDNI(dni)) {
+            insert = false;
+            adminView.CreateUserDniErrorLabel.setVisible(true);
+            adminView.TxtboxDniCreateUser.setText("");
+        }
+        if(insert) {
+            insertUser(email, password, name, surnames, dni);
+        }
+    }
+    
+    public static void insertUser(String email, String password, String name, String surnames, String dni) {
 	try {
     	// Obtener una instancia del objeto MessageDigest con el algoritmo MD5
     	MessageDigest md = MessageDigest.getInstance("MD5");
@@ -159,6 +196,53 @@ public class Controller {
 	}
     }
    
+   public static boolean checkEmail(String email) {
+        // Expresión regular para validar el formato de un correo electrónico
+        String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+
+        // Verifica si el correo electrónico tiene el formato correcto
+        if (!matcher.matches()) {
+            System.out.print("No matchea");
+            return false;
+        }
+        String sql = "SELECT COUNT(*) FROM user WHERE email = ?";
+        try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+            prepareQuery.setString(1, email);
+            ResultSet resultSet = prepareQuery.executeQuery();
+
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                System.out.print("Llega al count:" + count);
+                return !(count > 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print("Algun error");
+        return false;
+    }
+   
+   public static boolean checkPassword(String password) {
+        if (password == null || password == "") {
+            return false;
+        }
+        return !password.contains(" ");
+    }
+   
+   public static boolean checkName(String name) {
+        if (name == null || name.isEmpty()) {
+            return false; // El nombre no puede ser nulo ni estar vacío
+        }
+
+        // Utiliza una expresión regular para verificar si el nombre contiene solo letras y espacios
+        return name.matches("^[a-zA-Z\\s]+$");
+    }
+
+
+ 
+   
    public static boolean checkDNI(String dni) {
 	// Verifica que el DNI tiene exactamente 9 caracteres (8 dígitos + 1 letra)
 	if (dni == null || dni.length() != 9) {
@@ -186,8 +270,6 @@ public class Controller {
             return false;
 	}
     }
-
-
 
     
     public static ArrayList getCourts(boolean available) {
