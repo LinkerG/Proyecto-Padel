@@ -117,6 +117,79 @@ public class Controller {
         return "";
     }
     
+   public static void createUser(String email, String password, String name, String surnames, String dni) {
+	try {
+    	// Obtener una instancia del objeto MessageDigest con el algoritmo MD5
+    	MessageDigest md = MessageDigest.getInstance("MD5");
+
+    	// Calcular el hash de la cadena de texto
+    	md.update(password.getBytes());
+    	byte[] digest = md.digest();
+
+    	// Convertir el hash en una representación hexadecimal
+    	StringBuilder hexString = new StringBuilder();
+    	for (byte b : digest) {
+        	hexString.append(String.format("%02x", b));
+    	}
+
+    	// Use a PreparedStatement to safely insert data into the database
+    	String sql = "INSERT INTO user (email, password, name, surname, DNI, isActive, isAdmin) VALUES (?, ?, ?, ?, ?, true, false)";
+    	try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+        	prepareQuery.setString(1, email);
+        	prepareQuery.setString(2, hexString.toString());
+        	prepareQuery.setString(3, name);
+        	prepareQuery.setString(4, surnames);
+        	prepareQuery.setString(5, dni);
+
+        	// Execute the query
+        	int rowsInserted = prepareQuery.executeUpdate();
+
+        	if (rowsInserted > 0) {
+            	// Successfully inserted
+                    System.out.print("Fila insertada");
+        	} else {
+            	// Error in database
+                    System.out.print("Fila NO insertada");
+        	}
+    	} catch (Exception e) {
+        	e.printStackTrace(); // Print the exception for debugging
+    	}
+	} catch (Exception e) {
+    	e.printStackTrace(); // Print the exception for debugging
+	}
+    }
+   
+   public static boolean checkDNI(String dni) {
+	// Verifica que el DNI tiene exactamente 9 caracteres (8 dígitos + 1 letra)
+	if (dni == null || dni.length() != 9) {
+            return false;
+	}
+
+	// Extrae los dígitos y la letra de control
+	String digits = dni.substring(0, 8);
+	char controlLetter = dni.charAt(8);
+
+	try {
+            // Convierte los 8 dígitos a un número entero
+            int dniNumber = Integer.parseInt(digits);
+
+            // Calcula el índice de la letra de control en la cadena "TRWAGMYFPDXBNJZSQVHLCKE"
+            int index = dniNumber % 23;
+
+            // Obtiene la letra de control correspondiente al índice calculado
+            char expectedLetter = "TRWAGMYFPDXBNJZSQVHLCKE".charAt(index);
+
+            // Compara la letra de control esperada con la proporcionada
+            return controlLetter == expectedLetter;
+	} catch (NumberFormatException e) {
+            // Error al convertir los dígitos a número
+            return false;
+	}
+    }
+
+
+
+    
     public static ArrayList getCourts(boolean available) {
         // FUNCTION returns all courts in DB as object Court in a list
         
