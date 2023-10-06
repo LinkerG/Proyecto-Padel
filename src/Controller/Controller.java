@@ -223,7 +223,7 @@ public class Controller {
             ResultSet queryResult = prepareQuery.executeQuery();
             while(queryResult.next()){ 
                 int id = queryResult.getInt("courtId");
-                String name = queryResult.getString("name");
+                String name = queryResult.getString("notes");
                 boolean isActive = queryResult.getInt("isAvailable") == 1 ? true : false;
                 Court newCourt = new Court(id, name, isActive);
                 courtList.add(newCourt);

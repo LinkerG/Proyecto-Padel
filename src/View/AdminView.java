@@ -4,7 +4,8 @@
  */
 package View;
 import Controller.*;
-
+import java.util.ArrayList;
+import Model.*;
 /**
  *
  * @author isard
@@ -41,6 +42,8 @@ public class AdminView extends javax.swing.JFrame {
         BtnReturn = new javax.swing.JButton();
         BtnAdd = new javax.swing.JButton();
         CourtsContent = new javax.swing.JPanel();
+        CourtButtonsScrollPane = new javax.swing.JScrollPane();
+        CourtButtons = new javax.swing.JPanel();
         CourtSample = new javax.swing.JPanel();
         LabelCourtName = new javax.swing.JLabel();
         LabelCourtImage = new javax.swing.JLabel();
@@ -155,6 +158,29 @@ public class AdminView extends javax.swing.JFrame {
         CourtsContent.setMinimumSize(new java.awt.Dimension(934, 362));
         CourtsContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        CourtButtonsScrollPane.setBorder(null);
+        CourtButtonsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        CourtButtonsScrollPane.setMaximumSize(new java.awt.Dimension(850, 310));
+        CourtButtonsScrollPane.setMinimumSize(new java.awt.Dimension(850, 310));
+        CourtButtonsScrollPane.setPreferredSize(new java.awt.Dimension(850, 310));
+
+        CourtButtons.setBackground(new java.awt.Color(0, 90, 91));
+        CourtButtons.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        CourtButtons.setDoubleBuffered(false);
+        CourtButtons.setMaximumSize(new java.awt.Dimension(850, 310));
+        CourtButtons.setMinimumSize(new java.awt.Dimension(850, 310));
+        CourtButtons.setRequestFocusEnabled(false);
+        CourtButtons.setVerifyInputWhenFocusTarget(false);
+        CourtButtons.setLayout(new java.awt.GridLayout(0, 5));
+        CourtButtonsScrollPane.setViewportView(CourtButtons);
+        ArrayList<Court> courtList = Controller.getCourts(true);
+        for (Court court : courtList) {
+            javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
+            CourtButtons.add(courtLabelAdd);
+        }
+
+        CourtsContent.add(CourtButtonsScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
         CourtSample.setBackground(new java.awt.Color(0, 115, 105));
         CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
         CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
@@ -182,7 +208,7 @@ public class AdminView extends javax.swing.JFrame {
         BtnCourt.setPreferredSize(new java.awt.Dimension(134, 152));
         CourtSample.add(BtnCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        CourtsContent.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        CourtsContent.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, -1, -1));
 
         Courts.add(CourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
 
@@ -847,6 +873,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton BtnReturn4;
     private javax.swing.JButton BtnReturn5;
     public javax.swing.JPanel Content;
+    private javax.swing.JPanel CourtButtons;
+    private javax.swing.JScrollPane CourtButtonsScrollPane;
     private javax.swing.JLabel CourtID;
     private javax.swing.JLabel CourtIdLabel;
     private javax.swing.JPanel CourtInfo;
