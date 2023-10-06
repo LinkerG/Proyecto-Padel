@@ -51,13 +51,21 @@ public class AdminView extends javax.swing.JFrame {
         LabelCourts = new javax.swing.JLabel();
         LabelCourtsImage = new javax.swing.JLabel();
         PanelBtnUsers = new javax.swing.JPanel();
+        LabelUsersImage = new javax.swing.JLabel();
+        LabelUsers = new javax.swing.JLabel();
         CreateCourts = new javax.swing.JPanel();
         BtnReturn1 = new javax.swing.JButton();
         CreateCourtsContent = new javax.swing.JPanel();
-        LabelUsersImage = new javax.swing.JLabel();
-        LabelUsers = new javax.swing.JLabel();
-        UserInfo = new javax.swing.JPanel();
-        Users = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        CourtNotes = new javax.swing.JTextArea();
+        CourtState = new javax.swing.JTextField();
+        CourtNotesLabel = new javax.swing.JLabel();
+        CourtStateLabel = new javax.swing.JLabel();
+        CourtIdLabel = new javax.swing.JLabel();
+        CourtID = new javax.swing.JLabel();
+        AddCourtButton = new javax.swing.JButton();
         CourtInfo = new javax.swing.JPanel();
         BtnReturn5 = new javax.swing.JButton();
         CourtInfoContent = new javax.swing.JPanel();
@@ -261,7 +269,74 @@ public class AdminView extends javax.swing.JFrame {
         CreateCourtsContent.setMaximumSize(new java.awt.Dimension(934, 362));
         CreateCourtsContent.setMinimumSize(new java.awt.Dimension(934, 362));
         CreateCourtsContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        CreateCourts.add(CreateCourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        jPanel1.setBackground(new java.awt.Color(0, 115, 105));
+        jPanel1.setMaximumSize(new java.awt.Dimension(528, 315));
+        jPanel1.setMinimumSize(new java.awt.Dimension(528, 315));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Creating court");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 34, -1, -1));
+
+        jScrollPane1.setHorizontalScrollBar(null);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(254, 180));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(254, 180));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(254, 180));
+
+        CourtNotes.setBackground(new java.awt.Color(0, 90, 91));
+        CourtNotes.setColumns(20);
+        CourtNotes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtNotes.setForeground(new java.awt.Color(255, 255, 255));
+        CourtNotes.setLineWrap(true);
+        CourtNotes.setRows(5);
+        CourtNotes.setWrapStyleWord(true);
+        CourtNotes.setMaximumSize(new java.awt.Dimension(254, 180));
+        CourtNotes.setMinimumSize(new java.awt.Dimension(254, 180));
+        CourtNotes.setPreferredSize(new java.awt.Dimension(254, 180));
+        jScrollPane1.setViewportView(CourtNotes);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        CourtState.setBackground(new java.awt.Color(0, 90, 91));
+        CourtState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtState.setMaximumSize(new java.awt.Dimension(220, 34));
+        CourtState.setMinimumSize(new java.awt.Dimension(220, 34));
+        CourtState.setPreferredSize(new java.awt.Dimension(220, 34));
+        CourtState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CourtStateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CourtState, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 180, -1));
+
+        CourtNotesLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        CourtNotesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtNotesLabel.setText("Notes");
+        jPanel1.add(CourtNotesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 95, -1, -1));
+
+        CourtStateLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        CourtStateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtStateLabel.setText("State");
+        jPanel1.add(CourtStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 95, -1, -1));
+
+        CourtIdLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtIdLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtIdLabel.setText("Default Court ID:");
+        jPanel1.add(CourtIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
+
+        CourtID.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtID.setForeground(new java.awt.Color(255, 255, 255));
+        CourtID.setText(" XXX");
+        jPanel1.add(CourtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
+
+        AddCourtButton.setText("Add");
+        jPanel1.add(AddCourtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 150, -1));
+
+        CreateCourtsContent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 23, 528, 315));
+
+        CreateCourts.add(CreateCourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 940, 360));
 
         Content.add(CreateCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
@@ -543,11 +618,16 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
     }//GEN-LAST:event_PanelBtnUsersMouseExited
 
+    private void CourtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtStateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CourtStateActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddCourtButton;
     private javax.swing.JButton BtnAdd;
     private javax.swing.JButton BtnAdd3;
     private javax.swing.JButton BtnClose;
@@ -560,9 +640,15 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton BtnReturn4;
     private javax.swing.JButton BtnReturn5;
     public javax.swing.JPanel Content;
+    private javax.swing.JLabel CourtID;
+    private javax.swing.JLabel CourtIdLabel;
     private javax.swing.JPanel CourtInfo;
     private javax.swing.JPanel CourtInfoContent;
+    private javax.swing.JTextArea CourtNotes;
+    private javax.swing.JLabel CourtNotesLabel;
     private javax.swing.JPanel CourtSample;
+    private javax.swing.JTextField CourtState;
+    private javax.swing.JLabel CourtStateLabel;
     private javax.swing.JPanel Courts;
     private javax.swing.JPanel CourtsContent;
     private javax.swing.JPanel CreateCourts;
@@ -589,5 +675,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel UserInfoContent;
     private javax.swing.JPanel Users;
     private javax.swing.JPanel UsersContent;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
