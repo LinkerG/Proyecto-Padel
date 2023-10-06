@@ -48,6 +48,8 @@ public class Controller {
         return estado;
     }
     public static void checkUser(String email, char[] password){
+        // Validates user in DB and creates static User currentUser
+        
         String stringPassw = String.valueOf(password);
         String consultaSQL = "SELECT * FROM user WHERE email = ? AND password = ?";
         try {
@@ -116,6 +118,8 @@ public class Controller {
     }
     
     public static ArrayList getCourts(boolean available) {
+        // FUNCTION returns all courts in DB as object Court in a list
+        
         String consultaSQL = "SELECT * FROM court WHERE isAvailable = ?";
         int isAvailable = available ? 1 : 0;
         ArrayList<Court> courtList = new ArrayList<>();
@@ -133,6 +137,29 @@ public class Controller {
             ex.printStackTrace();
         } finally {
             return courtList;
+        }
+    }
+    
+    public static ArrayList getUsers(boolean available) {
+        // FUNCTION returns all users in DB as object User in a list
+        
+        String consultaSQL = "SELECT * FROM users WHERE isAdmin = 0 AND isActive = ?";
+        int isAvailable = available ? 1 : 0;
+        ArrayList<User> userList = new ArrayList<>();
+        try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
+            prepareQuery.setInt(1, isAvailable);
+            ResultSet queryResult = prepareQuery.executeQuery();
+            while(queryResult.next()){ 
+                String email = queryResult.getString("email");
+                String name = queryResult.getString("name");
+                String surname = queryResult.getString("surname");
+                User newUser = new User(email, name, surname, false);
+                userList.add(newUser);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            return userList;
         }
     }
     
