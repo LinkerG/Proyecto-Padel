@@ -136,6 +136,27 @@ public class Controller {
         }
     }
     
+    public static ArrayList getUsers(boolean available) {
+        String consultaSQL = "SELECT * FROM users WHERE isAdmin = 0 AND isActive = ?";
+        int isAvailable = available ? 1 : 0;
+        ArrayList<User> userList = new ArrayList<>();
+        try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
+            prepareQuery.setInt(1, isAvailable);
+            ResultSet queryResult = prepareQuery.executeQuery();
+            while(queryResult.next()){ 
+                String email = queryResult.getString("email");
+                String name = queryResult.getString("name");
+                String surname = queryResult.getString("surname");
+                User newUser = new User(email, name, surname, false);
+                userList.add(newUser);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            return userList;
+        }
+    }
+    
     public static void mostrarCourts() {
         ArrayList<Court> courtList = getCourts(false);
         for(int i = 0; i < courtList.size(); i++) {
