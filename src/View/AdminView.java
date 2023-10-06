@@ -56,7 +56,6 @@ public class AdminView extends javax.swing.JFrame {
         CreateCourtsContent = new javax.swing.JPanel();
         LabelUsersImage = new javax.swing.JLabel();
         LabelUsers = new javax.swing.JLabel();
-        CreateCourt = new javax.swing.JPanel();
         UserInfo = new javax.swing.JPanel();
         Users = new javax.swing.JPanel();
         CourtInfo = new javax.swing.JPanel();
