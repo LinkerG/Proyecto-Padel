@@ -171,7 +171,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtButtons.setMinimumSize(new java.awt.Dimension(850, 310));
         CourtButtons.setRequestFocusEnabled(false);
         CourtButtons.setVerifyInputWhenFocusTarget(false);
-        CourtButtons.setLayout(new java.awt.GridLayout(0, 5));
+        CourtButtons.setLayout(new java.awt.GridLayout(0, 5, 50, 10));
         CourtButtonsScrollPane.setViewportView(CourtButtons);
         ArrayList<Court> courtList = Controller.getCourts(true);
         for (Court court : courtList) {
@@ -751,7 +751,12 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnCourts.setBackground(new java.awt.Color(0,115,105));
         Selector.setVisible(false);
         Courts.setVisible(true);
-        Selector.setVisible(false);
+        CourtButtons.removeAll();
+        ArrayList<Court> courtList = Controller.getCourts(true);
+        for (Court court : courtList) {
+            javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
+            CourtButtons.add(courtLabelAdd);
+        }
     }//GEN-LAST:event_PanelBtnCourtsMouseClicked
 
     private void PanelBtnUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseClicked
@@ -763,6 +768,13 @@ public class AdminView extends javax.swing.JFrame {
     private void BtnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn1ActionPerformed
         Courts.setVisible(true);
         CreateCourts.setVisible(false);
+        ArrayList<Court> courtList = Controller.getCourts(true);
+        CourtButtons.removeAll();
+        for (Court court : courtList) {
+            javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
+            CourtButtons.add(courtLabelAdd);
+        }
+
     }//GEN-LAST:event_BtnReturn1ActionPerformed
 
     private void BtnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn2ActionPerformed
@@ -847,6 +859,12 @@ public class AdminView extends javax.swing.JFrame {
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
         Controller.createCourt(CourtNotes.getText(), CourtState.getSelectedIndex());
+        ArrayList<Court> courtList = Controller.getCourts(true);
+        CourtButtons.removeAll();
+        for (Court court : courtList) {
+            javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
+            CourtButtons.add(courtLabelAdd);
+        }
         CreateCourts.setVisible(false);
         Courts.setVisible(true);
         defaultId = Controller.getDefId();
