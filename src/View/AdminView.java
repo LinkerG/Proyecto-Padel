@@ -38,12 +38,12 @@ public class AdminView extends javax.swing.JFrame {
         Content = new javax.swing.JPanel();
         LabelAdminPanel = new javax.swing.JLabel();
         Selector = new javax.swing.JPanel();
+        PanelBtnCourts = new javax.swing.JPanel();
         LabelCourts = new javax.swing.JLabel();
         LabelCourtsImage = new javax.swing.JLabel();
-        PanelBtnCourts = new javax.swing.JPanel();
-        LabelUsers = new javax.swing.JLabel();
-        LabelUsersImage = new javax.swing.JLabel();
         PanelBtnUsers = new javax.swing.JPanel();
+        LabelUsersImage = new javax.swing.JLabel();
+        LabelUsers = new javax.swing.JLabel();
         CreateCourt = new javax.swing.JPanel();
         UserInfo = new javax.swing.JPanel();
         Users = new javax.swing.JPanel();
@@ -91,64 +91,69 @@ public class AdminView extends javax.swing.JFrame {
         Selector.setPreferredSize(new java.awt.Dimension(934, 362));
         Selector.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LabelCourts.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        LabelCourts.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCourts.setText("Courts");
-        Selector.add(LabelCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 70, -1, -1));
-
-        LabelCourtsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/courts.png"))); // NOI18N
-        Selector.add(LabelCourtsImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, -1, -1));
-
         PanelBtnCourts.setBackground(new java.awt.Color(0, 115, 105));
         PanelBtnCourts.setMaximumSize(new java.awt.Dimension(350, 311));
         PanelBtnCourts.setMinimumSize(new java.awt.Dimension(350, 311));
         PanelBtnCourts.setPreferredSize(new java.awt.Dimension(350, 311));
+        PanelBtnCourts.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                PanelBtnCourtsFocusGained(evt);
+            }
+        });
         PanelBtnCourts.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PanelBtnCourtsMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PanelBtnCourtsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PanelBtnCourtsMouseExited(evt);
+            }
         });
+        PanelBtnCourts.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout PanelBtnCourtsLayout = new javax.swing.GroupLayout(PanelBtnCourts);
-        PanelBtnCourts.setLayout(PanelBtnCourtsLayout);
-        PanelBtnCourtsLayout.setHorizontalGroup(
-            PanelBtnCourtsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-        PanelBtnCourtsLayout.setVerticalGroup(
-            PanelBtnCourtsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
-        );
+        LabelCourts.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        LabelCourts.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCourts.setText("Courts");
+        PanelBtnCourts.add(LabelCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 45, -1, -1));
+
+        LabelCourtsImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/courts.png"))); // NOI18N
+        LabelCourtsImage.setFocusable(false);
+        PanelBtnCourts.add(LabelCourtsImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 125, -1, -1));
 
         Selector.add(PanelBtnCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 25, -1, -1));
 
-        LabelUsers.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
-        LabelUsers.setForeground(new java.awt.Color(255, 255, 255));
-        LabelUsers.setText("Users");
-        Selector.add(LabelUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(659, 70, -1, -1));
-
-        LabelUsersImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/users.png"))); // NOI18N
-        Selector.add(LabelUsersImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(636, 150, -1, -1));
-
         PanelBtnUsers.setBackground(new java.awt.Color(0, 115, 105));
+        PanelBtnUsers.setFocusable(false);
         PanelBtnUsers.setMaximumSize(new java.awt.Dimension(350, 311));
         PanelBtnUsers.setMinimumSize(new java.awt.Dimension(350, 311));
+        PanelBtnUsers.setPreferredSize(new java.awt.Dimension(350, 311));
+        PanelBtnUsers.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                PanelBtnUsersFocusGained(evt);
+            }
+        });
         PanelBtnUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PanelBtnUsersMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                PanelBtnUsersMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                PanelBtnUsersMouseExited(evt);
+            }
         });
+        PanelBtnUsers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout PanelBtnUsersLayout = new javax.swing.GroupLayout(PanelBtnUsers);
-        PanelBtnUsers.setLayout(PanelBtnUsersLayout);
-        PanelBtnUsersLayout.setHorizontalGroup(
-            PanelBtnUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
-        PanelBtnUsersLayout.setVerticalGroup(
-            PanelBtnUsersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
-        );
+        LabelUsersImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/users.png"))); // NOI18N
+        PanelBtnUsers.add(LabelUsersImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(111, 125, -1, -1));
+
+        LabelUsers.setFont(new java.awt.Font("Arial", 1, 28)); // NOI18N
+        LabelUsers.setForeground(new java.awt.Color(255, 255, 255));
+        LabelUsers.setText("Users");
+        PanelBtnUsers.add(LabelUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 46, -1, -1));
 
         Selector.add(PanelBtnUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 25, -1, -1));
 
@@ -342,14 +347,40 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturnActionPerformed
 
     private void PanelBtnCourtsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnCourtsMouseClicked
+        PanelBtnCourts.setBackground(new java.awt.Color(0,115,105));
         Selector.setVisible(false);
         Courts.setVisible(true);
     }//GEN-LAST:event_PanelBtnCourtsMouseClicked
 
     private void PanelBtnUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseClicked
+        PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
         Selector.setVisible(false);
         Users.setVisible(true);
     }//GEN-LAST:event_PanelBtnUsersMouseClicked
+
+    private void PanelBtnCourtsFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PanelBtnCourtsFocusGained
+        
+    }//GEN-LAST:event_PanelBtnCourtsFocusGained
+
+    private void PanelBtnUsersFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_PanelBtnUsersFocusGained
+
+    }//GEN-LAST:event_PanelBtnUsersFocusGained
+
+    private void PanelBtnCourtsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnCourtsMouseEntered
+        PanelBtnCourts.setBackground(new java.awt.Color(0,140,129));
+    }//GEN-LAST:event_PanelBtnCourtsMouseEntered
+
+    private void PanelBtnCourtsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnCourtsMouseExited
+        PanelBtnCourts.setBackground(new java.awt.Color(0,115,105));
+    }//GEN-LAST:event_PanelBtnCourtsMouseExited
+
+    private void PanelBtnUsersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseEntered
+        PanelBtnUsers.setBackground(new java.awt.Color(0,140,129));
+    }//GEN-LAST:event_PanelBtnUsersMouseEntered
+
+    private void PanelBtnUsersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseExited
+        PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
+    }//GEN-LAST:event_PanelBtnUsersMouseExited
 
     /**
      * @param args the command line arguments
