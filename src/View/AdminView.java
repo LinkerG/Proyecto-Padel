@@ -804,7 +804,8 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtboxPasswordActionPerformed
 
     private void CreateUserBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserBtnSaveActionPerformed
-
+        String password = String.valueOf(TxtboxPassword.getPassword());
+        Controller.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText());
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     /**
