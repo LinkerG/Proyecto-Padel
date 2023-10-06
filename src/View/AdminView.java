@@ -11,7 +11,7 @@ import Controller.*;
  */
 
 public class AdminView extends javax.swing.JFrame {
-    private int posX, posY;
+    private int posX, posY, defaultId;
     /**
      * Creates new form AdminSelect
      */
@@ -65,7 +65,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtIdLabel = new javax.swing.JLabel();
         CourtID = new javax.swing.JLabel();
         AddCourtButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CourtState = new javax.swing.JComboBox<>();
         CourtInfo = new javax.swing.JPanel();
         BtnReturn5 = new javax.swing.JButton();
         CourtInfoContent = new javax.swing.JPanel();
@@ -333,7 +333,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtID.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         CourtID.setForeground(new java.awt.Color(255, 255, 255));
         CourtID.setText("XXX");
-        int defaultId = Controller.getDefId();
+        defaultId = Controller.getDefId();
         CourtID.setText(Integer.toString(defaultId));
         jPanel1.add(CourtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
 
@@ -351,16 +351,17 @@ public class AdminView extends javax.swing.JFrame {
         });
         jPanel1.add(AddCourtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 180, -1));
 
-        jComboBox1.setBackground(new java.awt.Color(0, 90, 91));
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Blocked" }));
-        jComboBox1.setBorder(null);
-        jComboBox1.setFocusable(false);
-        jComboBox1.setLightWeightPopupEnabled(false);
-        jComboBox1.setRequestFocusEnabled(false);
-        jComboBox1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 180, 40));
+        CourtState.setBackground(new java.awt.Color(0, 90, 91));
+        CourtState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtState.setForeground(new java.awt.Color(255, 255, 255));
+        CourtState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blocked", "Available" }));
+        CourtState.setSelectedIndex(1);
+        CourtState.setBorder(null);
+        CourtState.setFocusable(false);
+        CourtState.setLightWeightPopupEnabled(false);
+        CourtState.setRequestFocusEnabled(false);
+        CourtState.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(CourtState, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 180, 40));
 
         CreateCourtsContent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 23, 528, 315));
 
@@ -819,7 +820,13 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
-        // TODO add your handling code here:
+        Controller.createCourt(CourtNotes.getText(), CourtState.getSelectedIndex());
+        CreateCourts.setVisible(false);
+        Courts.setVisible(true);
+        defaultId = Controller.getDefId();
+        CourtID.setText(Integer.toString(defaultId));
+        CourtState.setSelectedIndex(0);
+        CourtNotes.setText("");
     }//GEN-LAST:event_AddCourtButtonActionPerformed
 
     /**
@@ -847,6 +854,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTextArea CourtNotes;
     private javax.swing.JLabel CourtNotesLabel;
     private javax.swing.JPanel CourtSample;
+    private javax.swing.JComboBox<String> CourtState;
     private javax.swing.JLabel CourtStateLabel;
     private javax.swing.JPanel Courts;
     private javax.swing.JPanel CourtsContent;
@@ -889,7 +897,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel UserInfoContent;
     private javax.swing.JPanel Users;
     private javax.swing.JPanel UsersContent;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -117,7 +117,29 @@ public class Controller {
         return "";
     }
     
-   public static void createUser(String email, String password, String name, String surnames, String dni) {
+    public static void createCourt(String notes, int isAvailable) {
+        // Use a PreparedStatement to safely insert data into the database
+    	String sql = "INSERT INTO court (notes, isAvailable) VALUES (? , ?)";
+    	try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+        	prepareQuery.setString(1, notes);
+        	prepareQuery.setInt(2, isAvailable);
+
+        	// Execute the query
+        	int rowsInserted = prepareQuery.executeUpdate();
+
+        	if (rowsInserted > 0) {
+            	// Successfully inserted
+                    System.out.print("Fila insertada");
+        	} else {
+            	// Error in database
+                    System.out.print("Fila NO insertada");
+        	}
+    	} catch (Exception e) {
+        	e.printStackTrace(); // Print the exception for debugging
+    	}
+    }
+    
+    public static void createUser(String email, String password, String name, String surnames, String dni) {
 	try {
     	// Obtener una instancia del objeto MessageDigest con el algoritmo MD5
     	MessageDigest md = MessageDigest.getInstance("MD5");
@@ -268,10 +290,6 @@ public class Controller {
         } finally {
             return defId;
         }
-    }
-    
-    public static void addCourt() {
-        
     }
     
     public static void mostrarError(String error) {
