@@ -37,6 +37,15 @@ public class AdminView extends javax.swing.JFrame {
         PanelBackground = new javax.swing.JPanel();
         Content = new javax.swing.JPanel();
         LabelAdminPanel = new javax.swing.JLabel();
+        Courts = new javax.swing.JPanel();
+        BtnReturn = new javax.swing.JButton();
+        BtnAdd = new javax.swing.JButton();
+        CourtsContent = new javax.swing.JPanel();
+        CourtSample = new javax.swing.JPanel();
+        LabelCourtName = new javax.swing.JLabel();
+        LabelCourtImage = new javax.swing.JLabel();
+        LabelCourtState = new javax.swing.JLabel();
+        BtnCourt = new javax.swing.JButton();
         Selector = new javax.swing.JPanel();
         LabelCourts = new javax.swing.JLabel();
         LabelCourtsImage = new javax.swing.JLabel();
@@ -44,19 +53,22 @@ public class AdminView extends javax.swing.JFrame {
         LabelUsers = new javax.swing.JLabel();
         LabelUsersImage = new javax.swing.JLabel();
         PanelBtnUsers = new javax.swing.JPanel();
-        CreateCourt = new javax.swing.JPanel();
-        UserInfo = new javax.swing.JPanel();
-        Users = new javax.swing.JPanel();
+        CreateCourts = new javax.swing.JPanel();
+        BtnReturn1 = new javax.swing.JButton();
+        CreateCourtsContent = new javax.swing.JPanel();
         CourtInfo = new javax.swing.JPanel();
-        Courts = new javax.swing.JPanel();
-        CourtSample = new javax.swing.JPanel();
-        LabelCourtName = new javax.swing.JLabel();
-        LabelCourtImage = new javax.swing.JLabel();
-        LabelCourtState = new javax.swing.JLabel();
-        BtnCourt = new javax.swing.JButton();
-        BtnReturn = new javax.swing.JButton();
-        BtnAdd = new javax.swing.JButton();
-        CreateUser = new javax.swing.JPanel();
+        BtnReturn5 = new javax.swing.JButton();
+        CourtInfoContent = new javax.swing.JPanel();
+        CreateUsers = new javax.swing.JPanel();
+        BtnReturn2 = new javax.swing.JButton();
+        CreateUsersContent = new javax.swing.JPanel();
+        Users = new javax.swing.JPanel();
+        BtnReturn3 = new javax.swing.JButton();
+        BtnAdd3 = new javax.swing.JButton();
+        UsersContent = new javax.swing.JPanel();
+        UserInfo = new javax.swing.JPanel();
+        BtnReturn4 = new javax.swing.JButton();
+        UserInfoContent = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         LabelCompleteName = new javax.swing.JLabel();
@@ -84,6 +96,72 @@ public class AdminView extends javax.swing.JFrame {
         LabelAdminPanel.setForeground(new java.awt.Color(255, 255, 255));
         LabelAdminPanel.setText("Administrator Panel");
         Content.add(LabelAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+
+        Courts.setVisible(false);
+        Courts.setBackground(new java.awt.Color(0, 56, 64));
+        Courts.setMaximumSize(new java.awt.Dimension(934, 403));
+        Courts.setMinimumSize(new java.awt.Dimension(934, 403));
+        Courts.setName(""); // NOI18N
+        Courts.setPreferredSize(new java.awt.Dimension(934, 403));
+        Courts.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnReturn.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn.setBorder(null);
+        BtnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReturnActionPerformed(evt);
+            }
+        });
+        Courts.add(BtnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
+
+        BtnAdd.setBackground(new java.awt.Color(0, 56, 64));
+        BtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        BtnAdd.setBorder(null);
+        BtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddActionPerformed(evt);
+            }
+        });
+        Courts.add(BtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 0, -1, -1));
+
+        CourtsContent.setBackground(new java.awt.Color(0, 90, 91));
+        CourtsContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        CourtsContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        CourtsContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CourtSample.setBackground(new java.awt.Color(0, 115, 105));
+        CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
+        CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
+        CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
+        CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCourtName.setText("Court 1");
+        CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
+
+        LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
+        CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+
+        LabelCourtState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        LabelCourtState.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCourtState.setText("Active");
+        CourtSample.add(LabelCourtState, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 123, -1, -1));
+
+        BtnCourt.setBackground(new java.awt.Color(0, 115, 105));
+        BtnCourt.setBorder(null);
+        BtnCourt.setBorderPainted(false);
+        BtnCourt.setMaximumSize(new java.awt.Dimension(134, 152));
+        BtnCourt.setMinimumSize(new java.awt.Dimension(134, 152));
+        BtnCourt.setPreferredSize(new java.awt.Dimension(134, 152));
+        CourtSample.add(BtnCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        CourtsContent.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        Courts.add(CourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        Content.add(Courts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
         Selector.setBackground(new java.awt.Color(0, 90, 91));
         Selector.setMaximumSize(new java.awt.Dimension(934, 362));
@@ -154,98 +232,145 @@ public class AdminView extends javax.swing.JFrame {
 
         Content.add(Selector, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
-        CreateCourt.setVisible(false);
-        CreateCourt.setBackground(new java.awt.Color(0, 90, 91));
-        CreateCourt.setMaximumSize(new java.awt.Dimension(934, 362));
-        CreateCourt.setMinimumSize(new java.awt.Dimension(934, 362));
-        CreateCourt.setPreferredSize(new java.awt.Dimension(934, 362));
-        CreateCourt.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Content.add(CreateCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        CreateCourts.setVisible(false);
+        CreateCourts.setBackground(new java.awt.Color(0, 56, 64));
+        CreateCourts.setMaximumSize(new java.awt.Dimension(934, 403));
+        CreateCourts.setMinimumSize(new java.awt.Dimension(934, 403));
+        CreateCourts.setName(""); // NOI18N
+        CreateCourts.setPreferredSize(new java.awt.Dimension(934, 403));
+        CreateCourts.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        UserInfo.setVisible(false);
-        UserInfo.setBackground(new java.awt.Color(0, 90, 91));
-        UserInfo.setMaximumSize(new java.awt.Dimension(934, 362));
-        UserInfo.setMinimumSize(new java.awt.Dimension(934, 362));
-        UserInfo.setPreferredSize(new java.awt.Dimension(934, 362));
-        UserInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Content.add(UserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
-        Users.setVisible(false);
-        Users.setBackground(new java.awt.Color(0, 90, 91));
-        Users.setMaximumSize(new java.awt.Dimension(934, 362));
-        Users.setMinimumSize(new java.awt.Dimension(934, 362));
-        Users.setPreferredSize(new java.awt.Dimension(934, 362));
-        Users.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Content.add(Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
-        CourtInfo.setVisible(false);
-        CourtInfo.setBackground(new java.awt.Color(0, 90, 91));
-        CourtInfo.setMaximumSize(new java.awt.Dimension(934, 362));
-        CourtInfo.setMinimumSize(new java.awt.Dimension(934, 362));
-        CourtInfo.setPreferredSize(new java.awt.Dimension(934, 362));
-        CourtInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Content.add(CourtInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
-        Courts.setVisible(false);
-        Courts.setBackground(new java.awt.Color(0, 90, 91));
-        Courts.setMaximumSize(new java.awt.Dimension(934, 362));
-        Courts.setMinimumSize(new java.awt.Dimension(934, 362));
-        Courts.setPreferredSize(new java.awt.Dimension(934, 362));
-        Courts.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        CourtSample.setBackground(new java.awt.Color(0, 115, 105));
-        CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
-        CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
-        CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
-        CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCourtName.setText("Court 1");
-        CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
-
-        LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
-        CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-
-        LabelCourtState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        LabelCourtState.setForeground(new java.awt.Color(255, 255, 255));
-        LabelCourtState.setText("Active");
-        CourtSample.add(LabelCourtState, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 123, -1, -1));
-
-        BtnCourt.setBackground(new java.awt.Color(0, 115, 105));
-        BtnCourt.setBorder(null);
-        BtnCourt.setBorderPainted(false);
-        BtnCourt.setMaximumSize(new java.awt.Dimension(134, 152));
-        BtnCourt.setMinimumSize(new java.awt.Dimension(134, 152));
-        BtnCourt.setPreferredSize(new java.awt.Dimension(134, 152));
-        CourtSample.add(BtnCourt, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        Courts.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
-        BtnReturn.setBackground(new java.awt.Color(0, 56, 64));
-        BtnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
-        BtnReturn.setBorder(null);
-        BtnReturn.addActionListener(new java.awt.event.ActionListener() {
+        BtnReturn1.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn1.setBorder(null);
+        BtnReturn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnReturnActionPerformed(evt);
+                BtnReturn1ActionPerformed(evt);
             }
         });
-        Courts.add(BtnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, -40, -1, -1));
+        CreateCourts.add(BtnReturn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
 
-        BtnAdd.setBackground(new java.awt.Color(0, 56, 64));
-        BtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        BtnAdd.setBorder(null);
-        Courts.add(BtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, -40, -1, -1));
+        CreateCourtsContent.setBackground(new java.awt.Color(0, 90, 91));
+        CreateCourtsContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        CreateCourtsContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        CreateCourtsContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        CreateCourts.add(CreateCourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
 
-        Content.add(Courts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        Content.add(CreateCourts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
-        CreateUser.setVisible(false);
-        CreateUser.setBackground(new java.awt.Color(0, 90, 91));
-        CreateUser.setMaximumSize(new java.awt.Dimension(934, 362));
-        CreateUser.setMinimumSize(new java.awt.Dimension(934, 362));
-        CreateUser.setPreferredSize(new java.awt.Dimension(934, 362));
-        CreateUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Content.add(CreateUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        CourtInfo.setVisible(false);
+        CourtInfo.setBackground(new java.awt.Color(0, 56, 64));
+        CourtInfo.setMaximumSize(new java.awt.Dimension(934, 403));
+        CourtInfo.setMinimumSize(new java.awt.Dimension(934, 403));
+        CourtInfo.setName(""); // NOI18N
+        CourtInfo.setPreferredSize(new java.awt.Dimension(934, 403));
+        CourtInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnReturn5.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn5.setBorder(null);
+        BtnReturn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReturn5ActionPerformed(evt);
+            }
+        });
+        CourtInfo.add(BtnReturn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
+
+        CourtInfoContent.setBackground(new java.awt.Color(0, 90, 91));
+        CourtInfoContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        CourtInfoContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        CourtInfoContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        CourtInfo.add(CourtInfoContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        Content.add(CourtInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+
+        CreateUsers.setVisible(false);
+        CreateUsers.setBackground(new java.awt.Color(0, 56, 64));
+        CreateUsers.setMaximumSize(new java.awt.Dimension(934, 403));
+        CreateUsers.setMinimumSize(new java.awt.Dimension(934, 403));
+        CreateUsers.setName(""); // NOI18N
+        CreateUsers.setPreferredSize(new java.awt.Dimension(934, 403));
+        CreateUsers.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnReturn2.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn2.setBorder(null);
+        BtnReturn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReturn2ActionPerformed(evt);
+            }
+        });
+        CreateUsers.add(BtnReturn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
+
+        CreateUsersContent.setBackground(new java.awt.Color(0, 90, 91));
+        CreateUsersContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        CreateUsersContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        CreateUsersContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        CreateUsers.add(CreateUsersContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        Content.add(CreateUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+
+        Users.setVisible(false);
+        Users.setBackground(new java.awt.Color(0, 56, 64));
+        Users.setMaximumSize(new java.awt.Dimension(934, 403));
+        Users.setMinimumSize(new java.awt.Dimension(934, 403));
+        Users.setName(""); // NOI18N
+        Users.setPreferredSize(new java.awt.Dimension(934, 403));
+        Users.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnReturn3.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn3.setBorder(null);
+        BtnReturn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReturn3ActionPerformed(evt);
+            }
+        });
+        Users.add(BtnReturn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
+
+        BtnAdd3.setBackground(new java.awt.Color(0, 56, 64));
+        BtnAdd3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        BtnAdd3.setBorder(null);
+        BtnAdd3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAdd3ActionPerformed(evt);
+            }
+        });
+        Users.add(BtnAdd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, 0, -1, -1));
+
+        UsersContent.setBackground(new java.awt.Color(0, 90, 91));
+        UsersContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        UsersContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        UsersContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Users.add(UsersContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        Content.add(Users, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
+
+        UserInfo.setVisible(false);
+        UserInfo.setBackground(new java.awt.Color(0, 56, 64));
+        UserInfo.setMaximumSize(new java.awt.Dimension(934, 403));
+        UserInfo.setMinimumSize(new java.awt.Dimension(934, 403));
+        UserInfo.setName(""); // NOI18N
+        UserInfo.setPreferredSize(new java.awt.Dimension(934, 403));
+        UserInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BtnReturn4.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn4.setBorder(null);
+        BtnReturn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReturn4ActionPerformed(evt);
+            }
+        });
+        UserInfo.add(BtnReturn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, 0, -1, -1));
+
+        UserInfoContent.setBackground(new java.awt.Color(0, 90, 91));
+        UserInfoContent.setMaximumSize(new java.awt.Dimension(934, 362));
+        UserInfoContent.setMinimumSize(new java.awt.Dimension(934, 362));
+        UserInfoContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        UserInfo.add(UserInfoContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        Content.add(UserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
         PanelBackground.add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -338,12 +463,13 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
     private void BtnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturnActionPerformed
-        // TODO add your handling code here:
+        Selector.setVisible(true);
+        Courts.setVisible(false);
     }//GEN-LAST:event_BtnReturnActionPerformed
 
     private void PanelBtnCourtsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnCourtsMouseClicked
-        Selector.setVisible(false);
         Courts.setVisible(true);
+        Selector.setVisible(false);
     }//GEN-LAST:event_PanelBtnCourtsMouseClicked
 
     private void PanelBtnUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseClicked
@@ -351,22 +477,65 @@ public class AdminView extends javax.swing.JFrame {
         Users.setVisible(true);
     }//GEN-LAST:event_PanelBtnUsersMouseClicked
 
+    private void BtnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn1ActionPerformed
+        Courts.setVisible(true);
+        CreateCourts.setVisible(false);
+    }//GEN-LAST:event_BtnReturn1ActionPerformed
+
+    private void BtnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn2ActionPerformed
+        Users.setVisible(true);
+        CreateUsers.setVisible(false);
+    }//GEN-LAST:event_BtnReturn2ActionPerformed
+
+    private void BtnReturn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn3ActionPerformed
+        Selector.setVisible(true);
+        Users.setVisible(false);
+    }//GEN-LAST:event_BtnReturn3ActionPerformed
+
+    private void BtnReturn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnReturn4ActionPerformed
+
+    private void BtnReturn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnReturn5ActionPerformed
+
+    private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
+        CreateCourts.setVisible(true);
+        Courts.setVisible(false);
+    }//GEN-LAST:event_BtnAddActionPerformed
+
+    private void BtnAdd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd3ActionPerformed
+        CreateUsers.setVisible(true);
+        Users.setVisible(false);
+    }//GEN-LAST:event_BtnAdd3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAdd;
+    private javax.swing.JButton BtnAdd3;
     private javax.swing.JButton BtnClose;
     private javax.swing.JButton BtnCourt;
     private javax.swing.JButton BtnLogout;
     private javax.swing.JButton BtnReturn;
+    private javax.swing.JButton BtnReturn1;
+    private javax.swing.JButton BtnReturn2;
+    private javax.swing.JButton BtnReturn3;
+    private javax.swing.JButton BtnReturn4;
+    private javax.swing.JButton BtnReturn5;
     public javax.swing.JPanel Content;
-    public javax.swing.JPanel CourtInfo;
+    private javax.swing.JPanel CourtInfo;
+    private javax.swing.JPanel CourtInfoContent;
     private javax.swing.JPanel CourtSample;
     private javax.swing.JPanel Courts;
-    public javax.swing.JPanel CreateCourt;
-    public javax.swing.JPanel CreateUser;
+    private javax.swing.JPanel CourtsContent;
+    private javax.swing.JPanel CreateCourts;
+    private javax.swing.JPanel CreateCourtsContent;
+    private javax.swing.JPanel CreateUsers;
+    private javax.swing.JPanel CreateUsersContent;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel LabelAdminPanel;
     private javax.swing.JLabel LabelCompleteName;
@@ -383,7 +552,9 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBtnCourts;
     private javax.swing.JPanel PanelBtnUsers;
     public javax.swing.JPanel Selector;
-    public javax.swing.JPanel UserInfo;
-    public javax.swing.JPanel Users;
+    private javax.swing.JPanel UserInfo;
+    private javax.swing.JPanel UserInfoContent;
+    private javax.swing.JPanel Users;
+    private javax.swing.JPanel UsersContent;
     // End of variables declaration//GEN-END:variables
 }
