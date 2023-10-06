@@ -60,12 +60,12 @@ public class AdminView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         CourtNotes = new javax.swing.JTextArea();
-        CourtState = new javax.swing.JTextField();
         CourtNotesLabel = new javax.swing.JLabel();
         CourtStateLabel = new javax.swing.JLabel();
         CourtIdLabel = new javax.swing.JLabel();
         CourtID = new javax.swing.JLabel();
         AddCourtButton = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         CourtInfo = new javax.swing.JPanel();
         BtnReturn5 = new javax.swing.JButton();
         CourtInfoContent = new javax.swing.JPanel();
@@ -307,47 +307,60 @@ public class AdminView extends javax.swing.JFrame {
         CourtNotes.setLineWrap(true);
         CourtNotes.setRows(5);
         CourtNotes.setWrapStyleWord(true);
+        CourtNotes.setBorder(null);
         CourtNotes.setMaximumSize(new java.awt.Dimension(254, 180));
         CourtNotes.setMinimumSize(new java.awt.Dimension(254, 180));
         CourtNotes.setPreferredSize(new java.awt.Dimension(254, 180));
         jScrollPane1.setViewportView(CourtNotes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-
-        CourtState.setBackground(new java.awt.Color(0, 90, 91));
-        CourtState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CourtState.setMaximumSize(new java.awt.Dimension(220, 34));
-        CourtState.setMinimumSize(new java.awt.Dimension(220, 34));
-        CourtState.setPreferredSize(new java.awt.Dimension(220, 34));
-        CourtState.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CourtStateActionPerformed(evt);
-            }
-        });
-        jPanel1.add(CourtState, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 180, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         CourtNotesLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         CourtNotesLabel.setForeground(new java.awt.Color(255, 255, 255));
         CourtNotesLabel.setText("Notes");
-        jPanel1.add(CourtNotesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 95, -1, -1));
+        jPanel1.add(CourtNotesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         CourtStateLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         CourtStateLabel.setForeground(new java.awt.Color(255, 255, 255));
         CourtStateLabel.setText("State");
-        jPanel1.add(CourtStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 95, -1, -1));
+        jPanel1.add(CourtStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, -1, -1));
 
-        CourtIdLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtIdLabel.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         CourtIdLabel.setForeground(new java.awt.Color(255, 255, 255));
         CourtIdLabel.setText("Default Court ID:");
-        jPanel1.add(CourtIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
+        jPanel1.add(CourtIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
 
-        CourtID.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtID.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         CourtID.setForeground(new java.awt.Color(255, 255, 255));
-        CourtID.setText(" XXX");
-        jPanel1.add(CourtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
+        CourtID.setText("XXX");
+        int defaultId = Controller.getDefId();
+        CourtID.setText(Integer.toString(defaultId));
+        jPanel1.add(CourtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, -1));
 
+        AddCourtButton.setBackground(new java.awt.Color(2, 166, 118));
+        AddCourtButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        AddCourtButton.setForeground(new java.awt.Color(255, 255, 255));
         AddCourtButton.setText("Add");
-        jPanel1.add(AddCourtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, 150, -1));
+        AddCourtButton.setMaximumSize(new java.awt.Dimension(220, 34));
+        AddCourtButton.setMinimumSize(new java.awt.Dimension(220, 34));
+        AddCourtButton.setPreferredSize(new java.awt.Dimension(220, 34));
+        AddCourtButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddCourtButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(AddCourtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 180, -1));
+
+        jComboBox1.setBackground(new java.awt.Color(0, 90, 91));
+        jComboBox1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Blocked" }));
+        jComboBox1.setBorder(null);
+        jComboBox1.setFocusable(false);
+        jComboBox1.setLightWeightPopupEnabled(false);
+        jComboBox1.setRequestFocusEnabled(false);
+        jComboBox1.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 180, 40));
 
         CreateCourtsContent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 23, 528, 315));
 
@@ -776,9 +789,6 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
     }//GEN-LAST:event_PanelBtnUsersMouseExited
 
-    private void CourtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtStateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CourtStateActionPerformed
     private void TxtboxNameCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxNameCreateUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtboxNameCreateUserActionPerformed
@@ -807,6 +817,10 @@ public class AdminView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
+    private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddCourtButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -832,7 +846,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTextArea CourtNotes;
     private javax.swing.JLabel CourtNotesLabel;
     private javax.swing.JPanel CourtSample;
-    private javax.swing.JTextField CourtState;
     private javax.swing.JLabel CourtStateLabel;
     private javax.swing.JPanel Courts;
     private javax.swing.JPanel CourtsContent;
@@ -875,6 +888,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel UserInfoContent;
     private javax.swing.JPanel Users;
     private javax.swing.JPanel UsersContent;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

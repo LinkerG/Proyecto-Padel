@@ -182,6 +182,25 @@ public class Controller {
         }
     }
     
+    public static int getDefId(){
+        String consultaSQL = "SELECT MAX(courtId) as 'lastId' FROM court;";
+        int defId = 1;
+        try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(consultaSQL)){
+            ResultSet queryResult = prepareQuery.executeQuery();
+            while(queryResult.next()){ 
+                defId = queryResult.getInt("lastId") + 1;
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            return defId;
+        }
+    }
+    
+    public static void addCourt() {
+        
+    }
+    
     public static void mostrarError(String error) {
         JOptionPane.showMessageDialog(null, error);
     }
