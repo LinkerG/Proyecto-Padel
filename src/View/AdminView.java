@@ -36,7 +36,6 @@ public class AdminView extends javax.swing.JFrame {
 
         PanelBackground = new javax.swing.JPanel();
         Content = new javax.swing.JPanel();
-        BtnReturn = new javax.swing.JButton();
         LabelAdminPanel = new javax.swing.JLabel();
         CreateUser = new javax.swing.JPanel();
         UserInfo = new javax.swing.JPanel();
@@ -56,11 +55,12 @@ public class AdminView extends javax.swing.JFrame {
         LabelCourtImage = new javax.swing.JLabel();
         LabelCourtState = new javax.swing.JLabel();
         BtnCourt = new javax.swing.JButton();
+        BtnReturn = new javax.swing.JButton();
+        BtnAdd = new javax.swing.JButton();
         CreateUser1 = new javax.swing.JPanel();
         UserInfo1 = new javax.swing.JPanel();
         Users1 = new javax.swing.JPanel();
         CourtInfo1 = new javax.swing.JPanel();
-        BtnAdd = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         LabelCompleteName = new javax.swing.JLabel();
@@ -83,11 +83,6 @@ public class AdminView extends javax.swing.JFrame {
         Content.setMinimumSize(new java.awt.Dimension(1198, 482));
         Content.setPreferredSize(new java.awt.Dimension(1198, 482));
         Content.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        BtnReturn.setBackground(new java.awt.Color(0, 56, 64));
-        BtnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
-        BtnReturn.setBorder(null);
-        Content.add(BtnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 30, -1, -1));
 
         LabelAdminPanel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         LabelAdminPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,6 +209,21 @@ public class AdminView extends javax.swing.JFrame {
 
         Courts.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
+        BtnReturn.setBackground(new java.awt.Color(0, 56, 64));
+        BtnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/return.png"))); // NOI18N
+        BtnReturn.setBorder(null);
+        BtnReturn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReturnActionPerformed(evt);
+            }
+        });
+        Courts.add(BtnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(902, -40, -1, -1));
+
+        BtnAdd.setBackground(new java.awt.Color(0, 56, 64));
+        BtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        BtnAdd.setBorder(null);
+        Courts.add(BtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(861, -40, -1, -1));
+
         Content.add(Courts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         CreateUser.setVisible(false);
@@ -247,11 +257,6 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfo1.setPreferredSize(new java.awt.Dimension(934, 362));
         CourtInfo1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Content.add(CourtInfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
-
-        BtnAdd.setBackground(new java.awt.Color(0, 56, 64));
-        BtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
-        BtnAdd.setBorder(null);
-        Content.add(BtnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 30, -1, -1));
 
         PanelBackground.add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -347,6 +352,10 @@ public class AdminView extends javax.swing.JFrame {
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
         ButtonActions.logOut(true);
     }//GEN-LAST:event_BtnLogoutActionPerformed
+
+    private void BtnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnReturnActionPerformed
 
     /**
      * @param args the command line arguments
