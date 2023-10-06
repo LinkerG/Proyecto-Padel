@@ -48,6 +48,8 @@ public class Controller {
         return estado;
     }
     public static void checkUser(String email, char[] password){
+        // Validates user in DB and creates static User currentUser
+        
         String stringPassw = String.valueOf(password);
         String consultaSQL = "SELECT * FROM user WHERE email = ? AND password = ?";
         try {
@@ -116,6 +118,8 @@ public class Controller {
     }
     
     public static ArrayList getCourts(boolean available) {
+        // FUNCTION returns all courts in DB as object Court in a list
+        
         String consultaSQL = "SELECT * FROM court WHERE isAvailable = ?";
         int isAvailable = available ? 1 : 0;
         ArrayList<Court> courtList = new ArrayList<>();
@@ -137,6 +141,8 @@ public class Controller {
     }
     
     public static ArrayList getUsers(boolean available) {
+        // FUNCTION returns all users in DB as object User in a list
+        
         String consultaSQL = "SELECT * FROM users WHERE isAdmin = 0 AND isActive = ?";
         int isAvailable = available ? 1 : 0;
         ArrayList<User> userList = new ArrayList<>();
