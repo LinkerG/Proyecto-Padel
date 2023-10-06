@@ -112,7 +112,7 @@ public class Controller {
     
     public static String getUserName() {
         if(currentUser != null) {
-            return currentUser.getName() + " " + currentUser.getSurname();
+            return currentUser.getName() + " " + currentUser.getSurnames();
         }
         return "";
     }

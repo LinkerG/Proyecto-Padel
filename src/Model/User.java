@@ -7,14 +7,16 @@ public class User {
     //Attributes
     private String email = "";
     private String name = "";
-    private String surname = "";
+    private String surnames = "";
+    private String dni = "";
+    private boolean isActive = true;
     private boolean admin = false;
     
     //Constructor
     public User(String email, String name, String surname, boolean admin){
         this.email = email;
         this.name = name;
-        this.surname = surname;
+        this.surnames = surname;
         this.admin = admin;
     }
     
@@ -35,11 +37,11 @@ public class User {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getSurnames() {
+        return surnames;
     }
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setSurnames(String surname) {
+        this.surnames = surname;
     }
 
     public boolean isAdmin() {
