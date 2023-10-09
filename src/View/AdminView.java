@@ -1,17 +1,22 @@
 package View;
 import Controller.*;
-import java.util.ArrayList;
 import Model.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.plaf.basic.ComboPopup;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import javax.imageio.ImageIO;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
-    
+    private javax.swing.ImageIcon fotoIcon = new javax.swing.ImageIcon("img/edit.png");
     public AdminView() {
         initComponents();
         LabelCompleteName.setText(Controller.getUserName());
@@ -658,7 +663,7 @@ public class AdminView extends javax.swing.JFrame {
 
         UsersTable.setAutoCreateRowSorter(true);
         UsersTable.setBackground(new java.awt.Color(0, 90, 91));
-        UsersTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UsersTable.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         UsersTable.setForeground(new java.awt.Color(255, 255, 255));
         UsersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -684,21 +689,59 @@ public class AdminView extends javax.swing.JFrame {
             }
         });
         javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+        UsersTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+        UsersTable.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());
+        UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
 
         ArrayList<User> userList = Controller.getUsers(false);
         for (User user : userList) {
-            Object[] rowData = {"img", user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), "1/0", "edit"};
+            BufferedImage iconImage = null;
+            ImageIcon icon = null;
+            try {
+                iconImage = ImageIO.read(new File("src/img/user.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (iconImage != null) {
+                icon = new ImageIcon(iconImage);
+            }
+
+            String activeUrl = user.isIsActive() ? "active" : "inactive";
+            BufferedImage activeImage = null;
+            ImageIcon activeIcon = null;
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (activeImage != null) {
+                activeIcon = new ImageIcon(activeImage);
+            }
+
+            BufferedImage editImage = null;
+            ImageIcon editIcon = null;
+            try{
+                editImage = ImageIO.read(new File("src/img/edit.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (editImage != null) {
+                editIcon = new ImageIcon(editImage);
+            }
+
+            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
             model.addRow(rowData);
-            System.out.println("hola");
         }
         UsersTable.setToolTipText("");
+        UsersTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        UsersTable.setAutoscrolls(false);
         UsersTable.setFocusable(false);
         UsersTable.setGridColor(new java.awt.Color(0, 90, 91));
         UsersTable.setMaximumSize(new java.awt.Dimension(525, 0));
         UsersTable.setMinimumSize(new java.awt.Dimension(525, 0));
         UsersTable.setRequestFocusEnabled(false);
-        UsersTable.setRowSelectionAllowed(false);
-        UsersTable.setSelectionBackground(new java.awt.Color(2, 166, 118));
+        UsersTable.setRowHeight(40);
+        UsersTable.setSelectionBackground(new java.awt.Color(0, 90, 91));
         UsersTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         javax.swing.table.JTableHeader header = UsersTable.getTableHeader();
         javax.swing.table.DefaultTableCellRenderer newRenderer = new javax.swing.table.DefaultTableCellRenderer();
@@ -1052,3 +1095,15 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
+
+class ImageRenderer extends DefaultTableCellRenderer {
+        @Override
+        protected void setValue(Object value) {
+            if (value instanceof Icon) {
+                setIcon((Icon) value);
+                setText(""); // Evitar que se muestre el texto
+            } else {
+                super.setValue(value);
+            }
+        }
+    }
