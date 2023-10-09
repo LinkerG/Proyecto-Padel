@@ -3,7 +3,10 @@ import Controller.*;
 import java.util.ArrayList;
 import Model.*;
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
@@ -631,12 +634,15 @@ public class AdminView extends javax.swing.JFrame {
 
         UsersTableScrollPane.setBackground(new java.awt.Color(0, 90, 91));
         UsersTableScrollPane.setBorder(null);
-        UsersTableScrollPane.setForeground(new java.awt.Color(255, 255, 255));
+        UsersTableScrollPane.setForeground(new java.awt.Color(0, 90, 91));
         UsersTableScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        UsersTableScrollPane.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         UsersTableScrollPane.setMaximumSize(new java.awt.Dimension(850, 310));
         UsersTableScrollPane.setMinimumSize(new java.awt.Dimension(850, 310));
         UsersTableScrollPane.setOpaque(false);
         UsersTableScrollPane.setPreferredSize(new java.awt.Dimension(850, 310));
+        UsersTableScrollPane.getViewport().setBackground(new java.awt.Color(0, 90, 91));
+        UsersTableScrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         UsersTable.setAutoCreateRowSorter(true);
         UsersTable.setBackground(new java.awt.Color(0, 90, 91));
@@ -644,10 +650,7 @@ public class AdminView extends javax.swing.JFrame {
         UsersTable.setForeground(new java.awt.Color(255, 255, 255));
         UsersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "", "Name", "Last names", "DNI", "Email", "Active", "Edit"
@@ -677,9 +680,27 @@ public class AdminView extends javax.swing.JFrame {
             System.out.println("hola");
         }
         UsersTable.setToolTipText("");
+        UsersTable.setFocusable(false);
         UsersTable.setGridColor(new java.awt.Color(0, 90, 91));
-        UsersTable.setOpaque(false);
+        UsersTable.setMaximumSize(new java.awt.Dimension(525, 0));
+        UsersTable.setMinimumSize(new java.awt.Dimension(525, 0));
+        UsersTable.setRequestFocusEnabled(false);
+        UsersTable.setRowSelectionAllowed(false);
+        UsersTable.setSelectionBackground(new java.awt.Color(2, 166, 118));
+        UsersTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.table.JTableHeader header = UsersTable.getTableHeader();
+        javax.swing.table.DefaultTableCellRenderer newRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        newRenderer.setBackground(new Color(0,90,91));
+        newRenderer.setHorizontalAlignment(JLabel.CENTER);
+        newRenderer.setFont(new Font("Arial", 0, 14));
+        newRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        newRenderer.setForeground(Color.WHITE);
+        header.setDefaultRenderer(newRenderer);
+        header.setResizingAllowed(false);
+        header.setReorderingAllowed(false);
+        UsersTable.setTableHeader(header);
         UsersTableScrollPane.setViewportView(UsersTable);
+        UsersTable.setBorder(null);
 
         UsersContent.add(UsersTableScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
