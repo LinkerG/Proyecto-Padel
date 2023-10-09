@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import Model.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
 import java.awt.*;
+import javax.swing.plaf.basic.ComboPopup;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
@@ -380,6 +381,18 @@ public class AdminView extends javax.swing.JFrame {
         CourtState.setLightWeightPopupEnabled(false);
         CourtState.setRequestFocusEnabled(false);
         CourtState.setVerifyInputWhenFocusTarget(false);
+        CourtState.setBorder(BorderFactory.createEmptyBorder());
+        CourtState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CourtStateActionPerformed(evt);
+            }
+        });
+        CourtState.setUI(new BasicComboBoxUI() {
+            @Override
+            protected ComboPopup createPopup() {
+                return new BasicComboPopup(comboBox);
+            }
+        });;
         jPanel1.add(CourtState, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 180, 40));
 
         CreateCourtsContent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 23, 528, 315));
@@ -633,7 +646,6 @@ public class AdminView extends javax.swing.JFrame {
         UsersContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UsersTableScrollPane.setBackground(new java.awt.Color(0, 90, 91));
-        UsersTableScrollPane.setBorder(null);
         UsersTableScrollPane.setForeground(new java.awt.Color(0, 90, 91));
         UsersTableScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         UsersTableScrollPane.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -957,6 +969,10 @@ public class AdminView extends javax.swing.JFrame {
         CourtState.setSelectedIndex(0);
         CourtNotes.setText("");
     }//GEN-LAST:event_AddCourtButtonActionPerformed
+
+    private void CourtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtStateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CourtStateActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
