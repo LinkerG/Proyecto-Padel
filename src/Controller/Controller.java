@@ -18,6 +18,7 @@ public class Controller {
     public static LoginError loginError = new LoginError();
     public static User currentUser;
     
+    
     public static void startApp(){
         if(checkStatement()) {
             loginMenu.setTitle("Log in");
@@ -146,6 +147,13 @@ public class Controller {
     
     public static void createUser(String email, String password, String name, String surnames, String dni) {
         boolean insert = true;
+        adminView.CreateUserEmailErrorLabel.setVisible(false);
+        adminView.CreateUserPasswordErrorLabel.setVisible(false);
+        adminView.CreateUserPasswordRequirementLabel.setVisible(false);
+        adminView.CreateUserNameErrorLabel.setVisible(false);
+        adminView.CreateUserLastnamesErrorLabel.setVisible(false);
+        adminView.CreateUserDniErrorLabel.setVisible(false);
+        
         if(!checkEmail(email)) {
            insert = false;
            adminView.CreateUserEmailErrorLabel.setVisible(true);
@@ -158,23 +166,27 @@ public class Controller {
            adminView.TxtboxPasswordCreateUser.setText("");
            
         }
+        String formattedName = modifyName(name);
         if(!checkName(name)) {
             insert = false;
             adminView.CreateUserNameErrorLabel.setVisible(true);
             adminView.TxtboxNameCreateUser.setText("");
         }
+        String formattedSurnames = modifyName(surnames);
         if(!checkName(surnames)) {
             insert = false;
             adminView.CreateUserLastnamesErrorLabel.setVisible(true);
             adminView.TxtboxLastnamesCreateUser.setText("");
         }
-        if(!checkDNI(dni)) {
+        String formattedDNI = dni.toUpperCase();
+        if(!checkDNI(formattedDNI)) {
             insert = false;
             adminView.CreateUserDniErrorLabel.setVisible(true);
             adminView.TxtboxDniCreateUser.setText("");
         }
+        System.out.println("Nombre post proceso: " + formattedName + " " + formattedSurnames + " DNI: " + formattedDNI);
         if(insert) {
-            insertUser(email, password, name, surnames, dni);
+            insertUser(email, password, formattedName, formattedSurnames, formattedDNI);
         }
     }
     
@@ -221,12 +233,15 @@ public class Controller {
     }
    
    public static boolean checkEmail(String email) {
-        // Expresiï¿½n regular para validar el formato de un correo electrï¿½nico
+       
+       if (email == null || email.trim().isEmpty()) {
+            return false;
+        }
+
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
-
-        // Verifica si el correo electrï¿½nico tiene el formato correcto
+        
         if (!matcher.matches()) {
             System.out.print("No matchea");
             return false;
@@ -249,20 +264,50 @@ public class Controller {
     }
    
    public static boolean checkPassword(String password) {
-        if (password == null || password == "") {
+        if (password == null || "".equals(password)) {
             return false;
         }
         return !password.contains(" ");
     }
    
-   public static boolean checkName(String name) {
-        if (name == null || name.isEmpty()) {
-            return false; // El nombre no puede ser nulo ni estar vacï¿½o
-        }
+    public static String modifyName(String name) {
+        
+        // Elimina espacios en blanco adicionales al principio y al final del nombre
+        name = name.trim();
 
-        // Utiliza una expresiï¿½n regular para verificar si el nombre contiene solo letras y espacios
-        return name.matches("^[a-zA-Z\\s]+$");
+        // Divide el nombre en palabras usando espacios como separadores
+        String[] words = name.split("\\s+");
+
+        // Formatea cada palabra: convierte a minúsculas todas las letras excepto la primera
+        StringBuilder formattedName = new StringBuilder();
+        for (String word : words) {
+            if (!word.isEmpty()) { // Ignora espacios en blanco adicionales
+                String firstLetter = word.substring(0, 1).toUpperCase();
+                String restOfWord = word.substring(1).toLowerCase();
+                formattedName.append(firstLetter).append(restOfWord).append(" ");
+            }
+        }
+        System.out.println("FName: " + formattedName);
+        // Verifica si el nombre después del formato es nulo o está vacío
+        if (formattedName.toString().trim().isEmpty()) {
+            System.out.println("El nombre después del formato está vacío o en blanco.");
+            return "";
+        }
+        name = formattedName.toString().trim();
+        // El nombre es válido después de aplicar el formato
+        System.out.println("Nombre válido: " + formattedName.toString().trim());
+        return formattedName.toString().trim(); 
+        
     }
+    
+    public static boolean checkName(String name) {
+	if (name == null || name.trim().isEmpty()) {
+            System.out.println("El nombre está vacío o en blanco.");
+            return false;
+	}
+	return true;
+    }
+
 
 
  
@@ -276,7 +321,21 @@ public class Controller {
 	// Extrae los dï¿½gitos y la letra de control
 	String digits = dni.substring(0, 8);
 	char controlLetter = dni.charAt(8);
+        String sql = "SELECT COUNT(*) FROM user WHERE dni = ?";
+        try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+            prepareQuery.setString(1, dni);
+            ResultSet resultSet = prepareQuery.executeQuery();
 
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                System.out.print("Llega al count:" + count);
+                if(count > 0) {
+                    return false;   
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	try {
             // Convierte los 8 dï¿½gitos a un nï¿½mero entero
             int dniNumber = Integer.parseInt(digits);
