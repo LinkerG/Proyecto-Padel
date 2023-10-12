@@ -722,44 +722,7 @@ public class AdminView extends javax.swing.JFrame {
         UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
 
         ArrayList<User> userList = Controller.getUsers(false);
-        for (User user : userList) {
-            BufferedImage iconImage = null;
-            ImageIcon icon = null;
-            try {
-                iconImage = ImageIO.read(new File("src/img/user.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (iconImage != null) {
-                icon = new ImageIcon(iconImage);
-            }
-
-            String activeUrl = user.isIsActive() ? "active" : "inactive";
-            BufferedImage activeImage = null;
-            ImageIcon activeIcon = null;
-            try {
-                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (activeImage != null) {
-                activeIcon = new ImageIcon(activeImage);
-            }
-
-            BufferedImage editImage = null;
-            ImageIcon editIcon = null;
-            try{
-                editImage = ImageIO.read(new File("src/img/edit.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (editImage != null) {
-                editIcon = new ImageIcon(editImage);
-            }
-
-            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
-            model.addRow(rowData);
-        }
+        updateTableContent(userList);
         UsersTable.setToolTipText("");
         UsersTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         UsersTable.setAutoscrolls(false);
@@ -782,6 +745,11 @@ public class AdminView extends javax.swing.JFrame {
         header.setResizingAllowed(false);
         header.setReorderingAllowed(false);
         UsersTable.setTableHeader(header);
+        UsersTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UsersTableMouseClicked(evt);
+            }
+        });
         UsersTableScrollPane.setViewportView(UsersTable);
         UsersTable.setBorder(null);
 
@@ -954,47 +922,10 @@ public class AdminView extends javax.swing.JFrame {
 
     private void PanelBtnUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseClicked
         PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
-        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
-        model.setRowCount(0);
+        
+        
         ArrayList<User> userList = Controller.getUsers(false);
-        for (User user : userList) {
-            BufferedImage iconImage = null;
-            ImageIcon icon = null;
-            try {
-                iconImage = ImageIO.read(new File("src/img/user.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (iconImage != null) {
-                icon = new ImageIcon(iconImage);
-            }
-
-            String activeUrl = user.isIsActive() ? "active" : "inactive";
-            BufferedImage activeImage = null;
-            ImageIcon activeIcon = null;
-            try {
-                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (activeImage != null) {
-                activeIcon = new ImageIcon(activeImage);
-            }
-
-            BufferedImage editImage = null;
-            ImageIcon editIcon = null;
-            try{
-                editImage = ImageIO.read(new File("src/img/edit.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (editImage != null) {
-                editIcon = new ImageIcon(editImage);
-            }
-
-            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
-            model.addRow(rowData);
-        }
+        updateTableContent(userList);
         Selector.setVisible(false);
         Users.setVisible(true);
     }//GEN-LAST:event_PanelBtnUsersMouseClicked
@@ -1039,47 +970,9 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturn1ActionPerformed
 
     private void BtnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn2ActionPerformed
-        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
-        model.setRowCount(0);
+        
         ArrayList<User> userList = Controller.getUsers(false);
-        for (User user : userList) {
-            BufferedImage iconImage = null;
-            ImageIcon icon = null;
-            try {
-                iconImage = ImageIO.read(new File("src/img/user.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (iconImage != null) {
-                icon = new ImageIcon(iconImage);
-            }
-
-            String activeUrl = user.isIsActive() ? "active" : "inactive";
-            BufferedImage activeImage = null;
-            ImageIcon activeIcon = null;
-            try {
-                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (activeImage != null) {
-                activeIcon = new ImageIcon(activeImage);
-            }
-
-            BufferedImage editImage = null;
-            ImageIcon editIcon = null;
-            try{
-                editImage = ImageIO.read(new File("src/img/edit.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (editImage != null) {
-                editIcon = new ImageIcon(editImage);
-            }
-
-            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
-            model.addRow(rowData);
-        }
+        updateTableContent(userList);
         Users.setVisible(true);
         CreateUsers.setVisible(false);
     }//GEN-LAST:event_BtnReturn2ActionPerformed
@@ -1103,47 +996,9 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAddActionPerformed
 
     private void BtnAdd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd3ActionPerformed
-        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
-        model.setRowCount(0);
+
         ArrayList<User> userList = Controller.getUsers(false);
-        for (User user : userList) {
-            BufferedImage iconImage = null;
-            ImageIcon icon = null;
-            try {
-                iconImage = ImageIO.read(new File("src/img/user.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (iconImage != null) {
-                icon = new ImageIcon(iconImage);
-            }
-
-            String activeUrl = user.isIsActive() ? "active" : "inactive";
-            BufferedImage activeImage = null;
-            ImageIcon activeIcon = null;
-            try {
-                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (activeImage != null) {
-                activeIcon = new ImageIcon(activeImage);
-            }
-
-            BufferedImage editImage = null;
-            ImageIcon editIcon = null;
-            try{
-                editImage = ImageIO.read(new File("src/img/edit.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (editImage != null) {
-                editIcon = new ImageIcon(editImage);
-            }
-
-            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
-            model.addRow(rowData);
-        }
+        updateTableContent(userList);
         CreateUsers.setVisible(true);
         Users.setVisible(false);
         CreateUserNameErrorLabel.setVisible(false);
@@ -1201,47 +1056,8 @@ public class AdminView extends javax.swing.JFrame {
     private void CreateUserBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserBtnSaveActionPerformed
         String password = String.valueOf(TxtboxPasswordCreateUser.getPassword());
         Controller.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText());
-        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
-        model.setRowCount(0);
         ArrayList<User> userList = Controller.getUsers(false);
-        for (User user : userList) {
-            BufferedImage iconImage = null;
-            ImageIcon icon = null;
-            try {
-                iconImage = ImageIO.read(new File("src/img/user.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (iconImage != null) {
-                icon = new ImageIcon(iconImage);
-            }
-
-            String activeUrl = user.isIsActive() ? "active" : "inactive";
-            BufferedImage activeImage = null;
-            ImageIcon activeIcon = null;
-            try {
-                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (activeImage != null) {
-                activeIcon = new ImageIcon(activeImage);
-            }
-
-            BufferedImage editImage = null;
-            ImageIcon editIcon = null;
-            try{
-                editImage = ImageIO.read(new File("src/img/edit.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (editImage != null) {
-                editIcon = new ImageIcon(editImage);
-            }
-
-            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
-            model.addRow(rowData);
-        }
+        updateTableContent(userList);
         CreateUsers.setVisible(false);
         Users.setVisible(true);
         
@@ -1293,6 +1109,34 @@ public class AdminView extends javax.swing.JFrame {
     private void CourtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtStateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CourtStateActionPerformed
+
+    private void UsersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UsersTableMouseClicked
+        int row = UsersTable.rowAtPoint(evt.getPoint());
+        int column = UsersTable.columnAtPoint(evt.getPoint());
+        
+        if(column == 5){
+            ArrayList<User> userList = Controller.getUsers(false);
+            Object dni = UsersTable.getValueAt(row, 3);
+            String stringDni = dni.toString();
+            for (User user : userList) {
+            if (user.getDni().equals(stringDni)) {
+                user.updateUserIsActive(user);
+                ArrayList<User> newUserList = Controller.getUsers(false);
+                updateTableContent(newUserList);
+            }
+    }
+        }
+        
+        if(column == 6){
+            System.out.println("Edit");
+        }
+        
+        if (row >= 0 && column >= 0) {
+            Object value = UsersTable.getValueAt(row, column);
+            System.out.println("Clicked on cell: " + value);
+            System.out.println("Row:"+row+"Col:"+column);
+        }
+    }//GEN-LAST:event_UsersTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1371,6 +1215,48 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
     // End of variables declaration//GEN-END:variables
+    private void updateTableContent(ArrayList<User> userList) {
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        for (User user : userList) {
+            BufferedImage iconImage = null;
+            ImageIcon icon = null;
+            try {
+                iconImage = ImageIO.read(new File("src/img/user.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (iconImage != null) {
+                icon = new ImageIcon(iconImage);
+            }
+
+            String activeUrl = user.isIsActive() ? "active" : "inactive";
+            BufferedImage activeImage = null;
+            ImageIcon activeIcon = null;
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (activeImage != null) {
+                activeIcon = new ImageIcon(activeImage);
+            }
+
+            BufferedImage editImage = null;
+            ImageIcon editIcon = null;
+            try{
+                editImage = ImageIO.read(new File("src/img/edit.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (editImage != null) {
+                editIcon = new ImageIcon(editImage);
+            }
+
+            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
+            model.addRow(rowData);
+        }
+    }
 }
 
 class ImageRenderer extends DefaultTableCellRenderer {

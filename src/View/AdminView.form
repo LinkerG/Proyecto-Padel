@@ -1584,7 +1584,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();&#xa;UsersTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());&#xa;&#xa;ArrayList&lt;User&gt; userList = Controller.getUsers(false);&#xa;for (User user : userList) {&#xa;    BufferedImage iconImage = null;&#xa;    ImageIcon icon = null;&#xa;    try {&#xa;        iconImage = ImageIO.read(new File(&quot;src/img/user.png&quot;));&#xa;    } catch (IOException e) {&#xa;        e.printStackTrace();&#xa;    }&#xa;    if (iconImage != null) {&#xa;        icon = new ImageIcon(iconImage);&#xa;    }&#xa;&#xa;    String activeUrl = user.isIsActive() ? &quot;active&quot; : &quot;inactive&quot;;&#xa;    BufferedImage activeImage = null;&#xa;    ImageIcon activeIcon = null;&#xa;    try {&#xa;        activeImage = ImageIO.read(new File(&quot;src/img/&quot; + activeUrl + &quot;.png&quot;));&#xa;    } catch (IOException e) {&#xa;        e.printStackTrace();&#xa;    }&#xa;    if (activeImage != null) {&#xa;        activeIcon = new ImageIcon(activeImage);&#xa;    }&#xa;    &#xa;    BufferedImage editImage = null;&#xa;    ImageIcon editIcon = null;&#xa;    try{&#xa;        editImage = ImageIO.read(new File(&quot;src/img/edit.png&quot;));&#xa;    } catch (IOException e) {&#xa;        e.printStackTrace();&#xa;    }&#xa;    if (editImage != null) {&#xa;        editIcon = new ImageIcon(editImage);&#xa;    }&#xa;    &#xa;    Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};&#xa;    model.addRow(rowData);&#xa;}">
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();&#xa;UsersTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());&#xa;&#xa;ArrayList&lt;User&gt; userList = Controller.getUsers(false);&#xa;updateTableContent(userList);">
                               <Table columnCount="7" rowCount="0">
                                 <Column editable="false" title="" type="java.lang.Object"/>
                                 <Column editable="false" title="Name" type="java.lang.String"/>
@@ -1659,6 +1659,9 @@
                               <Connection code="header" type="code"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UsersTableMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
