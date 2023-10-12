@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
@@ -174,8 +175,36 @@ public class AdminView extends javax.swing.JFrame {
         CourtButtonsScrollPane.setViewportView(CourtButtons);
         ArrayList<Court> courtList = Controller.getCourts(false);
         for (Court court : courtList) {
-            javax.swing.JLabel courtLabelAdd = new javax.swing.JLabel(String.valueOf(court.getID()));
-            CourtButtons.add(courtLabelAdd);
+            // Add panel
+            JPanel CourtSample = new javax.swing.JPanel();
+            CourtSample.setBackground(new java.awt.Color(0, 115, 105));
+            CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
+            CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
+            CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
+            //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+            // Add image
+            JLabel LabelCourtImage = new javax.swing.JLabel();
+            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
+            CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+            // Add ID
+            JLabel LabelCourtName = new javax.swing.JLabel();
+            LabelCourtName.setText("Court " + String.valueOf(court.getID()));
+            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+
+            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
+
+            CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
+            // Add State
+            String active = "";
+            if(court.isIsActive()) {
+                active = "Active";
+            } else {
+                active = "In maintenance";
+            }
+            JLabel courtState = new javax.swing.JLabel(active);
+            CourtSample.add(courtState);
+            CourtButtons.add(CourtSample);
         }
 
         CourtsContent.add(CourtButtonsScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
