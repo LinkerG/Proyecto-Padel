@@ -954,6 +954,47 @@ public class AdminView extends javax.swing.JFrame {
 
     private void PanelBtnUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseClicked
         PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        ArrayList<User> userList = Controller.getUsers(false);
+        for (User user : userList) {
+            BufferedImage iconImage = null;
+            ImageIcon icon = null;
+            try {
+                iconImage = ImageIO.read(new File("src/img/user.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (iconImage != null) {
+                icon = new ImageIcon(iconImage);
+            }
+
+            String activeUrl = user.isIsActive() ? "active" : "inactive";
+            BufferedImage activeImage = null;
+            ImageIcon activeIcon = null;
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (activeImage != null) {
+                activeIcon = new ImageIcon(activeImage);
+            }
+
+            BufferedImage editImage = null;
+            ImageIcon editIcon = null;
+            try{
+                editImage = ImageIO.read(new File("src/img/edit.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (editImage != null) {
+                editIcon = new ImageIcon(editImage);
+            }
+
+            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
+            model.addRow(rowData);
+        }
         Selector.setVisible(false);
         Users.setVisible(true);
     }//GEN-LAST:event_PanelBtnUsersMouseClicked
@@ -998,6 +1039,47 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturn1ActionPerformed
 
     private void BtnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn2ActionPerformed
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        ArrayList<User> userList = Controller.getUsers(false);
+        for (User user : userList) {
+            BufferedImage iconImage = null;
+            ImageIcon icon = null;
+            try {
+                iconImage = ImageIO.read(new File("src/img/user.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (iconImage != null) {
+                icon = new ImageIcon(iconImage);
+            }
+
+            String activeUrl = user.isIsActive() ? "active" : "inactive";
+            BufferedImage activeImage = null;
+            ImageIcon activeIcon = null;
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (activeImage != null) {
+                activeIcon = new ImageIcon(activeImage);
+            }
+
+            BufferedImage editImage = null;
+            ImageIcon editIcon = null;
+            try{
+                editImage = ImageIO.read(new File("src/img/edit.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (editImage != null) {
+                editIcon = new ImageIcon(editImage);
+            }
+
+            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
+            model.addRow(rowData);
+        }
         Users.setVisible(true);
         CreateUsers.setVisible(false);
     }//GEN-LAST:event_BtnReturn2ActionPerformed
@@ -1021,6 +1103,47 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAddActionPerformed
 
     private void BtnAdd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd3ActionPerformed
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        ArrayList<User> userList = Controller.getUsers(false);
+        for (User user : userList) {
+            BufferedImage iconImage = null;
+            ImageIcon icon = null;
+            try {
+                iconImage = ImageIO.read(new File("src/img/user.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (iconImage != null) {
+                icon = new ImageIcon(iconImage);
+            }
+
+            String activeUrl = user.isIsActive() ? "active" : "inactive";
+            BufferedImage activeImage = null;
+            ImageIcon activeIcon = null;
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (activeImage != null) {
+                activeIcon = new ImageIcon(activeImage);
+            }
+
+            BufferedImage editImage = null;
+            ImageIcon editIcon = null;
+            try{
+                editImage = ImageIO.read(new File("src/img/edit.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (editImage != null) {
+                editIcon = new ImageIcon(editImage);
+            }
+
+            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
+            model.addRow(rowData);
+        }
         CreateUsers.setVisible(true);
         Users.setVisible(false);
         CreateUserNameErrorLabel.setVisible(false);
@@ -1078,6 +1201,50 @@ public class AdminView extends javax.swing.JFrame {
     private void CreateUserBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserBtnSaveActionPerformed
         String password = String.valueOf(TxtboxPasswordCreateUser.getPassword());
         Controller.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText());
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
+        model.setRowCount(0);
+        ArrayList<User> userList = Controller.getUsers(false);
+        for (User user : userList) {
+            BufferedImage iconImage = null;
+            ImageIcon icon = null;
+            try {
+                iconImage = ImageIO.read(new File("src/img/user.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (iconImage != null) {
+                icon = new ImageIcon(iconImage);
+            }
+
+            String activeUrl = user.isIsActive() ? "active" : "inactive";
+            BufferedImage activeImage = null;
+            ImageIcon activeIcon = null;
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + activeUrl + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (activeImage != null) {
+                activeIcon = new ImageIcon(activeImage);
+            }
+
+            BufferedImage editImage = null;
+            ImageIcon editIcon = null;
+            try{
+                editImage = ImageIO.read(new File("src/img/edit.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (editImage != null) {
+                editIcon = new ImageIcon(editImage);
+            }
+
+            Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
+            model.addRow(rowData);
+        }
+        CreateUsers.setVisible(false);
+        Users.setVisible(true);
+        
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
