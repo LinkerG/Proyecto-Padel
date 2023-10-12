@@ -12,7 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
-    private static Statement statement = connectToDatabase();
+    public static Statement statement = connectToDatabase();
     public static LoginMenu loginMenu = new LoginMenu();
     
     public static LoginError loginError = new LoginError();

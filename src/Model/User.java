@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.*;
 import java.sql.*;
 import java.util.Calendar;
 
@@ -71,27 +72,21 @@ public class User {
     
     
     //Methods
-    //As admin, creates a new Court
-    public void createCourt(String name, boolean isEnabled, Statement connection){
-        //TO-DO SQL INSERT INTO pista
-    }
-    //As client or admin, books a court and changes the state
-    public void modifyBook(CourtState state, Court targetCourt, Calendar day, Statement connection){
-        //TO-DO actualizar informacion de la pista con CourtState
-    }
-    //As admin, sets a court as blocked that cannot be booked, if the court has a book programmed at a certain hour, it will change the book state to CANCELED
-    public void toggleCourt(Court targetCourt){
-        //TO-DO actualiza el estado de la pista (activo/no activo)
-        //Si la pista ahora esta inactiva, CANCELA todas las reservas futuras relacionadas y comprueba la disponibilidad espejo de otras pistas, si hay una libre, la asigna automaticamente
-    }
-    //As admin, registers a new user to the database
-    public void registerUser(String name, String surname, boolean admin){
-        //TO-DO SQL INSERT INTO user
-        //Default ACTIVO
-    }
-    //As admin, unsubscribes a user from the database (deactivates the user)
-    public void toggleUserSubscription(User targetUser){
-        //UPDATE USER userDNI !active
-        //Si el usuario tiene reservas proximas a su nombre, se cancela
+    public void updateUserIsActive(User user) {
+        String update = user.isActive ? "UPDATE USER SET isActive = 0 WHERE DNI = '" + user.dni + "';" : "UPDATE USER SET isActive = 1 WHERE DNI = '" + user.dni + "';";
+        try(PreparedStatement prepareQuery = Controller.statement.getConnection().prepareStatement(update)){
+            // Execute the query
+        	int rowsInserted = prepareQuery.executeUpdate();
+
+        	if (rowsInserted > 0) {
+            	// Successfully inserted
+                    System.out.print("updated");
+        	} else {
+            	// Error in database
+                    System.out.print("not updated");
+        	}
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }
