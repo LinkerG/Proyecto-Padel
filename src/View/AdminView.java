@@ -195,38 +195,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtButtons.setLayout(new java.awt.GridLayout(0, 5, 50, 10));
         CourtButtonsScrollPane.setViewportView(CourtButtons);
         ArrayList<Court> courtList = Controller.getCourts(false);
-        for (Court court : courtList) {
-            // Add panel
-            JPanel CourtSample = new javax.swing.JPanel();
-            CourtSample.setBackground(new java.awt.Color(0, 115, 105));
-            CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
-            //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            // Add image
-            JLabel LabelCourtImage = new javax.swing.JLabel();
-            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
-            CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-            // Add ID
-            JLabel LabelCourtName = new javax.swing.JLabel();
-            LabelCourtName.setText("Court " + String.valueOf(court.getID()));
-            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-
-            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-
-            CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
-            // Add State
-            String active = "";
-            if(court.isIsActive()) {
-                active = "Active";
-            } else {
-                active = "In maintenance";
-            }
-            JLabel courtState = new javax.swing.JLabel(active);
-            CourtSample.add(courtState);
-            CourtButtons.add(CourtSample);
-        }
+        generateCourtButtons(courtList);
 
         CourtsContent.add(CourtButtonsScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
@@ -1081,40 +1050,8 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnCourts.setBackground(new java.awt.Color(0,115,105));
         Selector.setVisible(false);
         Courts.setVisible(true);
-        CourtButtons.removeAll();
         ArrayList<Court> courtList = Controller.getCourts(false);
-    for (Court court : courtList) {
-        // Add panel
-        JPanel CourtSample = new javax.swing.JPanel();
-        CourtSample.setBackground(new java.awt.Color(0, 115, 105));
-        CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
-        CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
-        CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
-        //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        // Add image
-        JLabel LabelCourtImage = new javax.swing.JLabel();
-        LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
-        CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-        // Add ID
-        JLabel LabelCourtName = new javax.swing.JLabel();
-        LabelCourtName.setText("Court " + String.valueOf(court.getID()));
-        LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-
-        LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-
-        CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
-        // Add State
-        String active = "";
-        if(court.isIsActive()) {
-            active = "Active";
-        } else {
-            active = "In maintenance";
-        }
-        JLabel courtState = new javax.swing.JLabel(active);
-        CourtSample.add(courtState);
-        CourtButtons.add(CourtSample);
-    }
+        generateCourtButtons(courtList);
     }//GEN-LAST:event_PanelBtnCourtsMouseClicked
 
     private void PanelBtnUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelBtnUsersMouseClicked
@@ -1130,40 +1067,8 @@ public class AdminView extends javax.swing.JFrame {
     private void BtnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn1ActionPerformed
         Courts.setVisible(true);
         CreateCourts.setVisible(false);
-        CourtButtons.removeAll();
         ArrayList<Court> courtList = Controller.getCourts(false);
-        for (Court court : courtList) {
-            // Add panel
-            JPanel CourtSample = new javax.swing.JPanel();
-            CourtSample.setBackground(new java.awt.Color(0, 115, 105));
-            CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
-            //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            // Add image
-            JLabel LabelCourtImage = new javax.swing.JLabel();
-            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
-            CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-            // Add ID
-            JLabel LabelCourtName = new javax.swing.JLabel();
-            LabelCourtName.setText("Court " + String.valueOf(court.getID()));
-            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-
-            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-
-            CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
-            // Add State
-            String active = "";
-            if(court.isIsActive()) {
-                active = "Active";
-            } else {
-                active = "In maintenance";
-            }
-            JLabel courtState = new javax.swing.JLabel(active);
-            CourtSample.add(courtState);
-            CourtButtons.add(CourtSample);
-        }
+        generateCourtButtons(courtList);
     }//GEN-LAST:event_BtnReturn1ActionPerformed
 
     private void BtnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn2ActionPerformed
@@ -1251,48 +1156,19 @@ public class AdminView extends javax.swing.JFrame {
 
     private void CreateUserBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserBtnSaveActionPerformed
         String password = String.valueOf(TxtboxPasswordCreateUser.getPassword());
-        Controller.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText());
-        ArrayList<User> userList = Controller.getUsers(false);
-        updateTableContent(userList);
-        CreateUsers.setVisible(false);
-        Users.setVisible(true);
+        if(Controller.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText())){
+            ArrayList<User> userList = Controller.getUsers(false);
+            updateTableContent(userList);
+            CreateUsers.setVisible(false);
+            Users.setVisible(true);
+        }
+        
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
         Controller.createCourt(CourtNotes.getText(), CourtState.getSelectedIndex());
         ArrayList<Court> courtList = Controller.getCourts(false);
-        for (Court court : courtList) {
-            // Add panel
-            JPanel CourtSample = new javax.swing.JPanel();
-            CourtSample.setBackground(new java.awt.Color(0, 115, 105));
-            CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
-            //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            // Add image
-            JLabel LabelCourtImage = new javax.swing.JLabel();
-            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
-            CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-            // Add ID
-            JLabel LabelCourtName = new javax.swing.JLabel();
-            LabelCourtName.setText("Court " + String.valueOf(court.getID()));
-            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-
-            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-
-            CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
-            // Add State
-            String active = "";
-            if(court.isIsActive()) {
-                active = "Active";
-            } else {
-                active = "In maintenance";
-            }
-            JLabel courtState = new javax.swing.JLabel(active);
-            CourtSample.add(courtState);
-            CourtButtons.add(CourtSample);
-        }
+        generateCourtButtons(courtList);
         CreateCourts.setVisible(false);
         Courts.setVisible(true);
         defaultId = Controller.getDefId();
@@ -1490,6 +1366,42 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JScrollPane UsersTableScrollPane;
     private javax.swing.JLabel WIPtext;
     // End of variables declaration//GEN-END:variables
+    private void generateCourtButtons(ArrayList<Court> courtList){
+        CourtButtons.removeAll();
+        for (Court court : courtList) {
+            // Add panel
+            JPanel CourtSample = new javax.swing.JPanel();
+            CourtSample.setBackground(new java.awt.Color(0, 115, 105));
+            CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
+            CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
+            CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
+            //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+            // Add image
+            JLabel LabelCourtImage = new javax.swing.JLabel();
+            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
+            CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
+            // Add ID
+            JLabel LabelCourtName = new javax.swing.JLabel();
+            LabelCourtName.setText("Court " + String.valueOf(court.getID()));
+            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+
+            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
+
+            CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
+            // Add State
+            String active = "";
+            if(court.isIsActive()) {
+                active = "Active";
+            } else {
+                active = "In maintenance";
+            }
+            JLabel courtState = new javax.swing.JLabel(active);
+            CourtSample.add(courtState);
+            CourtButtons.add(CourtSample);
+        }
+    }
+    
     private void updateTableContent(ArrayList<User> userList) {
         javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
         model.setRowCount(0);

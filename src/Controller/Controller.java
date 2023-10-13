@@ -145,7 +145,7 @@ public class Controller {
     	}
     }
     
-    public static void createUser(String email, String password, String name, String surnames, String dni) {
+    public static boolean createUser(String email, String password, String name, String surnames, String dni) {
         boolean insert = true;
         adminView.CreateUserEmailErrorLabel.setVisible(false);
         adminView.CreateUserPasswordErrorLabel.setVisible(false);
@@ -187,6 +187,9 @@ public class Controller {
         System.out.println("Nombre post proceso: " + formattedName + " " + formattedSurnames + " DNI: " + formattedDNI);
         if(insert) {
             insertUser(email, password, formattedName, formattedSurnames, formattedDNI);
+            return true;
+        } else {
+            return false;
         }
     }
     
