@@ -231,6 +231,206 @@ public class Controller {
     	e.printStackTrace(); // Print the exception for debugging
 	}
     }
+    
+    public static boolean checkUpdateUser(String email, String password, String name, String surnames, String dni) {
+        boolean insert = true;
+        adminView.UserInfoPasswordErrorLabel.setVisible(false);
+        adminView.UserInfoPasswordRequirementLabel.setVisible(false);
+        adminView.UserInfoNameErrorLabel.setVisible(false);
+        adminView.UserInfoLastnamesErrorLabel.setVisible(false);
+        adminView.UserInfoDniErrorLabel.setVisible(false);
+        
+        
+        if(adminView.ChangePasswordToggle.isSelected()) {
+            if(!checkPassword(password)) {
+                insert = false;
+                adminView.UserInfoPasswordErrorLabel.setVisible(true);
+                adminView.UserInfoPasswordRequirementLabel.setVisible(true);
+                adminView.TxtboxPasswordUserInfo.setText("");
+            }
+        }
+        
+        String formattedName = modifyName(name);
+        if(!checkName(name)) {
+            insert = false;
+            adminView.UserInfoNameErrorLabel.setVisible(true);
+            adminView.TxtboxNameUserInfo.setText("");
+        }
+        String formattedSurnames = modifyName(surnames);
+        if(!checkName(surnames)) {
+            insert = false;
+            adminView.UserInfoLastnamesErrorLabel.setVisible(true);
+            adminView.TxtboxLastnamesUserInfo.setText("");
+        }
+        String formattedDNI = dni.toUpperCase();
+        if(adminView.ChangeDniToggle.isSelected()) {
+            System.out.println(formattedDNI);
+            if(!checkDNI(formattedDNI)) {
+                insert = false;
+                adminView.UserInfoDniErrorLabel.setVisible(true);
+                adminView.TxtboxDniUserInfo.setText("");
+            }
+        }
+        
+        System.out.println("Nombre post proceso: " + formattedName + " " + formattedSurnames + " DNI: " + formattedDNI);
+        if(insert) {
+            if(adminView.ChangeDniToggle.isSelected() && adminView.ChangePasswordToggle.isSelected()) {
+                updateUser(email, password, formattedName, formattedSurnames, dni);
+                return true;
+            } else if(adminView.ChangePasswordToggle.isSelected()) {
+                updateUser(email, password, formattedName, formattedSurnames, "");
+                return true;
+            } else if(adminView.ChangeDniToggle.isSelected()) {
+                updateUser(email, "", formattedName, formattedSurnames, formattedDNI);
+                return true;
+            } else {
+                updateUser(email, "", formattedName, formattedSurnames, "");
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+    
+    public static void updateUser(String email, String password, String name, String surnames, String dni) {
+        if(password.equals("") && dni.equals("")){
+            try {
+                System.out.println("NO CAMBIA");
+            // como no se cambia el password no se hace lo de md5
+            // Use a PreparedStatement to safely insert data into the database
+            String sql = "UPDATE user SET name = ?, surname = ? WHERE email = ?";
+            try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+                    prepareQuery.setString(1, name);
+                    prepareQuery.setString(2, surnames);
+                    prepareQuery.setString(3, email);
+
+                    // Execute the query
+                    int rowsInserted = prepareQuery.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                    // Successfully inserted
+                        System.out.print("Updated");
+                    } else {
+                    // Error in database
+                        System.out.print("Not updated");
+                    }
+            } catch (Exception e) {
+                    e.printStackTrace(); // Print the exception for debugging
+            }
+            } catch (Exception e) {
+            e.printStackTrace(); // Print the exception for debugging
+            }
+        } else if(dni.equals("")){
+            System.out.println("CAMBIA PASS");
+            try {
+            // Obtener una instancia del objeto MessageDigest con el algoritmo MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // Calcular el hash de la cadena de texto
+            md.update(password.getBytes());
+            byte[] digest = md.digest();
+
+            // Convertir el hash en una representaci�n hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                    hexString.append(String.format("%02x", b));
+            }
+            
+            // Use a PreparedStatement to safely insert data into the database
+            String sql = "UPDATE user SET name = ?, surname = ?, password = ? WHERE email = ?";
+            try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+                    prepareQuery.setString(1, name);
+                    prepareQuery.setString(2, surnames);
+                    prepareQuery.setString(3, hexString.toString());
+                    prepareQuery.setString(4, email);
+
+                    // Execute the query
+                    int rowsInserted = prepareQuery.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                    // Successfully inserted
+                        System.out.print("Updated");
+                    } else {
+                    // Error in database
+                        System.out.print("Not updated");
+                    }
+            } catch (Exception e) {
+                    e.printStackTrace(); // Print the exception for debugging
+            }
+            } catch (Exception e) {
+            e.printStackTrace(); // Print the exception for debugging
+            }
+        } else if(password.equals("")){
+            System.out.println("Cambia DNI");
+            try {
+            // como no se cambia el password no se hace lo de md5
+            // Use a PreparedStatement to safely insert data into the database
+            String sql = "UPDATE user SET name = ?, surname = ?, DNI = ? WHERE email = ?";
+            try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+                    prepareQuery.setString(1, name);
+                    prepareQuery.setString(2, surnames);
+                    prepareQuery.setString(3, dni);
+                    prepareQuery.setString(4, email);
+
+                    // Execute the query
+                    int rowsInserted = prepareQuery.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                    // Successfully inserted
+                        System.out.print("Updated");
+                    } else {
+                    // Error in database
+                        System.out.print("Not updated");
+                    }
+            } catch (Exception e) {
+                    e.printStackTrace(); // Print the exception for debugging
+            }
+            } catch (Exception e) {
+            e.printStackTrace(); // Print the exception for debugging
+            }
+        } else {
+            System.out.println("CAMBIA LOS DOS");
+            try {
+            // Obtener una instancia del objeto MessageDigest con el algoritmo MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // Calcular el hash de la cadena de texto
+            md.update(password.getBytes());
+            byte[] digest = md.digest();
+
+            // Convertir el hash en una representaci�n hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                    hexString.append(String.format("%02x", b));
+            }
+
+            // Use a PreparedStatement to safely insert data into the database
+            String sql = "UPDATE user SET name = ?, surname = ?,password = ?, DNI = ? WHERE email = ?";
+            try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+                    prepareQuery.setString(1, name);
+                    prepareQuery.setString(2, surnames);
+                    prepareQuery.setString(3, hexString.toString());
+                    prepareQuery.setString(4, dni);
+                    prepareQuery.setString(5, email);
+
+                    // Execute the query
+                    int rowsInserted = prepareQuery.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                    // Successfully inserted
+                        System.out.print("Updated");
+                    } else {
+                    // Error in database
+                        System.out.print("Not updated");
+                    }
+            } catch (Exception e) {
+                    e.printStackTrace(); // Print the exception for debugging
+            }
+            } catch (Exception e) {
+            e.printStackTrace(); // Print the exception for debugging
+            }
+        }
+    }
    
    public static boolean checkEmail(String email) {
        
@@ -329,9 +529,7 @@ public class Controller {
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
                 System.out.print("Llega al count:" + count);
-                if(count > 0) {
-                    return false;   
-                }
+                if(count > 0) return false;
             }
         } catch (Exception e) {
             e.printStackTrace();

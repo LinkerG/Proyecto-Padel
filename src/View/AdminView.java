@@ -17,7 +17,7 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
-    private javax.swing.ImageIcon fotoIcon = new javax.swing.ImageIcon("img/edit.png");
+    private String dniToShow = null;
     public AdminView() {
         initComponents();
         LabelCompleteName.setText(Controller.getUserName());
@@ -97,6 +97,27 @@ public class AdminView extends javax.swing.JFrame {
         UserInfo = new javax.swing.JPanel();
         BtnReturn4 = new javax.swing.JButton();
         UserInfoContent = new javax.swing.JPanel();
+        UserInfoImage = new javax.swing.JLabel();
+        UserInfoName = new javax.swing.JLabel();
+        UserInfoNameLabel = new javax.swing.JLabel();
+        UserInfoNameErrorLabel = new javax.swing.JLabel();
+        UserInfoEmailLabel = new javax.swing.JLabel();
+        UserInfoEmailContent = new javax.swing.JLabel();
+        TxtboxNameUserInfo = new javax.swing.JTextField();
+        UserInfoLastnamesLabel = new javax.swing.JLabel();
+        UserInfoLastnamesErrorLabel = new javax.swing.JLabel();
+        UserInfoPasswordErrorLabel = new javax.swing.JLabel();
+        UserInfoDniErrorLabel = new javax.swing.JLabel();
+        TxtboxDniUserInfo = new javax.swing.JTextField();
+        TxtboxLastnamesUserInfo = new javax.swing.JTextField();
+        TxtboxPasswordUserInfo = new javax.swing.JPasswordField();
+        UserInfoPasswordRequirementLabel = new javax.swing.JLabel();
+        UserInfoBtnSave = new javax.swing.JButton();
+        UserBookingsLabel = new javax.swing.JLabel();
+        UserBookingsPanel = new javax.swing.JPanel();
+        WIPtext = new javax.swing.JLabel();
+        ChangePasswordToggle = new javax.swing.JCheckBox();
+        ChangeDniToggle = new javax.swing.JCheckBox();
         Header = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         LabelCompleteName = new javax.swing.JLabel();
@@ -781,6 +802,182 @@ public class AdminView extends javax.swing.JFrame {
         UserInfoContent.setMaximumSize(new java.awt.Dimension(934, 362));
         UserInfoContent.setMinimumSize(new java.awt.Dimension(934, 362));
         UserInfoContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        UserInfoImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/userinfo.png"))); // NOI18N
+        UserInfoContent.add(UserInfoImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 21, -1, -1));
+
+        UserInfoName.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        UserInfoName.setForeground(new java.awt.Color(255, 255, 255));
+        UserInfoName.setText("<Complete user name>");
+        UserInfoContent.add(UserInfoName, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 41, -1, -1));
+
+        UserInfoNameLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        UserInfoNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        UserInfoNameLabel.setText("Name");
+        UserInfoContent.add(UserInfoNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        UserInfoNameErrorLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UserInfoNameErrorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        UserInfoNameErrorLabel.setText("Name not valid");
+        UserInfoContent.add(UserInfoNameErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
+
+        UserInfoEmailLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        UserInfoEmailLabel.setForeground(new java.awt.Color(255, 255, 255));
+        UserInfoEmailLabel.setText("Email");
+        UserInfoContent.add(UserInfoEmailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
+
+        UserInfoEmailContent.setBackground(new java.awt.Color(0, 115, 105));
+        UserInfoEmailContent.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        UserInfoEmailContent.setForeground(new java.awt.Color(255, 255, 255));
+        UserInfoEmailContent.setText("LabelForEmail");
+        UserInfoEmailContent.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        UserInfoEmailContent.setMaximumSize(new java.awt.Dimension(220, 34));
+        UserInfoEmailContent.setMinimumSize(new java.awt.Dimension(220, 34));
+        UserInfoEmailContent.setOpaque(true);
+        UserInfoEmailContent.setPreferredSize(new java.awt.Dimension(220, 34));
+        UserInfoContent.add(UserInfoEmailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
+
+        TxtboxNameUserInfo.setBackground(new java.awt.Color(0, 115, 105));
+        TxtboxNameUserInfo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxNameUserInfo.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxNameUserInfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxNameUserInfo.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxNameUserInfo.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxNameUserInfo.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxNameUserInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxNameUserInfoActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(TxtboxNameUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+
+        UserInfoLastnamesLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        UserInfoLastnamesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        UserInfoLastnamesLabel.setText("Last Names");
+        UserInfoContent.add(UserInfoLastnamesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
+
+        UserInfoLastnamesErrorLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UserInfoLastnamesErrorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        UserInfoLastnamesErrorLabel.setText("Invalid field");
+        UserInfoContent.add(UserInfoLastnamesErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+
+        UserInfoPasswordErrorLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UserInfoPasswordErrorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        UserInfoPasswordErrorLabel.setText("Password not valid");
+        UserInfoContent.add(UserInfoPasswordErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
+
+        UserInfoDniErrorLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UserInfoDniErrorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        UserInfoDniErrorLabel.setText("DNI not valid");
+        UserInfoContent.add(UserInfoDniErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, -1, -1));
+
+        TxtboxDniUserInfo.setBackground(new java.awt.Color(0, 115, 105));
+        TxtboxDniUserInfo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxDniUserInfo.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxDniUserInfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxDniUserInfo.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxDniUserInfo.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxDniUserInfo.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxDniUserInfo.setVisible(false);
+        TxtboxDniUserInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxDniUserInfoActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(TxtboxDniUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
+
+        TxtboxLastnamesUserInfo.setBackground(new java.awt.Color(0, 115, 105));
+        TxtboxLastnamesUserInfo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxLastnamesUserInfo.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxLastnamesUserInfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxLastnamesUserInfo.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxLastnamesUserInfo.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxLastnamesUserInfo.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxLastnamesUserInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxLastnamesUserInfoActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(TxtboxLastnamesUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
+
+        TxtboxPasswordUserInfo.setBackground(new java.awt.Color(0, 115, 105));
+        TxtboxPasswordUserInfo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        TxtboxPasswordUserInfo.setForeground(new java.awt.Color(255, 255, 255));
+        TxtboxPasswordUserInfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
+        TxtboxPasswordUserInfo.setMaximumSize(new java.awt.Dimension(220, 34));
+        TxtboxPasswordUserInfo.setMinimumSize(new java.awt.Dimension(220, 34));
+        TxtboxPasswordUserInfo.setPreferredSize(new java.awt.Dimension(220, 34));
+        TxtboxPasswordUserInfo.setVisible(false);
+        TxtboxPasswordUserInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtboxPasswordUserInfoActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(TxtboxPasswordUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, -1, -1));
+
+        UserInfoPasswordRequirementLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UserInfoPasswordRequirementLabel.setForeground(new java.awt.Color(255, 51, 51));
+        UserInfoPasswordRequirementLabel.setText("Password can't contain spaces.");
+        UserInfoContent.add(UserInfoPasswordRequirementLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, -1, -1));
+
+        UserInfoBtnSave.setBackground(new java.awt.Color(2, 166, 118));
+        UserInfoBtnSave.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        UserInfoBtnSave.setForeground(new java.awt.Color(255, 255, 255));
+        UserInfoBtnSave.setText("Save");
+        UserInfoBtnSave.setBorder(null);
+        UserInfoBtnSave.setFocusable(false);
+        UserInfoBtnSave.setMaximumSize(new java.awt.Dimension(220, 34));
+        UserInfoBtnSave.setMinimumSize(new java.awt.Dimension(220, 34));
+        UserInfoBtnSave.setPreferredSize(new java.awt.Dimension(220, 34));
+        UserInfoBtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserInfoBtnSaveActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(UserInfoBtnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 280, -1, -1));
+
+        UserBookingsLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        UserBookingsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        UserBookingsLabel.setText("User Bookings");
+        UserInfoContent.add(UserBookingsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 41, -1, -1));
+
+        UserBookingsPanel.setBackground(new java.awt.Color(0, 115, 105));
+        UserBookingsPanel.setForeground(new java.awt.Color(255, 255, 255));
+        UserBookingsPanel.setMaximumSize(new java.awt.Dimension(341, 230));
+        UserBookingsPanel.setMinimumSize(new java.awt.Dimension(341, 230));
+        UserBookingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        WIPtext.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        WIPtext.setForeground(new java.awt.Color(255, 255, 255));
+        WIPtext.setText("WIP");
+        UserBookingsPanel.add(WIPtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+
+        UserInfoContent.add(UserBookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 330, 225));
+
+        ChangePasswordToggle.setBackground(new java.awt.Color(0, 90, 91));
+        ChangePasswordToggle.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        ChangePasswordToggle.setForeground(new java.awt.Color(255, 255, 255));
+        ChangePasswordToggle.setText("Change Password");
+        ChangePasswordToggle.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ChangePasswordToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangePasswordToggleActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(ChangePasswordToggle, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, -1, -1));
+
+        ChangeDniToggle.setBackground(new java.awt.Color(0, 90, 91));
+        ChangeDniToggle.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        ChangeDniToggle.setForeground(new java.awt.Color(255, 255, 255));
+        ChangeDniToggle.setText("Change DNI");
+        ChangeDniToggle.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ChangeDniToggle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChangeDniToggleActionPerformed(evt);
+            }
+        });
+        UserInfoContent.add(ChangeDniToggle, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
         UserInfo.add(UserInfoContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
 
         Content.add(UserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
@@ -983,7 +1180,10 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturn3ActionPerformed
 
     private void BtnReturn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn4ActionPerformed
-        // TODO add your handling code here:
+        ArrayList<User> userList = Controller.getUsers(false);
+        updateTableContent(userList);
+        Users.setVisible(true);
+        UserInfo.setVisible(false);
     }//GEN-LAST:event_BtnReturn4ActionPerformed
 
     private void BtnReturn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn5ActionPerformed
@@ -1033,10 +1233,6 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
     }//GEN-LAST:event_PanelBtnUsersMouseExited
 
-    private void TxtboxNameCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxNameCreateUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtboxNameCreateUserActionPerformed
-
     private void TxtboxLastnamesCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxLastnamesCreateUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtboxLastnamesCreateUserActionPerformed
@@ -1060,7 +1256,6 @@ public class AdminView extends javax.swing.JFrame {
         updateTableContent(userList);
         CreateUsers.setVisible(false);
         Users.setVisible(true);
-        
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
@@ -1119,24 +1314,83 @@ public class AdminView extends javax.swing.JFrame {
             Object dni = UsersTable.getValueAt(row, 3);
             String stringDni = dni.toString();
             for (User user : userList) {
-            if (user.getDni().equals(stringDni)) {
-                user.updateUserIsActive(user);
-                ArrayList<User> newUserList = Controller.getUsers(false);
-                updateTableContent(newUserList);
+                if (user.getDni().equals(stringDni)) {
+                    user.updateUserIsActive(user);
+                    ArrayList<User> newUserList = Controller.getUsers(false);
+                    updateTableContent(newUserList);
+                }
             }
-    }
         }
         
         if(column == 6){
-            System.out.println("Edit");
+            ArrayList<User> userList = Controller.getUsers(false);
+            Object dni = UsersTable.getValueAt(row, 3);
+            String stringDni = dni.toString();
+            System.out.println(stringDni);
+            for (User user : userList) {
+                if (user.getDni().equals(stringDni)) {
+                    userInfoByDni(user);
+                }
+            }
+            UserInfo.setVisible(true);
+            Users.setVisible(false);
         }
         
         if (row >= 0 && column >= 0) {
-            Object value = UsersTable.getValueAt(row, column);
-            System.out.println("Clicked on cell: " + value);
-            System.out.println("Row:"+row+"Col:"+column);
+            // Esto sirve para printar el valor de la celda clicada
+            
+            //Object value = UsersTable.getValueAt(row, column);
+            //System.out.println("Clicked on cell: " + value);
+            System.out.println("Row: "+row+" Col: "+column);
         }
     }//GEN-LAST:event_UsersTableMouseClicked
+
+    private void TxtboxNameUserInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxNameUserInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxNameUserInfoActionPerformed
+
+    private void TxtboxDniUserInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxDniUserInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxDniUserInfoActionPerformed
+
+    private void TxtboxLastnamesUserInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxLastnamesUserInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxLastnamesUserInfoActionPerformed
+
+    private void TxtboxPasswordUserInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxPasswordUserInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxPasswordUserInfoActionPerformed
+
+    private void UserInfoBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserInfoBtnSaveActionPerformed
+        String password = String.valueOf(TxtboxPasswordUserInfo.getPassword());
+        if(Controller.checkUpdateUser(UserInfoEmailContent.getText(), password, TxtboxNameUserInfo.getText(), TxtboxLastnamesUserInfo.getText(), TxtboxDniUserInfo.getText())){
+            ArrayList<User> userList = Controller.getUsers(false);
+            updateTableContent(userList);
+            UserInfo.setVisible(false);
+            Users.setVisible(true);
+            TxtboxDniUserInfo.setText("");
+            TxtboxDniUserInfo.setVisible(false);
+            TxtboxPasswordUserInfo.setText("");
+            TxtboxPasswordUserInfo.setVisible(false);
+            ChangeDniToggle.setSelected(false);
+            ChangePasswordToggle.setSelected(false);
+        }
+        
+    }//GEN-LAST:event_UserInfoBtnSaveActionPerformed
+
+    private void ChangePasswordToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangePasswordToggleActionPerformed
+        if(TxtboxPasswordUserInfo.isVisible()) TxtboxPasswordUserInfo.setVisible(false);
+        else TxtboxPasswordUserInfo.setVisible(true);
+    }//GEN-LAST:event_ChangePasswordToggleActionPerformed
+
+    private void TxtboxNameCreateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtboxNameCreateUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtboxNameCreateUserActionPerformed
+
+    private void ChangeDniToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeDniToggleActionPerformed
+        if(TxtboxDniUserInfo.isVisible()) TxtboxDniUserInfo.setVisible(false);
+        else TxtboxDniUserInfo.setVisible(true);
+    }//GEN-LAST:event_ChangeDniToggleActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1151,6 +1405,8 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JButton BtnReturn3;
     private javax.swing.JButton BtnReturn4;
     private javax.swing.JButton BtnReturn5;
+    public javax.swing.JCheckBox ChangeDniToggle;
+    public javax.swing.JCheckBox ChangePasswordToggle;
     public javax.swing.JPanel Content;
     private javax.swing.JPanel CourtButtons;
     private javax.swing.JScrollPane CourtButtonsScrollPane;
@@ -1203,17 +1459,36 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBtnUsers;
     public javax.swing.JPanel Selector;
     public javax.swing.JTextField TxtboxDniCreateUser;
+    public javax.swing.JTextField TxtboxDniUserInfo;
     public javax.swing.JTextField TxtboxEmailCreateUser;
     public javax.swing.JTextField TxtboxLastnamesCreateUser;
+    public javax.swing.JTextField TxtboxLastnamesUserInfo;
     public javax.swing.JTextField TxtboxNameCreateUser;
+    public javax.swing.JTextField TxtboxNameUserInfo;
     public javax.swing.JPasswordField TxtboxPasswordCreateUser;
+    public javax.swing.JPasswordField TxtboxPasswordUserInfo;
+    private javax.swing.JLabel UserBookingsLabel;
+    private javax.swing.JPanel UserBookingsPanel;
     private javax.swing.JLabel UserImageCreateUser;
     private javax.swing.JPanel UserInfo;
+    private javax.swing.JButton UserInfoBtnSave;
     private javax.swing.JPanel UserInfoContent;
+    public javax.swing.JLabel UserInfoDniErrorLabel;
+    private javax.swing.JLabel UserInfoEmailContent;
+    private javax.swing.JLabel UserInfoEmailLabel;
+    private javax.swing.JLabel UserInfoImage;
+    public javax.swing.JLabel UserInfoLastnamesErrorLabel;
+    private javax.swing.JLabel UserInfoLastnamesLabel;
+    private javax.swing.JLabel UserInfoName;
+    public javax.swing.JLabel UserInfoNameErrorLabel;
+    private javax.swing.JLabel UserInfoNameLabel;
+    public javax.swing.JLabel UserInfoPasswordErrorLabel;
+    public javax.swing.JLabel UserInfoPasswordRequirementLabel;
     private javax.swing.JPanel Users;
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
+    private javax.swing.JLabel WIPtext;
     // End of variables declaration//GEN-END:variables
     private void updateTableContent(ArrayList<User> userList) {
         javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();
@@ -1256,6 +1531,17 @@ public class AdminView extends javax.swing.JFrame {
             Object[] rowData = {icon, user.getName(), user.getSurnames(), user.getDni(), user.getEmail(), activeIcon, editIcon};
             model.addRow(rowData);
         }
+    }
+    private void userInfoByDni(User user) {
+        UserInfoNameErrorLabel.setVisible(false);
+        UserInfoLastnamesErrorLabel.setVisible(false);
+        UserInfoDniErrorLabel.setVisible(false);
+        UserInfoPasswordErrorLabel.setVisible(false);
+        UserInfoPasswordRequirementLabel.setVisible(false);
+        UserInfoName.setText(user.getName() + " " + user.getSurnames());
+        TxtboxNameUserInfo.setText(user.getName());
+        TxtboxLastnamesUserInfo.setText(user.getSurnames());
+        UserInfoEmailContent.setText(user.getEmail());
     }
 }
 
