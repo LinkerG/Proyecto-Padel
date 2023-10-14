@@ -601,7 +601,7 @@ public class Controller {
             System.out.println("El formato de la cadena no es válido.");
         }
         
-        state = (state == 1) ? 0 : 1;
+        state = (state == 1) ? 1 : 0;
 
         String sql = "UPDATE court SET notes = ?, isAvailable = ? WHERE courtId = ?";
             try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {

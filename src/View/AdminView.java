@@ -1200,7 +1200,8 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturn4ActionPerformed
 
     private void BtnReturn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn5ActionPerformed
-        // TODO add your handling code here:
+        CourtInfo.setVisible(false);
+        Courts.setVisible(true);
     }//GEN-LAST:event_BtnReturn5ActionPerformed
 
     private void BtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddActionPerformed
@@ -1379,6 +1380,11 @@ public class AdminView extends javax.swing.JFrame {
     private void SaveCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCourtButtonActionPerformed
 
         Controller.updateCourt(CourtInfoState.getSelectedIndex(), CourtInfoNotes.getText(), CourtInfoIDLabel.getText());
+        CourtButtons.removeAll();
+        ArrayList<Court>  courtList = Controller.getCourts(false);
+        generateCourtButtons(courtList);
+        CourtInfo.setVisible(false);
+        Courts.setVisible(true);
     }//GEN-LAST:event_SaveCourtButtonActionPerformed
 
     private void CourtInfoStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtInfoStateActionPerformed
