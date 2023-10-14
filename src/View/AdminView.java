@@ -65,6 +65,16 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfo = new javax.swing.JPanel();
         BtnReturn5 = new javax.swing.JButton();
         CourtInfoContent = new javax.swing.JPanel();
+        CourtInfoPanel = new javax.swing.JPanel();
+        CourtInfoIDLabel = new javax.swing.JLabel();
+        CourtInfoNotesScrollPane = new javax.swing.JScrollPane();
+        CourtInfoNotes = new javax.swing.JTextArea();
+        CourtInfoNotesLabel = new javax.swing.JLabel();
+        CourtInfoStateLabel = new javax.swing.JLabel();
+        SaveCourtButton = new javax.swing.JButton();
+        CourtInfoState = new javax.swing.JComboBox<>();
+        CourtBookingsInfo = new javax.swing.JPanel();
+        WIP = new javax.swing.JLabel();
         CreateUsers = new javax.swing.JPanel();
         BtnReturn2 = new javax.swing.JButton();
         CreateUserContent = new javax.swing.JPanel();
@@ -446,6 +456,104 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfoContent.setMaximumSize(new java.awt.Dimension(934, 362));
         CourtInfoContent.setMinimumSize(new java.awt.Dimension(934, 362));
         CourtInfoContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CourtInfoPanel.setBackground(new java.awt.Color(0, 115, 105));
+        CourtInfoPanel.setMaximumSize(new java.awt.Dimension(861, 314));
+        CourtInfoPanel.setMinimumSize(new java.awt.Dimension(861, 314));
+        CourtInfoPanel.setPreferredSize(new java.awt.Dimension(861, 314));
+        CourtInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CourtInfoIDLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        CourtInfoIDLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtInfoIDLabel.setText("Court X");
+        CourtInfoPanel.add(CourtInfoIDLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 17, -1, -1));
+
+        CourtInfoNotesScrollPane.setHorizontalScrollBar(null);
+        CourtInfoNotesScrollPane.setMaximumSize(new java.awt.Dimension(231, 92));
+        CourtInfoNotesScrollPane.setMinimumSize(new java.awt.Dimension(231, 92));
+        CourtInfoNotesScrollPane.setPreferredSize(new java.awt.Dimension(231, 92));
+
+        CourtInfoNotes.setBackground(new java.awt.Color(0, 90, 91));
+        CourtInfoNotes.setColumns(20);
+        CourtInfoNotes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtInfoNotes.setForeground(new java.awt.Color(255, 255, 255));
+        CourtInfoNotes.setLineWrap(true);
+        CourtInfoNotes.setRows(5);
+        CourtInfoNotes.setWrapStyleWord(true);
+        CourtInfoNotes.setBorder(null);
+        CourtInfoNotes.setMaximumSize(new java.awt.Dimension(231, 92));
+        CourtInfoNotes.setMinimumSize(new java.awt.Dimension(231, 92));
+        CourtInfoNotes.setPreferredSize(new java.awt.Dimension(231, 92));
+        CourtInfoNotesScrollPane.setViewportView(CourtInfoNotes);
+
+        CourtInfoPanel.add(CourtInfoNotesScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 148, -1, -1));
+
+        CourtInfoNotesLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        CourtInfoNotesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtInfoNotesLabel.setText("Notes");
+        CourtInfoPanel.add(CourtInfoNotesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 119, -1, -1));
+
+        CourtInfoStateLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        CourtInfoStateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtInfoStateLabel.setText("State");
+        CourtInfoPanel.add(CourtInfoStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 52, -1, -1));
+
+        SaveCourtButton.setBackground(new java.awt.Color(2, 166, 118));
+        SaveCourtButton.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        SaveCourtButton.setForeground(new java.awt.Color(255, 255, 255));
+        SaveCourtButton.setText("Save");
+        SaveCourtButton.setBorder(null);
+        SaveCourtButton.setMaximumSize(new java.awt.Dimension(231, 41));
+        SaveCourtButton.setMinimumSize(new java.awt.Dimension(231, 41));
+        SaveCourtButton.setPreferredSize(new java.awt.Dimension(231, 41));
+        SaveCourtButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveCourtButtonActionPerformed(evt);
+            }
+        });
+        CourtInfoPanel.add(SaveCourtButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 256, -1, -1));
+
+        CourtInfoState.setBackground(new java.awt.Color(0, 90, 91));
+        CourtInfoState.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtInfoState.setForeground(new java.awt.Color(255, 255, 255));
+        CourtInfoState.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Blocked", "Available" }));
+        CourtInfoState.setSelectedIndex(1);
+        CourtInfoState.setBorder(null);
+        CourtInfoState.setFocusable(false);
+        CourtInfoState.setLightWeightPopupEnabled(false);
+        CourtInfoState.setMaximumSize(new java.awt.Dimension(231, 29));
+        CourtInfoState.setMinimumSize(new java.awt.Dimension(231, 29));
+        CourtInfoState.setPreferredSize(new java.awt.Dimension(231, 29));
+        CourtInfoState.setVerifyInputWhenFocusTarget(false);
+        CourtState.setBorder(BorderFactory.createEmptyBorder());
+        CourtInfoState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CourtInfoStateActionPerformed(evt);
+            }
+        });
+        CourtState.setUI(new BasicComboBoxUI() {
+            @Override
+            protected ComboPopup createPopup() {
+                return new BasicComboPopup(comboBox);
+            }
+        });;
+        CourtInfoPanel.add(CourtInfoState, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 81, -1, -1));
+
+        CourtBookingsInfo.setBackground(new java.awt.Color(2, 166, 118));
+        CourtBookingsInfo.setMaximumSize(new java.awt.Dimension(514, 246));
+        CourtBookingsInfo.setMinimumSize(new java.awt.Dimension(514, 246));
+        CourtBookingsInfo.setPreferredSize(new java.awt.Dimension(514, 246));
+        CourtBookingsInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        WIP.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        WIP.setForeground(new java.awt.Color(255, 255, 255));
+        WIP.setText("WIP");
+        CourtBookingsInfo.add(WIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
+
+        CourtInfoPanel.add(CourtBookingsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 51, -1, -1));
+
+        CourtInfoContent.add(CourtInfoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 24, -1, -1));
+
         CourtInfo.add(CourtInfoContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
 
         Content.add(CourtInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
@@ -1268,6 +1376,15 @@ public class AdminView extends javax.swing.JFrame {
         else TxtboxDniUserInfo.setVisible(true);
     }//GEN-LAST:event_ChangeDniToggleActionPerformed
 
+    private void SaveCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCourtButtonActionPerformed
+
+        Controller.updateCourt(CourtInfoState.getSelectedIndex(), CourtInfoNotes.getText(), CourtInfoIDLabel.getText());
+    }//GEN-LAST:event_SaveCourtButtonActionPerformed
+
+    private void CourtInfoStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtInfoStateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CourtInfoStateActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
     private javax.swing.JButton BtnAdd;
@@ -1284,18 +1401,26 @@ public class AdminView extends javax.swing.JFrame {
     public javax.swing.JCheckBox ChangeDniToggle;
     public javax.swing.JCheckBox ChangePasswordToggle;
     public javax.swing.JPanel Content;
+    private javax.swing.JPanel CourtBookingsInfo;
     private javax.swing.JPanel CourtButtons;
     private javax.swing.JScrollPane CourtButtonsScrollPane;
     private javax.swing.JLabel CourtID;
     private javax.swing.JLabel CourtIdLabel;
-    private javax.swing.JPanel CourtInfo;
+    public static javax.swing.JPanel CourtInfo;
     private javax.swing.JPanel CourtInfoContent;
+    public static javax.swing.JLabel CourtInfoIDLabel;
+    public static javax.swing.JTextArea CourtInfoNotes;
+    private javax.swing.JLabel CourtInfoNotesLabel;
+    public static javax.swing.JScrollPane CourtInfoNotesScrollPane;
+    private javax.swing.JPanel CourtInfoPanel;
+    public static javax.swing.JComboBox<String> CourtInfoState;
+    public javax.swing.JLabel CourtInfoStateLabel;
     private javax.swing.JTextArea CourtNotes;
     private javax.swing.JLabel CourtNotesLabel;
     private javax.swing.JPanel CourtSample;
     private javax.swing.JComboBox<String> CourtState;
     private javax.swing.JLabel CourtStateLabel;
-    private javax.swing.JPanel Courts;
+    public static javax.swing.JPanel Courts;
     private javax.swing.JPanel CourtsContent;
     private javax.swing.JLabel CreateCourtLabel;
     private javax.swing.JPanel CreateCourtPanel;
@@ -1333,6 +1458,7 @@ public class AdminView extends javax.swing.JFrame {
     public javax.swing.JPanel PanelBackground;
     private javax.swing.JPanel PanelBtnCourts;
     private javax.swing.JPanel PanelBtnUsers;
+    private javax.swing.JButton SaveCourtButton;
     public javax.swing.JPanel Selector;
     public javax.swing.JTextField TxtboxDniCreateUser;
     public javax.swing.JTextField TxtboxDniUserInfo;
@@ -1364,41 +1490,14 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
+    private javax.swing.JLabel WIP;
     private javax.swing.JLabel WIPtext;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
         CourtButtons.removeAll();
         for (Court court : courtList) {
-            // Add panel
-            JPanel CourtSample = new javax.swing.JPanel();
-            CourtSample.setBackground(new java.awt.Color(0, 115, 105));
-            CourtSample.setMaximumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setMinimumSize(new java.awt.Dimension(134, 152));
-            CourtSample.setPreferredSize(new java.awt.Dimension(134, 152));
-            //CourtSample.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-            // Add image
-            JLabel LabelCourtImage = new javax.swing.JLabel();
-            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
-            CourtSample.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-            // Add ID
-            JLabel LabelCourtName = new javax.swing.JLabel();
-            LabelCourtName.setText("Court " + String.valueOf(court.getID()));
-            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-
-            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-
-            CourtSample.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
-            // Add State
-            String active = "";
-            if(court.isIsActive()) {
-                active = "Active";
-            } else {
-                active = "In maintenance";
-            }
-            JLabel courtState = new javax.swing.JLabel(active);
-            CourtSample.add(courtState);
-            CourtButtons.add(CourtSample);
+            CourtPanel courtPanel = new CourtPanel(court);
+            CourtButtons.add(courtPanel);
         }
     }
     

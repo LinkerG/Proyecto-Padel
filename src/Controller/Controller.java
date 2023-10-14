@@ -510,10 +510,6 @@ public class Controller {
 	}
 	return true;
     }
-
-
-
- 
    
    public static boolean checkDNI(String dni) {
 	// Verifica que el DNI tiene exactamente 9 caracteres (8 dï¿½gitos + 1 letra)
@@ -555,7 +551,6 @@ public class Controller {
 	}
     }
 
-    
     public static ArrayList getCourts(boolean available) {
         // FUNCTION returns all courts in DB as object Court in a list
         
@@ -582,6 +577,64 @@ public class Controller {
             return courtList;
         }
     }
+    
+    public static void getSelectedCourt(Court court) {
+        AdminView.CourtInfoIDLabel.setText("Court " + court.getID());
+        AdminView.CourtInfoNotes.setText(court.getNotes());
+        if(court.isIsActive()) {
+            AdminView.CourtInfoState.setSelectedItem(0);
+        } else {
+            AdminView.CourtInfoState.setSelectedItem(1);
+        }
+    }
+    
+    public static void updateCourt(int state, String notes, String court) {
+        
+        // Dividimos la cadena en función de un espacio en blanco
+        String[] parts = court.split(" ");
+        int number = 0;
+        // La primera parte es "Court" y la segunda parte es el número
+        if (parts.length == 2 && parts[0].equals("Court")) {
+            // Convertimos la segunda parte a un valor int
+            number = Integer.parseInt(parts[1]);
+        } else {
+            System.out.println("El formato de la cadena no es válido.");
+        }
+        
+        state = (state == 1) ? 0 : 1;
+
+        String sql = "UPDATE court SET notes = ?, isAvailable = ? WHERE courtId = ?";
+            try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+                    prepareQuery.setString(1, notes);
+                    prepareQuery.setInt(2, state);
+                    prepareQuery.setInt(3, number);
+
+                    // Execute the query
+                    int rowsInserted = prepareQuery.executeUpdate();
+
+                    if (rowsInserted > 0) {
+                    // Successfully inserted
+                        System.out.print("Updated");
+                    } else {
+                    // Error in database
+                        System.out.print("Not updated");
+                    }
+            } catch (Exception e) {
+                    e.printStackTrace(); // Print the exception for debugging
+            }
+    }
+    /* Codigo antiguo, puede ser util
+    public static Court getCourtById(int courtId, boolean available) {
+        ArrayList<Court> courtList = getCourts(available);
+
+        for (Court court : courtList) {
+            if (court.getID() == courtId) {
+                return court;
+            }
+        }
+        return null; 
+    }
+    */
     
     public static ArrayList getUsers(boolean available) {
         // FUNCTION returns all users in DB as object User in a list
@@ -648,7 +701,4 @@ public class Controller {
         JOptionPane.showMessageDialog(null, error);
     }
     
-    private static void abrirPista() {                                             
-        System.out.println("Hola");
-    } 
 }
