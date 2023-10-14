@@ -20,6 +20,17 @@ public class AdminView extends javax.swing.JFrame {
     private String dniToShow = null;
     public AdminView() {
         initComponents();
+        BufferedImage toolBarImg = null;
+        try {
+            toolBarImg = ImageIO.read(new File("src/img/iconImage.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Establece la imagen como ícono de la ventana
+        if (toolBarImg != null) {
+            setIconImage(toolBarImg);
+        }
         LabelCompleteName.setText(Controller.getUserName());
         setLocationRelativeTo(null);  
     }
