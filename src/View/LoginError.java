@@ -6,6 +6,10 @@ package View;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -17,7 +21,17 @@ public class LoginError extends javax.swing.JFrame {
     
     public LoginError() {
         initComponents();
-        
+        BufferedImage toolBarImg = null;
+        try {
+            toolBarImg = ImageIO.read(new File("src/img/iconImage.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Establece la imagen como ícono de la ventana
+        if (toolBarImg != null) {
+            setIconImage(toolBarImg);
+        }
         setLocationRelativeTo(null);
         
         addMouseListener(new MouseAdapter() {

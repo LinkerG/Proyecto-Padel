@@ -241,7 +241,7 @@
                             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
                           </Properties>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ArrayList&lt;Court&gt; courtList = Controller.getCourts(false);&#xa;generateCourtButtons(courtList);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="ArrayList&lt;Court&gt; courtList = Court.getCourts(false);&#xa;generateCourtButtons(courtList);"/>
                           </AuxValues>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
@@ -1856,7 +1856,7 @@
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="ff" green="ff" red="ff" type="rgb"/>
                             </Property>
-                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();&#xa;UsersTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());&#xa;&#xa;ArrayList&lt;User&gt; userList = Controller.getUsers(false);&#xa;updateTableContent(userList);">
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="javax.swing.table.DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();&#xa;UsersTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());&#xa;UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());&#xa;&#xa;ArrayList&lt;User&gt; userList = User.getUsers(false);&#xa;updateTableContent(userList);">
                               <Table columnCount="7" rowCount="0">
                                 <Column editable="false" title="" type="java.lang.Object"/>
                                 <Column editable="false" title="Name" type="java.lang.String"/>

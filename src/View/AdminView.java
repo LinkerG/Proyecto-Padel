@@ -17,7 +17,6 @@ import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;
-    private String dniToShow = null;
     public AdminView() {
         initComponents();
         BufferedImage toolBarImg = null;
@@ -215,7 +214,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtButtons.setVerifyInputWhenFocusTarget(false);
         CourtButtons.setLayout(new java.awt.GridLayout(0, 5, 50, 10));
         CourtButtonsScrollPane.setViewportView(CourtButtons);
-        ArrayList<Court> courtList = Controller.getCourts(false);
+        ArrayList<Court> courtList = Court.getCourts(false);
         generateCourtButtons(courtList);
 
         CourtsContent.add(CourtButtonsScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
@@ -830,7 +829,7 @@ public class AdminView extends javax.swing.JFrame {
         UsersTable.getColumnModel().getColumn(5).setCellRenderer(new ImageRenderer());
         UsersTable.getColumnModel().getColumn(6).setCellRenderer(new ImageRenderer());
 
-        ArrayList<User> userList = Controller.getUsers(false);
+        ArrayList<User> userList = User.getUsers(false);
         updateTableContent(userList);
         UsersTable.setToolTipText("");
         UsersTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -1169,7 +1168,7 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnCourts.setBackground(new java.awt.Color(0,115,105));
         Selector.setVisible(false);
         Courts.setVisible(true);
-        ArrayList<Court> courtList = Controller.getCourts(false);
+        ArrayList<Court> courtList = Court.getCourts(false);
         generateCourtButtons(courtList);
     }//GEN-LAST:event_PanelBtnCourtsMouseClicked
 
@@ -1177,7 +1176,7 @@ public class AdminView extends javax.swing.JFrame {
         PanelBtnUsers.setBackground(new java.awt.Color(0,115,105));
         
         
-        ArrayList<User> userList = Controller.getUsers(false);
+        ArrayList<User> userList = User.getUsers(false);
         updateTableContent(userList);
         Selector.setVisible(false);
         Users.setVisible(true);
@@ -1186,13 +1185,13 @@ public class AdminView extends javax.swing.JFrame {
     private void BtnReturn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn1ActionPerformed
         Courts.setVisible(true);
         CreateCourts.setVisible(false);
-        ArrayList<Court> courtList = Controller.getCourts(false);
+        ArrayList<Court> courtList = Court.getCourts(false);
         generateCourtButtons(courtList);
     }//GEN-LAST:event_BtnReturn1ActionPerformed
 
     private void BtnReturn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn2ActionPerformed
         
-        ArrayList<User> userList = Controller.getUsers(false);
+        ArrayList<User> userList = User.getUsers(false);
         updateTableContent(userList);
         Users.setVisible(true);
         CreateUsers.setVisible(false);
@@ -1204,7 +1203,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturn3ActionPerformed
 
     private void BtnReturn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturn4ActionPerformed
-        ArrayList<User> userList = Controller.getUsers(false);
+        ArrayList<User> userList = User.getUsers(false);
         updateTableContent(userList);
         Users.setVisible(true);
         UserInfo.setVisible(false);
@@ -1222,7 +1221,7 @@ public class AdminView extends javax.swing.JFrame {
 
     private void BtnAdd3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAdd3ActionPerformed
 
-        ArrayList<User> userList = Controller.getUsers(false);
+        ArrayList<User> userList = User.getUsers(false);
         updateTableContent(userList);
         CreateUsers.setVisible(true);
         Users.setVisible(false);
@@ -1276,8 +1275,8 @@ public class AdminView extends javax.swing.JFrame {
 
     private void CreateUserBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateUserBtnSaveActionPerformed
         String password = String.valueOf(TxtboxPasswordCreateUser.getPassword());
-        if(Controller.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText())){
-            ArrayList<User> userList = Controller.getUsers(false);
+        if(User.createUser(TxtboxEmailCreateUser.getText(), password, TxtboxNameCreateUser.getText(), TxtboxLastnamesCreateUser.getText(), TxtboxDniCreateUser.getText())){
+            ArrayList<User> userList = User.getUsers(false);
             updateTableContent(userList);
             CreateUsers.setVisible(false);
             Users.setVisible(true);
@@ -1286,8 +1285,8 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_CreateUserBtnSaveActionPerformed
 
     private void AddCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCourtButtonActionPerformed
-        Controller.createCourt(CourtNotes.getText(), CourtState.getSelectedIndex());
-        ArrayList<Court> courtList = Controller.getCourts(false);
+        Court.createCourt(CourtNotes.getText(), CourtState.getSelectedIndex());
+        ArrayList<Court> courtList = Court.getCourts(false);
         generateCourtButtons(courtList);
         CreateCourts.setVisible(false);
         Courts.setVisible(true);
@@ -1306,20 +1305,20 @@ public class AdminView extends javax.swing.JFrame {
         int column = UsersTable.columnAtPoint(evt.getPoint());
         
         if(column == 5){
-            ArrayList<User> userList = Controller.getUsers(false);
+            ArrayList<User> userList = User.getUsers(false);
             Object dni = UsersTable.getValueAt(row, 3);
             String stringDni = dni.toString();
             for (User user : userList) {
                 if (user.getDni().equals(stringDni)) {
                     user.updateUserIsActive(user);
-                    ArrayList<User> newUserList = Controller.getUsers(false);
+                    ArrayList<User> newUserList = User.getUsers(false);
                     updateTableContent(newUserList);
                 }
             }
         }
         
         if(column == 6){
-            ArrayList<User> userList = Controller.getUsers(false);
+            ArrayList<User> userList = User.getUsers(false);
             Object dni = UsersTable.getValueAt(row, 3);
             String stringDni = dni.toString();
             System.out.println(stringDni);
@@ -1359,8 +1358,8 @@ public class AdminView extends javax.swing.JFrame {
 
     private void UserInfoBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserInfoBtnSaveActionPerformed
         String password = String.valueOf(TxtboxPasswordUserInfo.getPassword());
-        if(Controller.checkUpdateUser(UserInfoEmailContent.getText(), password, TxtboxNameUserInfo.getText(), TxtboxLastnamesUserInfo.getText(), TxtboxDniUserInfo.getText())){
-            ArrayList<User> userList = Controller.getUsers(false);
+        if(User.checkUpdateUser(UserInfoEmailContent.getText(), password, TxtboxNameUserInfo.getText(), TxtboxLastnamesUserInfo.getText(), TxtboxDniUserInfo.getText())){
+            ArrayList<User> userList = User.getUsers(false);
             updateTableContent(userList);
             UserInfo.setVisible(false);
             Users.setVisible(true);
@@ -1390,9 +1389,9 @@ public class AdminView extends javax.swing.JFrame {
 
     private void SaveCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCourtButtonActionPerformed
 
-        Controller.updateCourt(CourtInfoState.getSelectedIndex(), CourtInfoNotes.getText(), CourtInfoIDLabel.getText());
+        Court.updateCourt(CourtInfoState.getSelectedIndex(), CourtInfoNotes.getText(), CourtInfoIDLabel.getText());
         CourtButtons.removeAll();
-        ArrayList<Court>  courtList = Controller.getCourts(false);
+        ArrayList<Court>  courtList = Court.getCourts(false);
         generateCourtButtons(courtList);
         CourtInfo.setVisible(false);
         Courts.setVisible(true);

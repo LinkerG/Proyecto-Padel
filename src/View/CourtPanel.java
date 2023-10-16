@@ -24,7 +24,7 @@ public class CourtPanel extends javax.swing.JPanel {
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 // Llama a la función que desees cuando se hace clic en el JPanel
-                Controller.getSelectedCourt(court);
+                Court.getSelectedCourt(court);
                 AdminView.Courts.setVisible(false);
                 AdminView.CourtInfo.setVisible(true);
             }
