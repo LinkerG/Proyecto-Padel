@@ -80,10 +80,7 @@ public class Controller {
                     boolean isAdmin = queryResult.getInt("isAdmin") == 1;
                     
                     if(isActive) {
-                        String name = queryResult.getString("name");
-                        String surname = queryResult.getString("surname");
-                        String dni = queryResult.getString("dni");
-                        currentUser = new User(email, name, surname, dni, isActive, isAdmin);
+                        
                         
                         if(isAdmin) {
                             String userName = queryResult.getString("name");
@@ -96,10 +93,18 @@ public class Controller {
                             ButtonActions.logIn(true);
                             
                         } else {
-                            System.out.println("Normal user");
+                            String userName = queryResult.getString("name");
+                            String userSurname = queryResult.getString("surname");
+                            String userDni = queryResult.getString("dni");
+                            
+                            currentUser = new User(email, userName, userSurname, userDni, isActive, isAdmin);
+                            
+                            ButtonActions.logIn(false);
                         }
                     } else {
-                        mostrarError("The user you tried to log in is currently inactive");
+                        loginMenu.TxtboxEmail.setText("");
+                        loginMenu.TxtboxPassword.setText("");
+                        loginMenu.LabelIncorrectCredentials.setText("User is inactive");
                     }
                 }
                 if(!exists) {
