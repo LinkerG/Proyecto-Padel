@@ -8,8 +8,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Calendar;
-import java.awt.Color;
 import java.awt.Component;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.border.*;
@@ -107,6 +107,11 @@ public class UserView extends javax.swing.JFrame {
         javax.swing.JPanel day = BookingCalendar.getDayPanel();
         day.setBackground(new java.awt.Color(0,90,91));
         refreshCalendar(day);
+        BookingCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                BookingCalendarPropertyChange(evt);
+            }
+        });
         CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 370, 260));
 
         MonthChooser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -253,6 +258,17 @@ public class UserView extends javax.swing.JFrame {
         JPanel day = BookingCalendar.getDayPanel();
         refreshCalendar(day);
     }//GEN-LAST:event_NextMonthBtnActionPerformed
+    
+    int loop = 0;
+    private void BookingCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_BookingCalendarPropertyChange
+        loop++;
+        if(loop>2){
+            int diaSeleccionado = BookingCalendar.getDay();
+            JPanel dayPanel = BookingCalendar.getDayPanel();
+            refreshCalendar(dayPanel);
+            System.out.println(diaSeleccionado + "/" + month + "/" + year);
+        }        
+    }//GEN-LAST:event_BookingCalendarPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDayChooser BookingCalendar;
@@ -274,10 +290,8 @@ public class UserView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private void refreshCalendar(JPanel dayPanel){
         Component component[] = dayPanel.getComponents();
-        Border emptyBorder = new EmptyBorder(1, 1, 1, 1);
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
-            System.out.println(component[i].getClass());
         }
     }
 }

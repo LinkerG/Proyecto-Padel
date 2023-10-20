@@ -172,6 +172,9 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="BookingCalendarPropertyChange"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="javax.swing.JPanel day = BookingCalendar.getDayPanel();&#xa;day.setBackground(new java.awt.Color(0,90,91));&#xa;refreshCalendar(day);"/>
                       </AuxValues>
