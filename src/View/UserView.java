@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.border.*;
 
 
 public class UserView extends javax.swing.JFrame {
@@ -100,17 +101,13 @@ public class UserView extends javax.swing.JFrame {
         BookingCalendar.setAlwaysFireDayProperty(false);
         BookingCalendar.setDayBordersVisible(false);
         BookingCalendar.setDecorationBackgroundColor(new java.awt.Color(0, 90, 91));
-        BookingCalendar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         BookingCalendar.setOpaque(false);
         BookingCalendar.setSundayForeground(new java.awt.Color(255, 255, 255));
         BookingCalendar.setWeekdayForeground(new java.awt.Color(255, 255, 255));
         javax.swing.JPanel day = BookingCalendar.getDayPanel();
         day.setBackground(new java.awt.Color(0,90,91));
-        Component component[] = day.getComponents();
-        for (int i = 7; i < 49; i++) {
-            component[i].setBackground(new java.awt.Color(0,115,105));
-        }
-        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 280, 210));
+        refreshCalendar(day);
+        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 370, 260));
 
         MonthChooser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -134,9 +131,9 @@ public class UserView extends javax.swing.JFrame {
         });
         MonthChooser.add(NextMonthBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
 
-        CalendarPanel.add(MonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 190, 40));
+        CalendarPanel.add(MonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 190, 40));
 
-        Main.add(CalendarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        Main.add(CalendarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 360));
 
         Content.add(Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
@@ -240,6 +237,8 @@ public class UserView extends javax.swing.JFrame {
         MonthLabel.setText(months[month]);
         BookingCalendar.setMonth(month);
         BookingCalendar.setYear(year);
+        JPanel day = BookingCalendar.getDayPanel();
+        refreshCalendar(day);
     }//GEN-LAST:event_PrevMonthBtnActionPerformed
 
     private void NextMonthBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthBtnActionPerformed
@@ -251,6 +250,8 @@ public class UserView extends javax.swing.JFrame {
         MonthLabel.setText(months[month]);
         BookingCalendar.setMonth(month);
         BookingCalendar.setYear(year);
+        JPanel day = BookingCalendar.getDayPanel();
+        refreshCalendar(day);
     }//GEN-LAST:event_NextMonthBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -271,5 +272,12 @@ public class UserView extends javax.swing.JFrame {
     public javax.swing.JPanel PanelBackground;
     private javax.swing.JButton PrevMonthBtn;
     // End of variables declaration//GEN-END:variables
-
+    private void refreshCalendar(JPanel dayPanel){
+        Component component[] = dayPanel.getComponents();
+        Border emptyBorder = new EmptyBorder(1, 1, 1, 1);
+        for (int i = 7; i < 49; i++) {
+            component[i].setBackground(new java.awt.Color(0,115,105));
+            System.out.println(component[i].getClass());
+        }
+    }
 }
