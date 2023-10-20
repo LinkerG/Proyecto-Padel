@@ -1,14 +1,30 @@
-
 package View;
 import Controller.*;
 import Model.*;
+import com.toedter.calendar.JDayChooser;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.util.Calendar;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.Map;
+import java.util.Set;
+
 
 public class UserView extends javax.swing.JFrame {
     private int posX, posY;
+    
+    String[] months = {
+            "January", "February", "March", "April",
+            "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        };
+    Calendar calendar = Calendar.getInstance();
+    private int month = calendar.get(Calendar.MONTH);
+    private int year = calendar.get(Calendar.YEAR);
     
     public UserView() {
         initComponents();
@@ -34,7 +50,13 @@ public class UserView extends javax.swing.JFrame {
         PanelBackground = new javax.swing.JPanel();
         Content = new javax.swing.JPanel();
         LabelUserPanel = new javax.swing.JLabel();
-        Selector = new javax.swing.JPanel();
+        Main = new javax.swing.JPanel();
+        CalendarPanel = new javax.swing.JPanel();
+        BookingCalendar = new com.toedter.calendar.JDayChooser();
+        MonthChooser = new javax.swing.JPanel();
+        MonthLabel = new javax.swing.JLabel();
+        PrevMonthBtn = new javax.swing.JButton();
+        NextMonthBtn = new javax.swing.JButton();
         Header = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         LabelCompleteName = new javax.swing.JLabel();
@@ -62,12 +84,61 @@ public class UserView extends javax.swing.JFrame {
         LabelUserPanel.setText("Select a date and start booking");
         Content.add(LabelUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
-        Selector.setBackground(new java.awt.Color(0, 90, 91));
-        Selector.setMaximumSize(new java.awt.Dimension(934, 362));
-        Selector.setMinimumSize(new java.awt.Dimension(934, 362));
-        Selector.setPreferredSize(new java.awt.Dimension(934, 362));
-        Selector.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        Content.add(Selector, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
+        Main.setBackground(new java.awt.Color(0, 90, 91));
+        Main.setMaximumSize(new java.awt.Dimension(934, 362));
+        Main.setMinimumSize(new java.awt.Dimension(934, 362));
+        Main.setPreferredSize(new java.awt.Dimension(934, 362));
+        Main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CalendarPanel.setBackground(new java.awt.Color(0, 90, 91));
+        CalendarPanel.setMaximumSize(new java.awt.Dimension(300, 300));
+        CalendarPanel.setMinimumSize(new java.awt.Dimension(300, 300));
+        CalendarPanel.setPreferredSize(new java.awt.Dimension(300, 300));
+        CalendarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BookingCalendar.setBackground(new java.awt.Color(0, 90, 91));
+        BookingCalendar.setAlwaysFireDayProperty(false);
+        BookingCalendar.setDayBordersVisible(false);
+        BookingCalendar.setDecorationBackgroundColor(new java.awt.Color(0, 90, 91));
+        BookingCalendar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        BookingCalendar.setOpaque(false);
+        BookingCalendar.setSundayForeground(new java.awt.Color(255, 255, 255));
+        BookingCalendar.setWeekdayForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.JPanel day = BookingCalendar.getDayPanel();
+        day.setBackground(new java.awt.Color(0,90,91));
+        Component component[] = day.getComponents();
+        for (int i = 7; i < 49; i++) {
+            component[i].setBackground(new java.awt.Color(0,115,105));
+        }
+        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 280, 210));
+
+        MonthChooser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        MonthLabel.setText("month");
+        MonthLabel.setText(months[month]);
+        MonthChooser.add(MonthLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(76, 12, -1, -1));
+
+        PrevMonthBtn.setText("<");
+        PrevMonthBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrevMonthBtnActionPerformed(evt);
+            }
+        });
+        MonthChooser.add(PrevMonthBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NextMonthBtn.setText(">");
+        NextMonthBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NextMonthBtnActionPerformed(evt);
+            }
+        });
+        MonthChooser.add(NextMonthBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+
+        CalendarPanel.add(MonthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 190, 40));
+
+        Main.add(CalendarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        Content.add(Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
         PanelBackground.add(Content, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -92,6 +163,7 @@ public class UserView extends javax.swing.JFrame {
         LabelCompleteName.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         LabelCompleteName.setForeground(new java.awt.Color(255, 255, 255));
         LabelCompleteName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabelCompleteName.setText("xx");
         LabelCompleteName.setMaximumSize(new java.awt.Dimension(280, 28));
         LabelCompleteName.setMinimumSize(new java.awt.Dimension(280, 28));
         LabelCompleteName.setPreferredSize(new java.awt.Dimension(280, 28));
@@ -159,51 +231,45 @@ public class UserView extends javax.swing.JFrame {
         posY = evt.getYOnScreen() - getY();
     }//GEN-LAST:event_HeaderMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void PrevMonthBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevMonthBtnActionPerformed
+        if(month > 0) month-=1;
+        else {
+            month = 11;
+            year -=1;
         }
-        //</editor-fold>
+        MonthLabel.setText(months[month]);
+        BookingCalendar.setMonth(month);
+        BookingCalendar.setYear(year);
+    }//GEN-LAST:event_PrevMonthBtnActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserView().setVisible(true);
-            }
-        });
-    }
+    private void NextMonthBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthBtnActionPerformed
+        if(month < 11) month+=1;
+        else {
+            month=0;
+            year +=1;
+        }
+        MonthLabel.setText(months[month]);
+        BookingCalendar.setMonth(month);
+        BookingCalendar.setYear(year);
+    }//GEN-LAST:event_NextMonthBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDayChooser BookingCalendar;
     private javax.swing.JButton BtnClose;
     private javax.swing.JButton BtnLogout;
-    private javax.swing.JPanel Content;
+    private javax.swing.JPanel CalendarPanel;
+    public javax.swing.JPanel Content;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel LabelCompleteName;
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel LabelTitle;
     private javax.swing.JLabel LabelUserPanel;
+    public javax.swing.JPanel Main;
+    private javax.swing.JPanel MonthChooser;
+    private javax.swing.JLabel MonthLabel;
+    private javax.swing.JButton NextMonthBtn;
     public javax.swing.JPanel PanelBackground;
-    public javax.swing.JPanel Selector;
+    private javax.swing.JButton PrevMonthBtn;
     // End of variables declaration//GEN-END:variables
+
 }
