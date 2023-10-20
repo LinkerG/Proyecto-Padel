@@ -85,6 +85,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfoState = new javax.swing.JComboBox<>();
         CourtBookingsInfo = new javax.swing.JPanel();
         WIP = new javax.swing.JLabel();
+        CourtInfoIncorrectNotesLabel = new javax.swing.JLabel();
         CreateUsers = new javax.swing.JPanel();
         BtnReturn2 = new javax.swing.JButton();
         CreateUserContent = new javax.swing.JPanel();
@@ -561,6 +562,11 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingsInfo.add(WIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
 
         CourtInfoPanel.add(CourtBookingsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 51, -1, -1));
+
+        CourtInfoIncorrectNotesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        CourtInfoIncorrectNotesLabel.setForeground(new java.awt.Color(255, 51, 51));
+        CourtInfoIncorrectNotesLabel.setToolTipText("");
+        CourtInfoPanel.add(CourtInfoIncorrectNotesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 127, 119, 14));
 
         CourtInfoContent.add(CourtInfoPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 24, -1, -1));
 
@@ -1388,13 +1394,19 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_ChangeDniToggleActionPerformed
 
     private void SaveCourtButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveCourtButtonActionPerformed
-
-        Court.updateCourt(CourtInfoState.getSelectedIndex(), CourtInfoNotes.getText(), CourtInfoIDLabel.getText());
-        CourtButtons.removeAll();
-        ArrayList<Court>  courtList = Court.getCourts(false);
-        generateCourtButtons(courtList);
-        CourtInfo.setVisible(false);
-        Courts.setVisible(true);
+        String notes = CourtInfoNotes.getText();
+        int state = CourtInfoState.getSelectedIndex();
+        String id = CourtInfoIDLabel.getText();
+        if(!Controller.isTooLong(notes)) {
+           Court.updateCourt(state, notes, id);
+            CourtButtons.removeAll();
+            ArrayList<Court>  courtList = Court.getCourts(false);
+            generateCourtButtons(courtList);
+            CourtInfo.setVisible(false);
+            Courts.setVisible(true);
+        } else {
+            CourtInfoIncorrectNotesLabel.setText("Max of 250 characters");
+        }
     }//GEN-LAST:event_SaveCourtButtonActionPerformed
 
     private void CourtInfoStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtInfoStateActionPerformed
@@ -1425,6 +1437,7 @@ public class AdminView extends javax.swing.JFrame {
     public static javax.swing.JPanel CourtInfo;
     private javax.swing.JPanel CourtInfoContent;
     public static javax.swing.JLabel CourtInfoIDLabel;
+    private javax.swing.JLabel CourtInfoIncorrectNotesLabel;
     public static javax.swing.JTextArea CourtInfoNotes;
     private javax.swing.JLabel CourtInfoNotesLabel;
     public static javax.swing.JScrollPane CourtInfoNotesScrollPane;

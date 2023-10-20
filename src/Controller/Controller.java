@@ -2,6 +2,8 @@ package Controller;
 
 import View.*;
 import Model.*;
+import static View.AdminView.CourtInfo;
+import static View.AdminView.Courts;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -81,7 +83,6 @@ public class Controller {
                     
                     if(isActive) {
                         
-                        
                         if(isAdmin) {
                             String userName = queryResult.getString("name");
                             String userSurname = "";
@@ -129,7 +130,7 @@ public class Controller {
 
    public static boolean checkEmail(String email) {
        
-       if (email == null || email.trim().isEmpty()) {
+       if (email == null || email.trim().isEmpty() || isTooLong(email)) {
             return false;
         }
 
@@ -159,7 +160,7 @@ public class Controller {
     }
    
    public static boolean checkPassword(String password) {
-        if (password == null || "".equals(password)) {
+        if (password == null || "".equals(password) || isTooLong(password)) {
             return false;
         }
         return !password.contains(" ");
@@ -196,11 +197,7 @@ public class Controller {
     }
     
     public static boolean checkName(String name) {
-	if (name == null || name.trim().isEmpty()) {
-            System.out.println("El nombre está vacío o en blanco.");
-            return false;
-	}
-	return true;
+	return !(name == null || name.trim().isEmpty() || isTooLong(name));
     }
    
    public static boolean checkDNI(String dni) {
@@ -243,7 +240,9 @@ public class Controller {
 	}
     }
     
-    
+    public static boolean isTooLong(String s) {
+        return (s.length() > 255);
+    }
     /* Codigo antiguo, puede ser util
     public static Court getCourtById(int courtId, boolean available) {
         ArrayList<Court> courtList = getCourts(available);
