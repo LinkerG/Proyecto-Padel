@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.border.*;
@@ -260,13 +261,25 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_NextMonthBtnActionPerformed
     
     int loop = 0;
+    int lastDay = -1;
     private void BookingCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_BookingCalendarPropertyChange
         loop++;
         if(loop>2){
             int diaSeleccionado = BookingCalendar.getDay();
             JPanel dayPanel = BookingCalendar.getDayPanel();
-            refreshCalendar(dayPanel);
-            System.out.println(diaSeleccionado + "/" + month + "/" + year);
+            Component component[] = dayPanel.getComponents();
+            if(lastDay!=-1){
+                component[lastDay].setBackground(new java.awt.Color(0,115,105));
+            }
+            //System.out.println(component[diaSeleccionado].());
+            System.out.println(diaSeleccionado + "/" + (month+1) + "/" + year);
+            Calendar diaInici = new GregorianCalendar(year, month, 1);
+            int valorDia = (diaInici.get(Calendar.DAY_OF_WEEK) + 5) % 7;
+            System.out.println(valorDia);
+            lastDay = (diaSeleccionado+valorDia+6);
+            component[diaSeleccionado+valorDia+6].setBackground(new java.awt.Color(0,115,105));
+            // Esto fufa
+            //component[1+valorDia+6].setBackground(new java.awt.Color(255,0,0));
         }        
     }//GEN-LAST:event_BookingCalendarPropertyChange
 
