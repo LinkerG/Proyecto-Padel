@@ -219,7 +219,7 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCloseActionPerformed
 
     private void BtnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogoutActionPerformed
-        ButtonActions.logOut(true);
+        ButtonActions.logOut(false);
     }//GEN-LAST:event_BtnLogoutActionPerformed
 
     private void HeaderMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HeaderMouseDragged

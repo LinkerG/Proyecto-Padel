@@ -1,4 +1,5 @@
 package View;
+
 import Controller.*;
 import Model.*;
 import javax.swing.*;
@@ -13,7 +14,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 public class AdminView extends javax.swing.JFrame {
     private int posX, posY, defaultId;

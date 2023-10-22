@@ -1,9 +1,5 @@
 package Controller;
 import static Controller.Controller.loginMenu;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import View.*;
 
 public class ButtonActions {
@@ -29,6 +25,8 @@ public class ButtonActions {
         Controller.currentUser = null;
         if(admin){
             adminView.setVisible(false);
+        } else {
+            userView.setVisible(false);
         }
         loginMenu.setVisible(true);
     }    

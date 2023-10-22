@@ -2,13 +2,10 @@ package Controller;
 
 import View.*;
 import Model.*;
-import static View.AdminView.CourtInfo;
-import static View.AdminView.Courts;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import javax.swing.JOptionPane;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
