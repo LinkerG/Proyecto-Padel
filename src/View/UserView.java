@@ -1,7 +1,6 @@
 package View;
+
 import Controller.*;
-import Model.*;
-import com.toedter.calendar.JDayChooser;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -9,12 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Map;
-import java.util.Set;
-import javax.swing.border.*;
-
 
 public class UserView extends javax.swing.JFrame {
     private int posX, posY;
@@ -58,6 +52,11 @@ public class UserView extends javax.swing.JFrame {
         NextMonthBtn = new javax.swing.JButton();
         MonthLabel = new javax.swing.JLabel();
         PrevMonthBtn = new javax.swing.JButton();
+        BookingsContainer = new javax.swing.JPanel();
+        BookingsPanel = new javax.swing.JPanel();
+        DefaultPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         Header = new javax.swing.JPanel();
         LabelLogo = new javax.swing.JLabel();
         LabelCompleteName = new javax.swing.JLabel();
@@ -112,7 +111,7 @@ public class UserView extends javax.swing.JFrame {
                 BookingCalendarPropertyChange(evt);
             }
         });
-        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 370, 260));
+        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 340, 230));
 
         NextMonthBtn.setBackground(new java.awt.Color(0, 90, 91));
         NextMonthBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -145,6 +144,44 @@ public class UserView extends javax.swing.JFrame {
         CalendarPanel.add(PrevMonthBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 35, -1, -1));
 
         Main.add(CalendarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 360));
+
+        BookingsContainer.setBackground(new java.awt.Color(0, 115, 105));
+        BookingsContainer.setForeground(new java.awt.Color(255, 255, 255));
+        BookingsContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BookingsPanel.setBackground(new java.awt.Color(0, 115, 105));
+        BookingsPanel.setForeground(new java.awt.Color(255, 255, 255));
+        BookingsPanel.setVisible(false);
+
+        javax.swing.GroupLayout BookingsPanelLayout = new javax.swing.GroupLayout(BookingsPanel);
+        BookingsPanel.setLayout(BookingsPanelLayout);
+        BookingsPanelLayout.setHorizontalGroup(
+            BookingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 420, Short.MAX_VALUE)
+        );
+        BookingsPanelLayout.setVerticalGroup(
+            BookingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+
+        BookingsContainer.add(BookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 290));
+
+        DefaultPanel.setBackground(new java.awt.Color(0, 115, 105));
+        DefaultPanel.setForeground(new java.awt.Color(255, 255, 255));
+        DefaultPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconImage.png"))); // NOI18N
+        DefaultPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 160, 130));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Select a date to manage your bookings");
+        DefaultPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
+
+        BookingsContainer.add(DefaultPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 290));
+
+        Main.add(BookingsContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 35, 420, 290));
 
         Content.add(Main, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, -1, -1));
 
@@ -244,19 +281,19 @@ public class UserView extends javax.swing.JFrame {
     private void BookingCalendarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_BookingCalendarPropertyChange
         loop++;
         if(loop>2){
-            int diaSeleccionado = BookingCalendar.getDay();
+            int selectedDay = BookingCalendar.getDay();
             JPanel dayPanel = BookingCalendar.getDayPanel();
             Component component[] = dayPanel.getComponents();
             if(lastDay!=-1){
                 component[lastDay].setBackground(new java.awt.Color(0,115,105));
             }
             //System.out.println(component[diaSeleccionado].());
-            System.out.println(diaSeleccionado + "/" + (month+1) + "/" + year);
-            Calendar diaInici = new GregorianCalendar(year, month, 1);
-            int valorDia = (diaInici.get(Calendar.DAY_OF_WEEK) + 5) % 7;
-            System.out.println(valorDia);
-            lastDay = (diaSeleccionado+valorDia+6);
-            component[diaSeleccionado+valorDia+6].setBackground(new java.awt.Color(0,115,105));
+            System.out.println(selectedDay + "/" + (month+1) + "/" + year);
+            Calendar startDay = new GregorianCalendar(year, month, 1);
+            int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
+            System.out.println(dayValue);
+            lastDay = (selectedDay+dayValue+6);
+            component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,115,105));
             // Esto fufa
             //component[1+valorDia+6].setBackground(new java.awt.Color(255,0,0));
         }        
@@ -290,10 +327,13 @@ public class UserView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDayChooser BookingCalendar;
+    private javax.swing.JPanel BookingsContainer;
+    private javax.swing.JPanel BookingsPanel;
     private javax.swing.JButton BtnClose;
     private javax.swing.JButton BtnLogout;
     private javax.swing.JPanel CalendarPanel;
     public javax.swing.JPanel Content;
+    private javax.swing.JPanel DefaultPanel;
     private javax.swing.JPanel Header;
     private javax.swing.JLabel LabelCompleteName;
     private javax.swing.JLabel LabelLogo;
@@ -304,6 +344,8 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JButton NextMonthBtn;
     public javax.swing.JPanel PanelBackground;
     private javax.swing.JButton PrevMonthBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
     private void refreshCalendar(JPanel dayPanel){
         Component component[] = dayPanel.getComponents();
