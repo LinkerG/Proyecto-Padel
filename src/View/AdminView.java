@@ -213,7 +213,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtButtons.setMinimumSize(new java.awt.Dimension(850, 310));
         CourtButtons.setRequestFocusEnabled(false);
         CourtButtons.setVerifyInputWhenFocusTarget(false);
-        CourtButtons.setLayout(new java.awt.GridLayout(0, 5, 50, 10));
+        CourtButtons.setLayout(new java.awt.GridLayout(2, 5, 50, 10));
         CourtButtonsScrollPane.setViewportView(CourtButtons);
         ArrayList<Court> courtList = Court.getCourts(false);
         generateCourtButtons(courtList);

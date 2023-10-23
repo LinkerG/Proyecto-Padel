@@ -23,7 +23,7 @@ CREATE TABLE booking(
     email varchar(50),
     courtId int,
     day date,
-    hour int,
+    hour varchar(5),
     status enum("FREE", "PAID", "BOOKED", "BLOCKED", "CANCELLED"),
     PRIMARY KEY (bookingId, email, courtId),
     FOREIGN KEY (email) REFERENCES user(email),
