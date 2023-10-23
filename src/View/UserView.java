@@ -1,6 +1,7 @@
 package View;
 
 import Controller.*;
+import Model.Booking;
 import Model.Court;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class UserView extends javax.swing.JFrame {
@@ -65,6 +67,7 @@ public class UserView extends javax.swing.JFrame {
         WeekdayLabel = new javax.swing.JLabel();
         MonthDayLabel = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        influxLabel = new javax.swing.JLabel();
         DefaultPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -183,12 +186,12 @@ public class UserView extends javax.swing.JFrame {
 
         BookingsPanel.add(BookingCourtsScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 22, 250, 250));
 
-        WeekdayLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        WeekdayLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         WeekdayLabel.setForeground(new java.awt.Color(255, 255, 255));
         WeekdayLabel.setText("Weekday");
         BookingsPanel.add(WeekdayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        MonthDayLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        MonthDayLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         MonthDayLabel.setForeground(new java.awt.Color(255, 255, 255));
         MonthDayLabel.setText("February 10");
         BookingsPanel.add(MonthDayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
@@ -199,6 +202,11 @@ public class UserView extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XX:XX - XX:XX", "8:00 - 9:30", "9:30 - 11:00", "11:00 - 12:30", "12:30 - 14:00", "15:00 - 16:30", "16:30 - 18:00", "18:00 - 20:30", "20:30 - 22:00", " " }));
         jComboBox1.setBorder(null);
         BookingsPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, -1));
+
+        influxLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        influxLabel.setForeground(new java.awt.Color(255, 255, 255));
+        influxLabel.setText("0% inf");
+        BookingsPanel.add(influxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         BookingsContainer.add(BookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 290));
 
@@ -327,13 +335,10 @@ public class UserView extends javax.swing.JFrame {
             System.out.println(selectedDay + "/" + (month+1) + "/" + year);
             Calendar startDay = new GregorianCalendar(year, month, 1);
             int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
-            System.out.println(dayValue);
             lastDay = (selectedDay+dayValue+6);
             component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,115,105));
             
             openBookings(selectedDay, month, year);
-            // Esto fufa
-            //component[1+valorDia+6].setBackground(new java.awt.Color(255,0,0));
         }        
     }//GEN-LAST:event_BookingCalendarPropertyChange
 
@@ -386,6 +391,7 @@ public class UserView extends javax.swing.JFrame {
     public javax.swing.JPanel PanelBackground;
     private javax.swing.JButton PrevMonthBtn;
     private javax.swing.JLabel WeekdayLabel;
+    private javax.swing.JLabel influxLabel;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -394,6 +400,25 @@ public class UserView extends javax.swing.JFrame {
     // functions
     private void refreshCalendar(JPanel dayPanel){
         Component component[] = dayPanel.getComponents();
+        Calendar startDay = new GregorianCalendar(year, month, 1);
+        int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
+        
+        ArrayList<Booking> bookingList = Booking.getBookingsByMonth(String.valueOf(month+1));
+        for(Booking booking : bookingList){
+            String date = booking.getDay();
+            String[] dateArr = date.split("-");
+            System.out.println(date);
+            int day = Integer.valueOf(dateArr[2]);
+            if(booking.getUserEmail().equals(Controller.currentUser.getEmail())){
+                // BOOKING IS FROM USER
+                component[day + dayValue + 6].setBackground(new java.awt.Color(0,0,255));
+            } else {
+                // BOOKING IS FROM OTHER USER
+                component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
+                System.out.println(day);
+            }
+        }
+        
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
         }
@@ -409,17 +434,22 @@ public class UserView extends javax.swing.JFrame {
         WeekdayLabel.setText(days[dayValue]);
         MonthDayLabel.setText(months[_month] + " " + _day);
         
+        String day = _year + "/" + (_month+1) + "/" + _day;
+        int influx = Controller.getInflux(day);
+        influxLabel.setText(influx + " % Influx");
+        
         ArrayList<Court> courtList = Court.getCourts(true);
-        generateCourtButtons(courtList);
+        generateCourtButtons(courtList, day);
         
         DefaultPanel.setVisible(false);
         BookingsPanel.setVisible(true);
     }
 
-    private void generateCourtButtons(ArrayList<Court> courtList) {
+    private void generateCourtButtons(ArrayList<Court> courtList, String _date) {
+        ArrayList<Booking> bookingList = Booking.getBookingsByDay(_date);
         BookingCourtsPanel.removeAll();
         for (Court court : courtList) {
-            CourtPanel courtPanel = new CourtPanel(court, true);
+            CourtPanel courtPanel = new CourtPanel(court, bookingList);
             BookingCourtsPanel.add(courtPanel);
         }
     }

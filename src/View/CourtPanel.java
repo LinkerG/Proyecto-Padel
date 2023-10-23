@@ -1,5 +1,6 @@
 package View;
 
+import Model.Booking;
 import Model.Court;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,7 +49,7 @@ public class CourtPanel extends javax.swing.JPanel {
             this.add(courtState);
     }
     
-    public CourtPanel(Court court, Boolean user) {
+    public CourtPanel(Court court, ArrayList<Booking> bookingList) {
         // Agrega un MouseListener al JPanel
         /*addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
