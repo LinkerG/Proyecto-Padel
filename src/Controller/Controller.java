@@ -5,9 +5,12 @@ import Model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.temporal.ChronoUnit;
 
 public class Controller {
     public static Statement statement = connectToDatabase();
@@ -285,4 +288,29 @@ public class Controller {
         
         return influx;
     }
+    
+    public static boolean isOnDate(String dateString) {
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate date = LocalDate.parse(dateString, formatter);
+        
+        LocalDate today = LocalDate.now();
+        
+        // Verifica si la fecha es hoy
+        if (date.isEqual(today)) {
+            return false;
+        }
+        
+        // Verifica si la fecha es anterior a hoy
+        if (date.isBefore(today)) {
+            return false;
+        }
+        
+        // Calcula la diferencia en días entre la fecha proporcionada y hoy
+        long daysDifference = ChronoUnit.DAYS.between(today, date);
+        
+        // Comprueba si la diferencia es menor o igual a 14 días
+        return daysDifference <= 14;
+    }
+
 }
