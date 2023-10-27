@@ -63,7 +63,9 @@ public class CourtPanel extends javax.swing.JPanel {
             for(Booking booking : bookingListByDay){
                 if(booking.getHour().getTimeString().equals(hour)) {
                     if(court.getID() == booking.getCourtId() && booking.getUserEmail().equals(Controller.currentUser.getEmail())) isFromUser = true;
+                    else if(court.getID() == booking.getCourtId()) isFull = true;
                 }
+                
                 
             }
             
