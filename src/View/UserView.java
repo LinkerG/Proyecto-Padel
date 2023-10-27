@@ -27,6 +27,7 @@ public class UserView extends javax.swing.JFrame {
             "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "Sunday"
         };
+    
     Calendar calendar = Calendar.getInstance();
     private int month = calendar.get(Calendar.MONTH);
     private int year = calendar.get(Calendar.YEAR);
@@ -461,13 +462,13 @@ public class UserView extends javax.swing.JFrame {
         Calendar startDay = new GregorianCalendar(year, month, 1);
         int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         
-        ArrayList<Booking> bookingList = Booking.getBookingsByMonth(String.valueOf(month+1));
+        ArrayList<Booking> bookingListMonth = Booking.getBookingsByMonth(String.valueOf(month+1));
         
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
         }
         
-        for(Booking booking : bookingList){
+        for(Booking booking : bookingListMonth){
             String date = booking.getDay();
             String[] dateArr = date.split("-");
             int day = Integer.valueOf(dateArr[2]);
