@@ -49,7 +49,7 @@ public class CourtPanel extends javax.swing.JPanel {
             this.add(courtState);
     }
     
-    public CourtPanel(Court court, ArrayList<Booking> bookingList) {
+    public CourtPanel(Court court, ArrayList<Booking> bookingListByDay) {
         // Agrega un MouseListener al JPanel
         /*addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -64,10 +64,32 @@ public class CourtPanel extends javax.swing.JPanel {
             this.setMinimumSize(new java.awt.Dimension(50, 70));
             this.setPreferredSize(new java.awt.Dimension(50, 70));
             //this.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
+            
             // Add image
             JLabel LabelCourtImage = new javax.swing.JLabel();
-            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/court.png"))); // NOI18N
+            Boolean isFromUser = false, isFull = false;
+            
+            for(Booking booking : bookingListByDay){
+                if(court.getID() == booking.getCourtId()) isFromUser = true;
+            }
+            
+            String imageRoute = "";
+            String courtText = "";
+            if(isFromUser) {
+                imageRoute = "/img/userBooking.png";
+                courtText = "Cancel";
+            }
+            else if(isFull) {
+                imageRoute = "";
+                courtText = "Booked";
+            }
+            else {
+                imageRoute = "/img/court.png";
+                courtText = "Book";
+            }
+            
+            LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(imageRoute))); // NOI18N
+            
             this.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
             // Add ID
             JLabel LabelCourtName = new javax.swing.JLabel();
@@ -79,13 +101,8 @@ public class CourtPanel extends javax.swing.JPanel {
 
             this.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
             // Add State
-            String active = "";
-            if(court.isIsActive()) {
-                active = "Active";
-            } else {
-                active = "In maintenance";
-            }
-            JLabel courtState = new javax.swing.JLabel(active);
+            
+            JLabel courtState = new javax.swing.JLabel(courtText);
             this.add(courtState);
     }
 }

@@ -332,13 +332,16 @@ public class UserView extends javax.swing.JFrame {
             if(lastDay!=-1){
                 component[lastDay].setBackground(new java.awt.Color(0,115,105));
             }
-            System.out.println(selectedDay + "/" + (month+1) + "/" + year);
+            
             Calendar startDay = new GregorianCalendar(year, month, 1);
             int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
             lastDay = (selectedDay+dayValue+6);
-            component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,115,105));
             
             openBookings(selectedDay, month, year);
+            
+            refreshCalendar(dayPanel);
+            
+            component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,180,129));
         }        
     }//GEN-LAST:event_BookingCalendarPropertyChange
 
@@ -404,23 +407,23 @@ public class UserView extends javax.swing.JFrame {
         int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         
         ArrayList<Booking> bookingList = Booking.getBookingsByMonth(String.valueOf(month+1));
-        for(Booking booking : bookingList){
-            String date = booking.getDay();
-            String[] dateArr = date.split("-");
-            System.out.println(date);
-            int day = Integer.valueOf(dateArr[2]);
-            if(booking.getUserEmail().equals(Controller.currentUser.getEmail())){
-                // BOOKING IS FROM USER
-                component[day + dayValue + 6].setBackground(new java.awt.Color(0,0,255));
-            } else {
-                // BOOKING IS FROM OTHER USER
-                component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
-                System.out.println(day);
-            }
-        }
         
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
+        }
+        
+        for(Booking booking : bookingList){
+            String date = booking.getDay();
+            String[] dateArr = date.split("-");
+            int day = Integer.valueOf(dateArr[2]);
+            
+            if(booking.getUserEmail().equals(Controller.currentUser.getEmail())){
+                // BOOKING IS FROM USER
+                component[day + dayValue + 6].setBackground(new java.awt.Color(0,155,189));
+            } else {
+                // BOOKING IS FROM OTHER USER
+                component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
+            }
         }
     }
     
