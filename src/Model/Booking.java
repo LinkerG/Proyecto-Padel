@@ -78,7 +78,7 @@ public class Booking {
     // Methods
     public static ArrayList getBookingsByDay(String day) {
 
-        String sql = "SELECT * FROM booking WHERE day = " + day;
+        String sql = "SELECT * FROM booking WHERE day = '" + day + "'";
         ArrayList<Booking> bookingsList = getBookings(sql);
         return bookingsList;
         

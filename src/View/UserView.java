@@ -417,7 +417,7 @@ public class UserView extends javax.swing.JFrame {
             case 10 -> "21:00";
             default -> "no hour";
         };
-        
+        BookingCourtsPanel.removeAll();
         ArrayList<Court> courtList = Court.getCourts(true);
         generateCourtButtons(courtList, selectedDate, hour);
         
@@ -512,9 +512,8 @@ public class UserView extends javax.swing.JFrame {
             System.out.println(hour);
             
             ArrayList<Booking> bookingList = Booking.getBookingsByDay(_date);
-            BookingCourtsPanel.removeAll();
             for (Court court : courtList) {
-                CourtPanel courtPanel = new CourtPanel(court, bookingList);
+                CourtPanel courtPanel = new CourtPanel(court, bookingList, hour);
                 BookingCourtsPanel.add(courtPanel);
             }
         }

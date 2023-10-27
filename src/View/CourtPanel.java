@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import Controller.*;
 
 public class CourtPanel extends javax.swing.JPanel {
 
@@ -49,7 +50,7 @@ public class CourtPanel extends javax.swing.JPanel {
             this.add(courtState);
     }
     
-    public CourtPanel(Court court, ArrayList<Booking> bookingListByDay) {
+    public CourtPanel(Court court, ArrayList<Booking> bookingListByDay, String hour) {
         // Agrega un MouseListener al JPanel
         /*addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -70,7 +71,7 @@ public class CourtPanel extends javax.swing.JPanel {
             Boolean isFromUser = false, isFull = false;
             
             for(Booking booking : bookingListByDay){
-                if(court.getID() == booking.getCourtId()) isFromUser = true;
+                if(court.getID() == booking.getCourtId() && booking.getUserEmail().equals(Controller.currentUser.getEmail())) isFromUser = true;
             }
             
             String imageRoute = "";
@@ -78,14 +79,35 @@ public class CourtPanel extends javax.swing.JPanel {
             if(isFromUser) {
                 imageRoute = "/img/userBooking.png";
                 courtText = "Cancel";
+                addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        // Llama a la función que desees cuando se hace clic en el JPanel
+                        Court.getSelectedCourt(court, true);
+                        System.out.println("Intenta cancelar");
+                    }
+                });
             }
             else if(isFull) {
                 imageRoute = "";
                 courtText = "Booked";
+                addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        // Llama a la función que desees cuando se hace clic en el JPanel
+                        Court.getSelectedCourt(court, true);
+                        System.out.println("Error ya reservado");
+                    }
+                });
             }
             else {
                 imageRoute = "/img/court.png";
                 courtText = "Book";
+                addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        // Llama a la función que desees cuando se hace clic en el JPanel
+                        Court.getSelectedCourt(court, true);
+                        System.out.println("Intenta reservar");
+                    }
+                });
             }
             
             LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(imageRoute))); // NOI18N
