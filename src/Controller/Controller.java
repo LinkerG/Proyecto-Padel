@@ -277,7 +277,7 @@ public class Controller {
     public static int getInflux(String date) {
         
         int totalHours = BookingHour.values().length;
-        int totalCourts = Court.getCourts(false).size();
+        int totalCourts = Court.getCourts(true).size();
         int totalBookings = totalHours * totalCourts;
         
         int bookings = Booking.getBookingsByDay(date).size();

@@ -51,33 +51,26 @@ public class CourtPanel extends javax.swing.JPanel {
     }
     
     public CourtPanel(Court court, ArrayList<Booking> bookingListByDay, String hour) {
-        // Agrega un MouseListener al JPanel
-        /*addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                // Llama a la función que desees cuando se hace clic en el JPanel
-                Court.getSelectedCourt(court);
-                AdminView.Courts.setVisible(false);
-                AdminView.CourtInfo.setVisible(true);
-            }
-        });*/
             this.setBackground(new java.awt.Color(0, 115, 105));
             this.setMaximumSize(new java.awt.Dimension(50, 70));
             this.setMinimumSize(new java.awt.Dimension(50, 70));
             this.setPreferredSize(new java.awt.Dimension(50, 70));
-            //this.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
             
             // Add image
             JLabel LabelCourtImage = new javax.swing.JLabel();
             Boolean isFromUser = false, isFull = false;
             
             for(Booking booking : bookingListByDay){
-                if(court.getID() == booking.getCourtId() && booking.getUserEmail().equals(Controller.currentUser.getEmail())) isFromUser = true;
+                if(booking.getHour().getTimeString().equals(hour)) {
+                    if(court.getID() == booking.getCourtId() && booking.getUserEmail().equals(Controller.currentUser.getEmail())) isFromUser = true;
+                }
+                
             }
             
             String imageRoute = "";
             String courtText = "";
             if(isFromUser) {
-                imageRoute = "/img/userBooking.png";
+                imageRoute = "/img/cancelBooking.png";
                 courtText = "Cancel";
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
@@ -88,7 +81,7 @@ public class CourtPanel extends javax.swing.JPanel {
                 });
             }
             else if(isFull) {
-                imageRoute = "";
+                imageRoute = "/img/bookingNotAvailable.png";
                 courtText = "Booked";
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
@@ -99,7 +92,7 @@ public class CourtPanel extends javax.swing.JPanel {
                 });
             }
             else {
-                imageRoute = "/img/court.png";
+                imageRoute = "/img/bookingAvailable.png";
                 courtText = "Book";
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
