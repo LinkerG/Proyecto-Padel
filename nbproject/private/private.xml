@@ -3,11 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Controller/Controller.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/UserView.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/ConfirmCreateBooking.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/BookingHour.java</file>
             <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/BookingStatus.java</file>
+=======
+            <file>file:/C:/Users/Iker/Documents/NetBeansProjects/Proyecto-Padel/src/View/CourtPanel.java</file>
+            <file>file:/C:/Users/Iker/Documents/NetBeansProjects/Proyecto-Padel/src/View/UserView.java</file>
+>>>>>>> 211174627e1f8e5c0ed7bff938a35acedd74ed86
         </group>
     </open-files>
 </project-private>
