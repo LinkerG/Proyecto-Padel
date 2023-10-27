@@ -7,6 +7,9 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import Controller.*;
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
 
 public class CourtPanel extends javax.swing.JPanel {
 
@@ -55,6 +58,17 @@ public class CourtPanel extends javax.swing.JPanel {
             this.setMaximumSize(new java.awt.Dimension(50, 70));
             this.setMinimumSize(new java.awt.Dimension(50, 70));
             this.setPreferredSize(new java.awt.Dimension(50, 70));
+            
+            // Add ID
+            JLabel LabelCourtName = new javax.swing.JLabel();
+            LabelCourtName.setText("Court " + court.getID());
+            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+            LabelCourtName.getText();
+
+            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
+            LabelCourtName.setHorizontalAlignment(SwingConstants.CENTER);
+            LabelCourtName.setVerticalAlignment(SwingConstants.CENTER);
+            this.add(LabelCourtName);
             
             // Add image
             JLabel LabelCourtImage = new javax.swing.JLabel();
@@ -106,21 +120,19 @@ public class CourtPanel extends javax.swing.JPanel {
             }
             
             LabelCourtImage.setIcon(new javax.swing.ImageIcon(getClass().getResource(imageRoute))); // NOI18N
+            LabelCourtImage.setHorizontalAlignment(SwingConstants.CENTER);
+            LabelCourtImage.setVerticalAlignment(SwingConstants.CENTER);
+            this.add(LabelCourtImage);
             
-            this.add(LabelCourtImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
-            // Add ID
-            JLabel LabelCourtName = new javax.swing.JLabel();
-            LabelCourtName.setText("Court " + court.getID());
-            LabelCourtName.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-            LabelCourtName.getText();
-
-            LabelCourtName.setForeground(new java.awt.Color(255, 255, 255));
-
-            this.add(LabelCourtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 12, -1, -1));
             // Add State
             
             JLabel courtState = new javax.swing.JLabel(courtText);
+            courtState.setHorizontalAlignment(SwingConstants.CENTER);
+            courtState.setVerticalAlignment(SwingConstants.CENTER);
+            courtState.setForeground(Color.white);
             this.add(courtState);
+            
+            setLayout(new GridLayout(3, 1));
     }
 }
 /*   @SuppressWarnings("unchecked")

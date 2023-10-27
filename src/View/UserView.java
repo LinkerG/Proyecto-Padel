@@ -184,7 +184,7 @@ public class UserView extends javax.swing.JFrame {
 
         HourPanelIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         HourPanelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconImage.png"))); // NOI18N
-        ChooseHourPanel.add(HourPanelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 160, 130));
+        ChooseHourPanel.add(HourPanelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 160, 130));
 
         HourPanelLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         HourPanelLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -372,6 +372,8 @@ public class UserView extends javax.swing.JFrame {
             
             refreshCalendar(dayPanel);
             
+            HourChooser.setSelectedIndex(0);
+            
             component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,180,129));
         }        
     }//GEN-LAST:event_BookingCalendarPropertyChange
@@ -421,7 +423,8 @@ public class UserView extends javax.swing.JFrame {
         
         ArrayList<Court> courtList = Court.getCourts(true);
         generateCourtButtons(courtList, selectedDate, hour);
-        
+        BookingCourtsPanel.setVisible(false);
+        BookingCourtsPanel.setVisible(true);
     }//GEN-LAST:event_HourChooserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
