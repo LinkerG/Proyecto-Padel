@@ -277,14 +277,14 @@ public class Controller {
         JOptionPane.showMessageDialog(null, error);
     }
     
-    public static int getInflux(Date date) {
-        int influx = 0;
+    public static int getInflux(String date) {
+        
         int totalHours = BookingHour.values().length;
-        int totalCourts = Court.getCourts(false).size();
+        int totalCourts = Court.getCourts(true).size();
         int totalBookings = totalHours * totalCourts;
         
         int bookings = Booking.getBookingsByDay(date).size();
-        influx = (bookings * 100) / totalBookings;
+        int influx = (bookings * 100) / totalBookings;
         
         return influx;
     }

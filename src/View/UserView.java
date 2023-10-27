@@ -1,6 +1,7 @@
 package View;
 
 import Controller.*;
+import Model.Booking;
 import Model.Court;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -10,10 +11,12 @@ import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class UserView extends javax.swing.JFrame {
     private int posX, posY;
+    private String selectedDate;
     
     String[] months = {
             "January", "February", "March", "April",
@@ -24,6 +27,7 @@ public class UserView extends javax.swing.JFrame {
             "Monday", "Tuesday", "Wednesday", "Thursday",
             "Friday", "Saturday", "Sunday"
         };
+    
     Calendar calendar = Calendar.getInstance();
     private int month = calendar.get(Calendar.MONTH);
     private int year = calendar.get(Calendar.YEAR);
@@ -60,11 +64,15 @@ public class UserView extends javax.swing.JFrame {
         PrevMonthBtn = new javax.swing.JButton();
         BookingsContainer = new javax.swing.JPanel();
         BookingsPanel = new javax.swing.JPanel();
+        ChooseHourPanel = new javax.swing.JPanel();
+        HourPanelIcon = new javax.swing.JLabel();
+        HourPanelLabel = new javax.swing.JLabel();
         BookingCourtsScrollPanel = new javax.swing.JScrollPane();
         BookingCourtsPanel = new javax.swing.JPanel();
         WeekdayLabel = new javax.swing.JLabel();
         MonthDayLabel = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        HourChooser = new javax.swing.JComboBox<>();
+        influxLabel = new javax.swing.JLabel();
         DefaultPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -165,6 +173,26 @@ public class UserView extends javax.swing.JFrame {
         BookingsPanel.setVisible(false);
         BookingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        ChooseHourPanel.setBackground(new java.awt.Color(0, 140, 129));
+        ChooseHourPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        ChooseHourPanel.setForeground(new java.awt.Color(255, 255, 255));
+        ChooseHourPanel.setToolTipText("");
+        ChooseHourPanel.setMaximumSize(new java.awt.Dimension(250, 250));
+        ChooseHourPanel.setMinimumSize(new java.awt.Dimension(250, 250));
+        ChooseHourPanel.setPreferredSize(new java.awt.Dimension(250, 250));
+        ChooseHourPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        HourPanelIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HourPanelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconImage.png"))); // NOI18N
+        ChooseHourPanel.add(HourPanelIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 160, 130));
+
+        HourPanelLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        HourPanelLabel.setForeground(new java.awt.Color(255, 255, 255));
+        HourPanelLabel.setText("Select an hour");
+        ChooseHourPanel.add(HourPanelLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
+
+        BookingsPanel.add(ChooseHourPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 22, -1, -1));
+
         BookingCourtsScrollPanel.setBorder(null);
         BookingCourtsScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         BookingCourtsScrollPanel.setMaximumSize(new java.awt.Dimension(250, 250));
@@ -180,25 +208,36 @@ public class UserView extends javax.swing.JFrame {
         BookingCourtsPanel.setPreferredSize(new java.awt.Dimension(250, 250));
         BookingCourtsPanel.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
         BookingCourtsScrollPanel.setViewportView(BookingCourtsPanel);
+        BookingCourtsPanel.setVisible(false);
 
         BookingsPanel.add(BookingCourtsScrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 22, 250, 250));
 
-        WeekdayLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        WeekdayLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         WeekdayLabel.setForeground(new java.awt.Color(255, 255, 255));
         WeekdayLabel.setText("Weekday");
         BookingsPanel.add(WeekdayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        MonthDayLabel.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        MonthDayLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         MonthDayLabel.setForeground(new java.awt.Color(255, 255, 255));
         MonthDayLabel.setText("February 10");
         BookingsPanel.add(MonthDayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jComboBox1.setBackground(new java.awt.Color(0, 115, 105));
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XX:XX - XX:XX", "8:00 - 9:30", "9:30 - 11:00", "11:00 - 12:30", "12:30 - 14:00", "15:00 - 16:30", "16:30 - 18:00", "18:00 - 20:30", "20:30 - 22:00", " " }));
-        jComboBox1.setBorder(null);
-        BookingsPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, -1));
+        HourChooser.setBackground(new java.awt.Color(0, 115, 105));
+        HourChooser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        HourChooser.setForeground(new java.awt.Color(255, 255, 255));
+        HourChooser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XX:XX - XX:XX", "8:00 - 9:30", "9:30 - 11:00", "11:00 - 12:30", "12:30 - 14:00", "15:00 - 16:30", "16:30 - 18:00", "18:00 - 19:30", "19:30 - 21:00", " " }));
+        HourChooser.setBorder(null);
+        HourChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HourChooserActionPerformed(evt);
+            }
+        });
+        BookingsPanel.add(HourChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, -1));
+
+        influxLabel.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
+        influxLabel.setForeground(new java.awt.Color(255, 255, 255));
+        influxLabel.setText("0% inf");
+        BookingsPanel.add(influxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         BookingsContainer.add(BookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 290));
 
@@ -324,16 +363,16 @@ public class UserView extends javax.swing.JFrame {
             if(lastDay!=-1){
                 component[lastDay].setBackground(new java.awt.Color(0,115,105));
             }
-            System.out.println(selectedDay + "/" + (month+1) + "/" + year);
+            
             Calendar startDay = new GregorianCalendar(year, month, 1);
             int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
-            System.out.println(dayValue);
             lastDay = (selectedDay+dayValue+6);
-            component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,115,105));
             
             openBookings(selectedDay, month, year);
-            // Esto fufa
-            //component[1+valorDia+6].setBackground(new java.awt.Color(255,0,0));
+            
+            refreshCalendar(dayPanel);
+            
+            component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,180,129));
         }        
     }//GEN-LAST:event_BookingCalendarPropertyChange
 
@@ -363,6 +402,28 @@ public class UserView extends javax.swing.JFrame {
         refreshCalendar(day);
     }//GEN-LAST:event_PrevMonthBtnActionPerformed
 
+    private void HourChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HourChooserActionPerformed
+
+        String hour = switch (HourChooser.getSelectedIndex()) {
+            case 0 -> "no hour";
+            case 1 -> "08:00";
+            case 2 -> "09:30";
+            case 3 -> "11:00";
+            case 4 -> "12:30";
+            case 5 -> "14:00";
+            case 6 -> "15:00";
+            case 7 -> "16:30";
+            case 8 -> "18:00";
+            case 9 -> "19:30";
+            case 10 -> "21:00";
+            default -> "no hour";
+        };
+        BookingCourtsPanel.removeAll();
+        ArrayList<Court> courtList = Court.getCourts(true);
+        generateCourtButtons(courtList, selectedDate, hour);
+        
+    }//GEN-LAST:event_HourChooserActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDayChooser BookingCalendar;
     private javax.swing.JPanel BookingCourtsPanel;
@@ -372,9 +433,13 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JButton BtnClose;
     private javax.swing.JButton BtnLogout;
     private javax.swing.JPanel CalendarPanel;
+    private javax.swing.JPanel ChooseHourPanel;
     public javax.swing.JPanel Content;
     private javax.swing.JPanel DefaultPanel;
     private javax.swing.JPanel Header;
+    private javax.swing.JComboBox<String> HourChooser;
+    private javax.swing.JLabel HourPanelIcon;
+    private javax.swing.JLabel HourPanelLabel;
     private javax.swing.JLabel LabelCompleteName;
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel LabelTitle;
@@ -386,7 +451,7 @@ public class UserView extends javax.swing.JFrame {
     public javax.swing.JPanel PanelBackground;
     private javax.swing.JButton PrevMonthBtn;
     private javax.swing.JLabel WeekdayLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel influxLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
@@ -394,8 +459,27 @@ public class UserView extends javax.swing.JFrame {
     // functions
     private void refreshCalendar(JPanel dayPanel){
         Component component[] = dayPanel.getComponents();
+        Calendar startDay = new GregorianCalendar(year, month, 1);
+        int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
+        
+        ArrayList<Booking> bookingListMonth = Booking.getBookingsByMonth(String.valueOf(month+1));
+        
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
+        }
+        
+        for(Booking booking : bookingListMonth){
+            String date = booking.getDay();
+            String[] dateArr = date.split("-");
+            int day = Integer.valueOf(dateArr[2]);
+            
+            if(booking.getUserEmail().equals(Controller.currentUser.getEmail())){
+                // BOOKING IS FROM USER
+                component[day + dayValue + 6].setBackground(new java.awt.Color(0,155,189));
+            } else {
+                // BOOKING IS FROM OTHER USER
+                component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
+            }
         }
     }
     
@@ -409,18 +493,31 @@ public class UserView extends javax.swing.JFrame {
         WeekdayLabel.setText(days[dayValue]);
         MonthDayLabel.setText(months[_month] + " " + _day);
         
-        ArrayList<Court> courtList = Court.getCourts(true);
-        generateCourtButtons(courtList);
+        String day = _year + "/" + (_month+1) + "/" + _day;
+        int influx = Controller.getInflux(day);
+        influxLabel.setText(influx + " % Influx");
+        
+        selectedDate = day;
         
         DefaultPanel.setVisible(false);
         BookingsPanel.setVisible(true);
     }
 
-    private void generateCourtButtons(ArrayList<Court> courtList) {
-        BookingCourtsPanel.removeAll();
-        for (Court court : courtList) {
-            CourtPanel courtPanel = new CourtPanel(court, true);
-            BookingCourtsPanel.add(courtPanel);
+    private void generateCourtButtons(ArrayList<Court> courtList, String _date, String hour) {
+        if(hour.equals("no hour")){
+            BookingCourtsPanel.setVisible(false);
+            ChooseHourPanel.setVisible(true);
+        } else {
+            ChooseHourPanel.setVisible(false);
+            BookingCourtsPanel.setVisible(true);
+            System.out.println(hour);
+            
+            ArrayList<Booking> bookingList = Booking.getBookingsByDay(_date);
+            for (Court court : courtList) {
+                CourtPanel courtPanel = new CourtPanel(court, bookingList, hour);
+                BookingCourtsPanel.add(courtPanel);
+            }
         }
+        
     }
 }

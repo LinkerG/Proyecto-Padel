@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import static Controller.Controller.statement;
@@ -80,24 +76,32 @@ public class Booking {
     
     
     // Methods
-    public static ArrayList getBookingsByDay(Date day) {
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");  
-        String strDay = formatter.format(day);
+    public static ArrayList getBookingsByDay(String day) {
 
-        String sql = "SELECT * FROM booking WHERE day = ?";
+        String sql = "SELECT * FROM booking WHERE day = '" + day + "'";
+        ArrayList<Booking> bookingsList = getBookings(sql);
+        return bookingsList;
         
+    }
+    
+    public static ArrayList getBookingsByMonth(String month) {
+
+        String sql = "SELECT * FROM booking WHERE MONTH(day) = '" + month + "'";
+        ArrayList<Booking> bookingsList = getBookings(sql);
+        return bookingsList;
+    }
+    
+    public static ArrayList getBookings(String sql) {
         ArrayList<Booking> bookingsList = new ArrayList<>();
         
         try(PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)){
-            
-            prepareQuery.setString(1, strDay);
             ResultSet queryResult = prepareQuery.executeQuery();
             
             while(queryResult.next()){
                 int id = queryResult.getInt("bookingId");
-                String email = queryResult.getString("userEmail");
+                String email = queryResult.getString("email");
                 int court = queryResult.getInt("courtId");
+                String day = queryResult.getString("day");
                 
                 String strHour = queryResult.getString("hour");
                 BookingHour bHour = BookingHour.fromString(strHour);
@@ -105,7 +109,7 @@ public class Booking {
                 String strStatus = queryResult.getString("status");
                 BookingStatus bStatus = BookingStatus.fromString(strStatus);
                 
-                Booking newBooking = new Booking(id, email, court, strDay, bHour, bStatus);
+                Booking newBooking = new Booking(id, email, court, day, bHour, bStatus);
                 bookingsList.add(newBooking);
             }
         } catch(Exception ex) {
