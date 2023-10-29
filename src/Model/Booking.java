@@ -76,6 +76,41 @@ public class Booking {
     
     
     // Methods
+    public static void createBooking(String userEmail, int courtId, String day, String hour) {
+        String sql = 
+                "INSERT INTO booking (userEmail, courtId, day, hour, status) "
+                + "VALUES (?, ?, ?, ?, 'NOTPAID')";
+        try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+            prepareQuery.setString(1, userEmail);
+            prepareQuery.setInt(2, courtId);
+            prepareQuery.setString(3, day);
+            prepareQuery.setString(4, hour);
+            ResultSet result = prepareQuery.executeQuery();
+            if(result.rowInserted()) {
+                System.out.println("INSERT Realizado");
+            } else {
+                System.out.println("INSERT NO Realizado");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void deleteBooking(int bookingId) {
+        String sql = "UPDATE booking SET status='CANCELLED' WHERE bookingId = ?";
+        try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+            prepareQuery.setInt(1, bookingId);
+            ResultSet result = prepareQuery.executeQuery();
+            if(result.rowInserted()) {
+                System.out.println("DELETE Realizado");
+            } else {
+                System.out.println("DELETE NO Realizado");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public static ArrayList getBookingsByDay(String day) {
 
         String sql = "SELECT * FROM booking WHERE day = '" + day + "'";
