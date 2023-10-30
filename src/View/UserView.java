@@ -483,7 +483,9 @@ public class UserView extends javax.swing.JFrame {
                 }
             } else {
                 // BOOKING IS FROM OTHER USER
-                component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
+                if(Controller.getInflux(date)>50){
+                    component[day + dayValue + 6].setBackground(new java.awt.Color(237,197,66));
+                }
             }
         }
         
