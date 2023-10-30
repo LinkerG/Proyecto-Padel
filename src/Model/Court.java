@@ -83,10 +83,6 @@ public class Court {
         }
     }
     
-    public static void getSelectedCourt(Court court, Boolean booking) {
-        System.out.println(court.getID());
-    }
-    
     public static void createCourt(String notes, int isAvailable) {
         // Use a PreparedStatement to safely insert data into the database
     	String sql = "INSERT INTO court (notes, isAvailable) VALUES (? , ?)";

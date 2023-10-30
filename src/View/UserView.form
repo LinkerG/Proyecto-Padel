@@ -176,7 +176,8 @@
                         <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="BookingCalendarPropertyChange"/>
                       </Events>
                       <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="javax.swing.JPanel day = BookingCalendar.getDayPanel();&#xa;day.setBackground(new java.awt.Color(0,90,91));&#xa;refreshCalendar(day);"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="javax.swing.JPanel day = BookingCalendar.getDayPanel();&#xa;day.setBackground(new java.awt.Color(0,90,91));&#xa;refreshCalendar();"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -411,6 +412,7 @@
                               </Properties>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="BookingCourtsPanel.setVisible(false);"/>
+                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
                               </AuxValues>
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">

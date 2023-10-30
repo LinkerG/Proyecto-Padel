@@ -18,7 +18,9 @@ public class Controller {
     
     public static LoginError loginError = new LoginError();
     public static User currentUser;
-    
+    // Atributos para poder hacer la reserva
+    public static String hour,day;
+    public static int courtId;
     
     public static void startApp(){
         if(checkStatement()) {
@@ -33,6 +35,7 @@ public class Controller {
     public static boolean checkStatement() {
         return statement != null;
     }
+    
     public static Statement connectToDatabase(){
         Connection connection;
         Statement estado = null;
@@ -52,6 +55,7 @@ public class Controller {
         }
         return estado;
     }
+    
     public static void checkUser(String email, char[] password){
         // Validates user in DB and creates static User currentUser
         
@@ -243,6 +247,7 @@ public class Controller {
     public static boolean isTooLong(String s) {
         return (s.length() > 255);
     }
+    
     /* Codigo antiguo, puede ser util
     public static Court getCourtById(int courtId, boolean available) {
         ArrayList<Court> courtList = getCourts(available);
@@ -254,9 +259,7 @@ public class Controller {
         }
         return null; 
     }
-    */
-    
-    
+    */  
     
     public static int getDefId(){
         String consultaSQL = "SELECT MAX(courtId) as 'lastId' FROM court;";
@@ -312,7 +315,10 @@ public class Controller {
         // Comprueba si la diferencia es menor o igual a 14 días
         return daysDifference <= 14;
     }
-    
-    
-
+     
+    public static void createBookingReference(int _courtId, String _day, String _hour){
+        courtId = _courtId;
+        day = _day;
+        hour = _hour;
+    }
 }

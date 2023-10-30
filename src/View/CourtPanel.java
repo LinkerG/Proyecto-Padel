@@ -53,7 +53,7 @@ public class CourtPanel extends javax.swing.JPanel {
             this.add(courtState);
     }
     
-    public CourtPanel(Court court, ArrayList<Booking> bookingListByDay, String hour) {
+    public CourtPanel(Court court, ArrayList<Booking> bookingListByDay, String hour, String day) {
             this.setBackground(new java.awt.Color(0, 115, 105));
             this.setMaximumSize(new java.awt.Dimension(50, 70));
             this.setMinimumSize(new java.awt.Dimension(50, 70));
@@ -91,7 +91,6 @@ public class CourtPanel extends javax.swing.JPanel {
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         // Llama a la función que desees cuando se hace clic en el JPanel
-                        Court.getSelectedCourt(court, true);
                         System.out.println("Intenta cancelar");
                     }
                 });
@@ -102,7 +101,6 @@ public class CourtPanel extends javax.swing.JPanel {
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         // Llama a la función que desees cuando se hace clic en el JPanel
-                        Court.getSelectedCourt(court, true);
                         System.out.println("Error ya reservado");
                     }
                 });
@@ -112,8 +110,9 @@ public class CourtPanel extends javax.swing.JPanel {
                 courtText = "Book";
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
-                        // Llama a la función que desees cuando se hace clic en el JPanel
-                        Court.getSelectedCourt(court, true);
+                        Controller.createBookingReference(court.getID(), day, hour);
+                        javax.swing.JFrame confirm = new ConfirmCreateBooking();
+                        confirm.setVisible(true);
                         System.out.println("Intenta reservar");
                     }
                 });

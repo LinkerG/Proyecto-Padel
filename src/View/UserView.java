@@ -17,6 +17,7 @@ import java.util.GregorianCalendar;
 public class UserView extends javax.swing.JFrame {
     private int posX, posY;
     private String selectedDate;
+    public static ArrayList<Booking> bookingListMonth;
     
     String[] months = {
             "January", "February", "March", "April",
@@ -28,9 +29,9 @@ public class UserView extends javax.swing.JFrame {
             "Friday", "Saturday", "Sunday"
         };
     
-    Calendar calendar = Calendar.getInstance();
-    private int month = calendar.get(Calendar.MONTH);
-    private int year = calendar.get(Calendar.YEAR);
+    public static Calendar calendar = Calendar.getInstance();
+    public static int month = calendar.get(Calendar.MONTH);
+    public static int year = calendar.get(Calendar.YEAR);
     
     public UserView() {
         initComponents();
@@ -124,7 +125,7 @@ public class UserView extends javax.swing.JFrame {
         BookingCalendar.setWeekdayForeground(new java.awt.Color(255, 255, 255));
         javax.swing.JPanel day = BookingCalendar.getDayPanel();
         day.setBackground(new java.awt.Color(0,90,91));
-        refreshCalendar(day);
+        refreshCalendar();
         BookingCalendar.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 BookingCalendarPropertyChange(evt);
@@ -370,12 +371,12 @@ public class UserView extends javax.swing.JFrame {
             
             openBookings(selectedDay, month, year);
             
-            refreshCalendar(dayPanel);
+            refreshCalendar();
             
             HourChooser.setSelectedIndex(0);
             
             component[selectedDay+dayValue+6].setBackground(new java.awt.Color(0,180,129));
-        }        
+        }   
     }//GEN-LAST:event_BookingCalendarPropertyChange
 
     private void NextMonthBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextMonthBtnActionPerformed
@@ -387,8 +388,7 @@ public class UserView extends javax.swing.JFrame {
         MonthLabel.setText(months[month] + ", " + year);
         BookingCalendar.setMonth(month);
         BookingCalendar.setYear(year);
-        JPanel day = BookingCalendar.getDayPanel();
-        refreshCalendar(day);
+        refreshCalendar();
     }//GEN-LAST:event_NextMonthBtnActionPerformed
 
     private void PrevMonthBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrevMonthBtnActionPerformed
@@ -400,8 +400,7 @@ public class UserView extends javax.swing.JFrame {
         MonthLabel.setText(months[month] + ", " + year);
         BookingCalendar.setMonth(month);
         BookingCalendar.setYear(year);
-        JPanel day = BookingCalendar.getDayPanel();
-        refreshCalendar(day);
+        refreshCalendar();
     }//GEN-LAST:event_PrevMonthBtnActionPerformed
 
     private void HourChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HourChooserActionPerformed
@@ -412,12 +411,10 @@ public class UserView extends javax.swing.JFrame {
             case 2 -> "09:30";
             case 3 -> "11:00";
             case 4 -> "12:30";
-            case 5 -> "14:00";
-            case 6 -> "15:00";
-            case 7 -> "16:30";
-            case 8 -> "18:00";
-            case 9 -> "19:30";
-            case 10 -> "21:00";
+            case 5 -> "15:00";
+            case 6 -> "16:30";
+            case 7 -> "18:00";
+            case 8 -> "19:30";
             default -> "no hour";
         };
         
@@ -428,8 +425,8 @@ public class UserView extends javax.swing.JFrame {
     }//GEN-LAST:event_HourChooserActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDayChooser BookingCalendar;
-    private javax.swing.JPanel BookingCourtsPanel;
+    public static com.toedter.calendar.JDayChooser BookingCalendar;
+    public static javax.swing.JPanel BookingCourtsPanel;
     private javax.swing.JScrollPane BookingCourtsScrollPanel;
     private javax.swing.JPanel BookingsContainer;
     private javax.swing.JPanel BookingsPanel;
@@ -460,12 +457,14 @@ public class UserView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     // functions
-    private void refreshCalendar(JPanel dayPanel){
+    public static void refreshCalendar(){
+        JPanel dayPanel = BookingCalendar.getDayPanel();
         Component component[] = dayPanel.getComponents();
-        Calendar startDay = new GregorianCalendar(year, month, 1);
+        Calendar startDay;
+        startDay = new GregorianCalendar(year, month, 1);
         int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         
-        ArrayList<Booking> bookingListMonth = Booking.getBookingsByMonth(String.valueOf(month+1));
+        bookingListMonth = Booking.getBookingsByMonth(String.valueOf(month+1));
         
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
@@ -483,6 +482,18 @@ public class UserView extends javax.swing.JFrame {
                 // BOOKING IS FROM OTHER USER
                 component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
             }
+        }
+        
+        if(BookingCourtsPanel.isVisible() == true){
+            ArrayList<Court> courtList = Court.getCourts(true);
+            BookingCourtsPanel.removeAll();
+            ArrayList<Booking> bookingList = Booking.getBookingsByDay(Controller.day);
+            for (Court court : courtList) {
+                CourtPanel courtPanel = new CourtPanel(court, bookingList, Controller.hour, Controller.day);
+                BookingCourtsPanel.add(courtPanel);
+            }
+            BookingCourtsPanel.setVisible(false);
+            BookingCourtsPanel.setVisible(true);
         }
     }
     
@@ -513,11 +524,10 @@ public class UserView extends javax.swing.JFrame {
         } else {
             ChooseHourPanel.setVisible(false);
             BookingCourtsPanel.setVisible(true);
-            System.out.println(hour);
             BookingCourtsPanel.removeAll();
             ArrayList<Booking> bookingList = Booking.getBookingsByDay(_date);
             for (Court court : courtList) {
-                CourtPanel courtPanel = new CourtPanel(court, bookingList, hour);
+                CourtPanel courtPanel = new CourtPanel(court, bookingList, hour, _date);
                 BookingCourtsPanel.add(courtPanel);
             }
         }
