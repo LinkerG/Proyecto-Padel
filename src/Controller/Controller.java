@@ -20,7 +20,7 @@ public class Controller {
     public static User currentUser;
     // Atributos para poder hacer la reserva
     public static String hour,day;
-    public static int courtId;
+    public static int courtId, bookingId;
     
     public static void startApp(){
         if(checkStatement()) {
@@ -320,5 +320,9 @@ public class Controller {
         courtId = _courtId;
         day = _day;
         hour = _hour;
+    }
+    
+    public static void createBookingIdReference(int _bookingId){
+        bookingId = _bookingId;
     }
 }

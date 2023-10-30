@@ -99,20 +99,24 @@ public class Booking {
     }
 
     
-    public static void deleteBooking(int bookingId) {
-        String sql = "UPDATE booking SET status='CANCELLED' WHERE bookingId = ?";
+    public static boolean deleteBooking(int bookingId) {
+        String sql = "UPDATE booking SET status = 'CANCELLED' WHERE bookingId = ?";
         try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
             prepareQuery.setInt(1, bookingId);
-            ResultSet result = prepareQuery.executeQuery();
-            if(result.rowInserted()) {
+            int rowsUpdated = prepareQuery.executeUpdate(); // Use executeUpdate() for UPDATE statements
+            if (rowsUpdated > 0) {
                 System.out.println("DELETE Realizado");
+                return true;
             } else {
                 System.out.println("DELETE NO Realizado");
+                return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
+
     
     public static ArrayList getBookingsByDay(String day) {
 

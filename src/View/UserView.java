@@ -2,6 +2,7 @@ package View;
 
 import Controller.*;
 import Model.Booking;
+import Model.BookingStatus;
 import Model.Court;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -477,7 +478,9 @@ public class UserView extends javax.swing.JFrame {
             
             if(booking.getUserEmail().equals(Controller.currentUser.getEmail())){
                 // BOOKING IS FROM USER
-                component[day + dayValue + 6].setBackground(new java.awt.Color(0,155,189));
+                if(booking.getStatus() != BookingStatus.CANCELLED){
+                    component[day + dayValue + 6].setBackground(new java.awt.Color(0,155,189));
+                }
             } else {
                 // BOOKING IS FROM OTHER USER
                 component[day + dayValue + 6].setBackground(new java.awt.Color(255,0,0));
