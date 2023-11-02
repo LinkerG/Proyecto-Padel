@@ -13,10 +13,13 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -123,6 +126,7 @@ public class UserView extends javax.swing.JFrame {
         CalendarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BookingCalendar.setBackground(new java.awt.Color(0, 90, 91));
+        BookingCalendar.setForeground(new java.awt.Color(255, 255, 255));
         BookingCalendar.setAlwaysFireDayProperty(false);
         BookingCalendar.setDayBordersVisible(false);
         BookingCalendar.setDecorationBackgroundColor(new java.awt.Color(0, 90, 91));
@@ -472,6 +476,7 @@ public class UserView extends javax.swing.JFrame {
         
         bookingListMonth = BookingController.getBookings("month",String.valueOf(month+1));
         
+            
         for (int i = 7; i < 49; i++) {
             Component c = component[i];
             c.setBackground(new java.awt.Color(0,115,105));
@@ -488,12 +493,14 @@ public class UserView extends javax.swing.JFrame {
             
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
+            EmptyBorder emptyBorder = new EmptyBorder(2, 2, 2, 2);
+            panel.setBorder(null);
+            panel.setBorder(emptyBorder);
             panel.add(c);
             
-            EmptyBorder emptyBorder = new EmptyBorder(2, 2, 2, 2);
-            panel.setBorder(emptyBorder);
+            
             panel.setBackground(new java.awt.Color(0,90,91));
-            dayPanel.remove(c);
+            //dayPanel.remove(c);
             dayPanel.add(panel);
 
 
