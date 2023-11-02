@@ -6,7 +6,10 @@ public class BookingController {
     
     public static ArrayList<Booking> getBookings(String action, String date){
        if(action.equals("month")){
-           ArrayList<Booking> bookingList = Booking.getBookingsByMonth(date);
+           String[] parts= date.split("/");
+           String year = parts[0];
+           String month = parts[1];
+           ArrayList<Booking> bookingList = Booking.getBookingsByMonth(month, year);
            return bookingList;
        } else if(action.equals("day")) {
            ArrayList<Booking> bookingList = Booking.getBookingsByDay(date);

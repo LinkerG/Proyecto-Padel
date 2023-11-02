@@ -141,7 +141,7 @@ public class UserView extends javax.swing.JFrame {
                 BookingCalendarPropertyChange(evt);
             }
         });
-        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 340, 230));
+        CalendarPanel.add(BookingCalendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 340, 250));
 
         NextMonthBtn.setBackground(new java.awt.Color(0, 90, 91));
         NextMonthBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -474,7 +474,7 @@ public class UserView extends javax.swing.JFrame {
         startDay = new GregorianCalendar(year, month, 1);
         int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         
-        bookingListMonth = BookingController.getBookings("month",String.valueOf(month+1));
+        bookingListMonth = BookingController.getBookings("month",String.valueOf(year)+"/"+String.valueOf(month+1));
         
             
         for (int i = 7; i < 49; i++) {
