@@ -419,7 +419,7 @@ public class UserView extends javax.swing.JFrame {
             default -> "no hour";
         };
         
-        ArrayList<Court> courtList = Court.getCourts(true);
+        ArrayList<Court> courtList = CourtController.getCourts(true);
         generateCourtButtons(courtList, selectedDate, hour);
         BookingCourtsPanel.setVisible(false);
         BookingCourtsPanel.setVisible(true);
@@ -465,7 +465,7 @@ public class UserView extends javax.swing.JFrame {
         startDay = new GregorianCalendar(year, month, 1);
         int dayValue = (startDay.get(Calendar.DAY_OF_WEEK) + 5) % 7;
         
-        bookingListMonth = Booking.getBookingsByMonth(String.valueOf(month+1));
+        bookingListMonth = BookingController.getBookings("month",String.valueOf(month+1));
         
         for (int i = 7; i < 49; i++) {
             component[i].setBackground(new java.awt.Color(0,115,105));
@@ -490,9 +490,9 @@ public class UserView extends javax.swing.JFrame {
         }
         
         if(BookingCourtsPanel.isVisible() == true){
-            ArrayList<Court> courtList = Court.getCourts(true);
+            ArrayList<Court> courtList = CourtController.getCourts(true);
             BookingCourtsPanel.removeAll();
-            ArrayList<Booking> bookingList = Booking.getBookingsByDay(Controller.day);
+            ArrayList<Booking> bookingList = BookingController.getBookings("day",Controller.day);
             for (Court court : courtList) {
                 CourtPanel courtPanel = new CourtPanel(court, bookingList, Controller.hour, Controller.day);
                 BookingCourtsPanel.add(courtPanel);
@@ -530,7 +530,7 @@ public class UserView extends javax.swing.JFrame {
             ChooseHourPanel.setVisible(false);
             BookingCourtsPanel.setVisible(true);
             BookingCourtsPanel.removeAll();
-            ArrayList<Booking> bookingList = Booking.getBookingsByDay(_date);
+            ArrayList<Booking> bookingList = BookingController.getBookings("day", _date);
             for (Court court : courtList) {
                 CourtPanel courtPanel = new CourtPanel(court, bookingList, hour, _date);
                 BookingCourtsPanel.add(courtPanel);

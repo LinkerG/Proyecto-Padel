@@ -146,7 +146,7 @@ public class ConfirmCreateBooking extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        if(Booking.createBooking(Controller.currentUser.getEmail(), Controller.courtId, Controller.day, Controller.hour) == true){
+        if(BookingController.createBooking(Controller.currentUser.getEmail(), Controller.courtId, Controller.day, Controller.hour) == true){
             UserView.refreshCalendar();
             dispose();
         } else {

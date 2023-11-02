@@ -107,8 +107,8 @@ public class User {
         }
     }
     
-    public void updateUserIsActive(User user) {
-        String update = user.isActive ? "UPDATE USER SET isActive = 0 WHERE DNI = '" + user.dni + "';" : "UPDATE USER SET isActive = 1 WHERE DNI = '" + user.dni + "';";
+    public void updateUserIsActive() {
+        String update = this.isActive ? "UPDATE USER SET isActive = 0 WHERE DNI = '" + this.dni + "';" : "UPDATE USER SET isActive = 1 WHERE DNI = '" + this.dni + "';";
         try(PreparedStatement prepareQuery = Controller.statement.getConnection().prepareStatement(update)){
             // Execute the query
         	int rowsInserted = prepareQuery.executeUpdate();

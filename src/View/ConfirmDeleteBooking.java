@@ -145,7 +145,7 @@ public class ConfirmDeleteBooking extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        if(Booking.deleteBooking(Controller.bookingId) == true){
+        if(BookingController.deleteBooking(Controller.bookingId) == true){
             UserView.refreshCalendar();
             dispose();
         } else {
