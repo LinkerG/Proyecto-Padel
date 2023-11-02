@@ -23,6 +23,13 @@ public class CourtPanel extends javax.swing.JPanel {
                 AdminView.Courts.setVisible(false);
                 AdminView.CourtInfo.setVisible(true);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {                                            
+                CourtPanel.this.setBackground(new java.awt.Color(0,140,129));
+            }                                           
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {                                           
+                CourtPanel.this.setBackground(new java.awt.Color(0,115,105));
+            }   
         });
             this.setBackground(new java.awt.Color(0, 115, 105));
             this.setMaximumSize(new java.awt.Dimension(134, 152));
@@ -87,6 +94,15 @@ public class CourtPanel extends javax.swing.JPanel {
                     }
                 }
             }
+            addMouseListener(new MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {                                            
+                    CourtPanel.this.setBackground(new java.awt.Color(0,88,81));
+                }                                           
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {                                           
+                    CourtPanel.this.setBackground(new java.awt.Color(0,115,105));
+                }  
+            });
             
             String imageRoute = "";
             String courtText = "";
@@ -101,6 +117,7 @@ public class CourtPanel extends javax.swing.JPanel {
                         confirm.setVisible(true);
                         System.out.println("Intenta cancelar");
                     }
+                    
                 });
             }
             else if(isFull) {

@@ -4,6 +4,8 @@ import Controller.*;
 import Model.Booking;
 import Model.BookingStatus;
 import Model.Court;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -11,9 +13,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 public class UserView extends javax.swing.JFrame {
     private int posX, posY;
@@ -468,7 +473,30 @@ public class UserView extends javax.swing.JFrame {
         bookingListMonth = BookingController.getBookings("month",String.valueOf(month+1));
         
         for (int i = 7; i < 49; i++) {
-            component[i].setBackground(new java.awt.Color(0,115,105));
+            Component c = component[i];
+            c.setBackground(new java.awt.Color(0,115,105));
+            
+            c.addMouseListener(new MouseAdapter() {
+                public void mouseEntered(java.awt.event.MouseEvent evt) {                                            
+                    c.setBackground(new java.awt.Color(0,140,129));
+                }                                           
+
+                public void mouseExited(java.awt.event.MouseEvent evt) {                                           
+                    c.setBackground(new java.awt.Color(0,115,105));
+                }   
+            });
+            
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            panel.add(c);
+            
+            EmptyBorder emptyBorder = new EmptyBorder(2, 2, 2, 2);
+            panel.setBorder(emptyBorder);
+            panel.setBackground(new java.awt.Color(0,90,91));
+            dayPanel.remove(c);
+            dayPanel.add(panel);
+
+
         }
         
         for(Booking booking : bookingListMonth){
@@ -479,12 +507,32 @@ public class UserView extends javax.swing.JFrame {
             if(booking.getUserEmail().equals(Controller.currentUser.getEmail())){
                 // BOOKING IS FROM USER
                 if(booking.getStatus() != BookingStatus.CANCELLED){
-                    component[day + dayValue + 6].setBackground(new java.awt.Color(0,155,189));
+                    Component blueComponent = component[day + dayValue + 6];
+                    blueComponent.setBackground(new java.awt.Color(0,155,189));
+                    blueComponent.addMouseListener(new MouseAdapter() {
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {                                            
+                            blueComponent.setBackground(new java.awt.Color(0,186,227));
+                        }                                           
+
+                        public void mouseExited(java.awt.event.MouseEvent evt) {                                           
+                            blueComponent.setBackground(new java.awt.Color(0,155,189));
+                        }   
+                    });
                 }
             } else {
                 // BOOKING IS FROM OTHER USER
                 if(Controller.getInflux(date)>50){
-                    component[day + dayValue + 6].setBackground(new java.awt.Color(237,197,66));
+                    Component yellowComponent = component[day + dayValue + 6];
+                    yellowComponent.setBackground(new java.awt.Color(237,197,66));
+                    yellowComponent.addMouseListener(new MouseAdapter() {
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {                                            
+                            yellowComponent.setBackground(new java.awt.Color(255,211,72));
+                        }                                           
+
+                        public void mouseExited(java.awt.event.MouseEvent evt) {                                           
+                            yellowComponent.setBackground(new java.awt.Color(237,197,66));
+                        }   
+                    });
                 }
             }
         }
