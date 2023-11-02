@@ -126,9 +126,9 @@ public class Booking {
         
     }
     
-    public static ArrayList getBookingsByMonth(String month) {
+    public static ArrayList getBookingsByMonth(String month, String year) {
 
-        String sql = "SELECT * FROM booking WHERE MONTH(day) = '" + month + "'";
+        String sql = "SELECT * FROM booking WHERE YEAR(day) = '" + year +"' AND MONTH(day) = '" + month + "'";
         ArrayList<Booking> bookingsList = getBookings(sql);
         return bookingsList;
     }
