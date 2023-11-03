@@ -13,6 +13,8 @@ import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.imageio.ImageIO;
 
 public class AdminView extends javax.swing.JFrame {
@@ -84,7 +86,12 @@ public class AdminView extends javax.swing.JFrame {
         SaveCourtButton = new javax.swing.JButton();
         CourtInfoState = new javax.swing.JComboBox<>();
         CourtBookingsInfo = new javax.swing.JPanel();
-        WIP = new javax.swing.JLabel();
+        CourtBookingLabel = new javax.swing.JLabel();
+        CourtBookingDate = new com.toedter.calendar.JDateChooser();
+        CourtBookingDateLabel = new javax.swing.JLabel();
+        CourtBookings = new javax.swing.JPanel();
+        CourtBookingsDefault = new javax.swing.JPanel();
+        CourtBookingsDefaultLabel = new javax.swing.JLabel();
         CourtInfoIncorrectNotesLabel = new javax.swing.JLabel();
         CreateUsers = new javax.swing.JPanel();
         BtnReturn2 = new javax.swing.JButton();
@@ -556,12 +563,46 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingsInfo.setPreferredSize(new java.awt.Dimension(514, 246));
         CourtBookingsInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        WIP.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        WIP.setForeground(new java.awt.Color(255, 255, 255));
-        WIP.setText("WIP");
-        CourtBookingsInfo.add(WIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
+        CourtBookingLabel.setFont(new java.awt.Font("Arial", 1, 20)); // NOI18N
+        CourtBookingLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtBookingLabel.setText("Booking Calendar");
+        CourtBookingsInfo.add(CourtBookingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        CourtInfoPanel.add(CourtBookingsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 51, -1, -1));
+        CourtBookingDate.setBackground(new java.awt.Color(0, 90, 91));
+        CourtBookingDate.setForeground(new java.awt.Color(255, 255, 255));
+        CourtBookingDate.setDateFormatString("dd/MM/yyyy");
+        CourtBookingDate.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        CourtBookingDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                CourtBookingDatePropertyChange(evt);
+            }
+        });
+        CourtBookingsInfo.add(CourtBookingDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 120, -1));
+
+        CourtBookingDateLabel.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        CourtBookingDateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtBookingDateLabel.setText("Date:");
+        CourtBookingsInfo.add(CourtBookingDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        CourtBookings.setBackground(new java.awt.Color(0, 144, 102));
+        CourtBookings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CourtBookings.setVisible(false);
+
+        CourtBookingsInfo.add(CourtBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 480, 150));
+
+        CourtBookingsDefault.setBackground(new java.awt.Color(0, 144, 102));
+        CourtBookingsDefault.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CourtBookingsDefaultLabel.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        CourtBookingsDefaultLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CourtBookingsDefaultLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iconImage.png"))); // NOI18N
+        CourtBookingsDefaultLabel.setText("Select a date");
+        CourtBookingsDefault.add(CourtBookingsDefaultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+
+        CourtBookingsInfo.add(CourtBookingsDefault, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 480, 150));
+
+        CourtInfoPanel.add(CourtBookingsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 17, -1, 280));
 
         CourtInfoIncorrectNotesLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         CourtInfoIncorrectNotesLabel.setForeground(new java.awt.Color(255, 51, 51));
@@ -1412,6 +1453,32 @@ public class AdminView extends javax.swing.JFrame {
     private void CourtInfoStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CourtInfoStateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CourtInfoStateActionPerformed
+int a = 0;
+    private void CourtBookingDatePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_CourtBookingDatePropertyChange
+        if(a>1){
+            Date selectedDate = CourtBookingDate.getDate();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(selectedDate);
+
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            
+            String formattedDate = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
+            
+            String courtId = CourtInfoIDLabel.getText().split(" ")[1];
+            
+            System.out.println(formattedDate);
+            
+            CourtBookingsDefault.setVisible(false);
+            CourtBookings.setVisible(false);
+            CourtBookings.setVisible(true);
+            
+            
+        } else {
+            a++;
+        }
+    }//GEN-LAST:event_CourtBookingDatePropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1429,6 +1496,12 @@ public class AdminView extends javax.swing.JFrame {
     public javax.swing.JCheckBox ChangeDniToggle;
     public javax.swing.JCheckBox ChangePasswordToggle;
     public javax.swing.JPanel Content;
+    private com.toedter.calendar.JDateChooser CourtBookingDate;
+    private javax.swing.JLabel CourtBookingDateLabel;
+    private javax.swing.JLabel CourtBookingLabel;
+    private javax.swing.JPanel CourtBookings;
+    private javax.swing.JPanel CourtBookingsDefault;
+    private javax.swing.JLabel CourtBookingsDefaultLabel;
     private javax.swing.JPanel CourtBookingsInfo;
     private javax.swing.JPanel CourtButtons;
     private javax.swing.JScrollPane CourtButtonsScrollPane;
@@ -1519,7 +1592,6 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
-    private javax.swing.JLabel WIP;
     private javax.swing.JLabel WIPtext;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
