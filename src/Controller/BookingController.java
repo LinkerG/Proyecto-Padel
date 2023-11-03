@@ -19,6 +19,10 @@ public class BookingController {
        }     
     }
     
+    public static ArrayList<Booking> getBookings(String date, int courtId){
+        return Booking.getBookingsByCourtDate(date, courtId);
+    }
+    
     public static boolean deleteBooking(int bookingId){
         return Booking.deleteBooking(bookingId);
     }

@@ -89,7 +89,8 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingLabel = new javax.swing.JLabel();
         CourtBookingDate = new com.toedter.calendar.JDateChooser();
         CourtBookingDateLabel = new javax.swing.JLabel();
-        CourtBookings = new javax.swing.JPanel();
+        CourtBookings = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         CourtBookingsDefault = new javax.swing.JPanel();
         CourtBookingsDefaultLabel = new javax.swing.JLabel();
         CourtInfoIncorrectNotesLabel = new javax.swing.JLabel();
@@ -476,6 +477,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtInfoContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         CourtInfoPanel.setBackground(new java.awt.Color(0, 115, 105));
+        CourtInfoPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         CourtInfoPanel.setMaximumSize(new java.awt.Dimension(861, 314));
         CourtInfoPanel.setMinimumSize(new java.awt.Dimension(861, 314));
         CourtInfoPanel.setPreferredSize(new java.awt.Dimension(861, 314));
@@ -585,11 +587,72 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingsInfo.add(CourtBookingDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         CourtBookings.setBackground(new java.awt.Color(0, 144, 102));
-        CourtBookings.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        CourtBookings.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        CourtBookings.setToolTipText("");
+        CourtBookings.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        CourtBookings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));
+        CourtBookings.setBorder(BorderFactory.createEmptyBorder());
 
-        CourtBookings.setVisible(false);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setBackground(new java.awt.Color(0, 144, 102));
+        jTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(255, 255, 255));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Hour", "Status", "Cancel"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setToolTipText("");
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.setAutoscrolls(false);
+        jTable1.setFocusable(false);
+        jTable1.setGridColor(new java.awt.Color(0, 144, 102));
+        jTable1.setMaximumSize(new java.awt.Dimension(525, 0));
+        jTable1.setMinimumSize(new java.awt.Dimension(525, 0));
+        jTable1.setRequestFocusEnabled(false);
+        jTable1.setRowHeight(40);
+        jTable1.setSelectionBackground(new java.awt.Color(0, 144, 102));
+        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.table.JTableHeader cb_header = jTable1.getTableHeader();
+        javax.swing.table.DefaultTableCellRenderer cb_newRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        cb_newRenderer.setBackground(new Color(0,144,102));
+        cb_newRenderer.setHorizontalAlignment(JLabel.CENTER);
+        cb_newRenderer.setFont(new Font("Arial", 0, 14));
+        cb_newRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        cb_newRenderer.setForeground(Color.WHITE);
+        cb_header.setDefaultRenderer(cb_newRenderer);
+        cb_header.setResizingAllowed(false);
+        cb_header.setReorderingAllowed(false);
+        jTable1.setTableHeader(cb_header);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        CourtBookings.setViewportView(jTable1);
 
         CourtBookingsInfo.add(CourtBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 480, 150));
+        CourtBookings.setVisible(false);
 
         CourtBookingsDefault.setBackground(new java.awt.Color(0, 144, 102));
         CourtBookingsDefault.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1466,9 +1529,9 @@ int a = 0;
             
             String formattedDate = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
             
-            String courtId = CourtInfoIDLabel.getText().split(" ")[1];
+            int courtId = Integer.valueOf(CourtInfoIDLabel.getText().split(" ")[1]);
             
-            System.out.println(formattedDate);
+            updateCourtBookingTable(formattedDate, courtId);
             
             CourtBookingsDefault.setVisible(false);
             CourtBookings.setVisible(false);
@@ -1479,6 +1542,10 @@ int a = 0;
             a++;
         }
     }//GEN-LAST:event_CourtBookingDatePropertyChange
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1499,7 +1566,7 @@ int a = 0;
     private com.toedter.calendar.JDateChooser CourtBookingDate;
     private javax.swing.JLabel CourtBookingDateLabel;
     private javax.swing.JLabel CourtBookingLabel;
-    private javax.swing.JPanel CourtBookings;
+    private javax.swing.JScrollPane CourtBookings;
     private javax.swing.JPanel CourtBookingsDefault;
     private javax.swing.JLabel CourtBookingsDefaultLabel;
     private javax.swing.JPanel CourtBookingsInfo;
@@ -1593,6 +1660,7 @@ int a = 0;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
     private javax.swing.JLabel WIPtext;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
         CourtButtons.removeAll();
@@ -1644,6 +1712,17 @@ int a = 0;
             model.addRow(rowData);
         }
     }
+    
+    private void updateCourtBookingTable(String date, int courtId){
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        ArrayList<Booking> bookingList = BookingController.getBookings(date, courtId);
+        for(Booking booking : bookingList) {
+            Object[] rowData = {booking.getUserEmail(), booking.getHour().getTimeString(), booking.getStatus().getStatus(), "cancel"};
+            model.addRow(rowData);
+        }
+    }
+    
     private void userInfoByDni(User user) {
         UserInfoNameErrorLabel.setVisible(false);
         UserInfoLastnamesErrorLabel.setVisible(false);
