@@ -15,6 +15,8 @@ import java.util.Calendar;
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -56,7 +58,11 @@ public class UserView extends javax.swing.JFrame {
             setIconImage(toolBarImg);
         }
         LabelCompleteName.setText(Controller.getUserName());
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
+        TodayDateLabel.setText("");
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        TodayDateLabel.setText(formatter.format(new Date()));
+
     }
 
     @SuppressWarnings("unchecked")
@@ -72,6 +78,14 @@ public class UserView extends javax.swing.JFrame {
         NextMonthBtn = new javax.swing.JButton();
         MonthLabel = new javax.swing.JLabel();
         PrevMonthBtn = new javax.swing.JButton();
+        LegendBlue = new javax.swing.JPanel();
+        LegendBlueLabel = new javax.swing.JLabel();
+        LegendYellowLabel = new javax.swing.JLabel();
+        LegendYellow = new javax.swing.JPanel();
+        TodayDateIcon = new javax.swing.JLabel();
+        LegendRed = new javax.swing.JPanel();
+        LegendRedLabel1 = new javax.swing.JLabel();
+        TodayDateLabel = new javax.swing.JLabel();
         BookingsContainer = new javax.swing.JPanel();
         BookingsPanel = new javax.swing.JPanel();
         ChooseHourPanel = new javax.swing.JPanel();
@@ -173,6 +187,85 @@ public class UserView extends javax.swing.JFrame {
         });
         CalendarPanel.add(PrevMonthBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 35, -1, -1));
 
+        LegendBlue.setBackground(new java.awt.Color(0, 155, 189));
+        LegendBlue.setMaximumSize(new java.awt.Dimension(16, 16));
+        LegendBlue.setMinimumSize(new java.awt.Dimension(16, 16));
+        LegendBlue.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout LegendBlueLayout = new javax.swing.GroupLayout(LegendBlue);
+        LegendBlue.setLayout(LegendBlueLayout);
+        LegendBlueLayout.setHorizontalGroup(
+            LegendBlueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        LegendBlueLayout.setVerticalGroup(
+            LegendBlueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+
+        CalendarPanel.add(LegendBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 16, 16));
+
+        LegendBlueLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LegendBlueLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LegendBlueLabel.setText("Your Bookings");
+        CalendarPanel.add(LegendBlueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 332, -1, -1));
+
+        LegendYellowLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LegendYellowLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LegendYellowLabel.setText("50% Booked");
+        CalendarPanel.add(LegendYellowLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 332, -1, -1));
+
+        LegendYellow.setBackground(new java.awt.Color(255, 211, 72));
+        LegendYellow.setMaximumSize(new java.awt.Dimension(16, 16));
+        LegendYellow.setMinimumSize(new java.awt.Dimension(16, 16));
+        LegendYellow.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout LegendYellowLayout = new javax.swing.GroupLayout(LegendYellow);
+        LegendYellow.setLayout(LegendYellowLayout);
+        LegendYellowLayout.setHorizontalGroup(
+            LegendYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        LegendYellowLayout.setVerticalGroup(
+            LegendYellowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+
+        CalendarPanel.add(LegendYellow, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 16, 16));
+
+        TodayDateIcon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TodayDateIcon.setForeground(new java.awt.Color(255, 255, 255));
+        TodayDateIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/calendar.png"))); // NOI18N
+        CalendarPanel.add(TodayDateIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 35, -1, -1));
+
+        LegendRed.setBackground(new java.awt.Color(119, 0, 0));
+        LegendRed.setMaximumSize(new java.awt.Dimension(16, 16));
+        LegendRed.setMinimumSize(new java.awt.Dimension(16, 16));
+        LegendRed.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout LegendRedLayout = new javax.swing.GroupLayout(LegendRed);
+        LegendRed.setLayout(LegendRedLayout);
+        LegendRedLayout.setHorizontalGroup(
+            LegendRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        LegendRedLayout.setVerticalGroup(
+            LegendRedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+
+        CalendarPanel.add(LegendRed, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, 16, 16));
+
+        LegendRedLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LegendRedLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        LegendRedLabel1.setText("Can't Book");
+        CalendarPanel.add(LegendRedLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 332, -1, -1));
+
+        TodayDateLabel.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        TodayDateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TodayDateLabel.setText("XX/XX/XXXX");
+        CalendarPanel.add(TodayDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 36, -1, -1));
+
         Main.add(CalendarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 360));
 
         BookingsContainer.setBackground(new java.awt.Color(0, 115, 105));
@@ -236,7 +329,7 @@ public class UserView extends javax.swing.JFrame {
         HourChooser.setBackground(new java.awt.Color(0, 115, 105));
         HourChooser.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         HourChooser.setForeground(new java.awt.Color(255, 255, 255));
-        HourChooser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XX:XX - XX:XX", "8:00 - 9:30", "9:30 - 11:00", "11:00 - 12:30", "12:30 - 14:00", "15:00 - 16:30", "16:30 - 18:00", "18:00 - 19:30", "19:30 - 21:00", " " }));
+        HourChooser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "XX:XX - XX:XX", "8:00 - 9:30", "9:30 - 11:00", "11:00 - 12:30", "12:30 - 14:00", "15:00 - 16:30", "16:30 - 18:00", "18:00 - 19:30", "19:30 - 21:00" }));
         HourChooser.setBorder(null);
         HourChooser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,12 +547,20 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JLabel LabelLogo;
     private javax.swing.JLabel LabelTitle;
     private javax.swing.JLabel LabelUserPanel;
+    private javax.swing.JPanel LegendBlue;
+    private javax.swing.JLabel LegendBlueLabel;
+    private javax.swing.JPanel LegendRed;
+    private javax.swing.JLabel LegendRedLabel1;
+    private javax.swing.JPanel LegendYellow;
+    private javax.swing.JLabel LegendYellowLabel;
     public javax.swing.JPanel Main;
     private javax.swing.JLabel MonthDayLabel;
     private javax.swing.JLabel MonthLabel;
     private javax.swing.JButton NextMonthBtn;
     public javax.swing.JPanel PanelBackground;
     private javax.swing.JButton PrevMonthBtn;
+    private javax.swing.JLabel TodayDateIcon;
+    private javax.swing.JLabel TodayDateLabel;
     private javax.swing.JLabel WeekdayLabel;
     private javax.swing.JLabel influxLabel;
     private javax.swing.JLabel jLabel1;
@@ -491,19 +592,7 @@ public class UserView extends javax.swing.JFrame {
                 }   
             });
             
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
-            EmptyBorder emptyBorder = new EmptyBorder(2, 2, 2, 2);
-            panel.setBorder(null);
-            panel.setBorder(emptyBorder);
-            panel.add(c);
-            
-            
-            panel.setBackground(new java.awt.Color(0,90,91));
-            //dayPanel.remove(c);
-            dayPanel.add(panel);
-
-
+            dayPanel.add(c);
         }
         
         for(Booking booking : bookingListMonth){
