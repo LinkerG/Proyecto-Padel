@@ -28,7 +28,7 @@ public class AdminView extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-        // Establece la imagen como ícono de la ventana
+        // Establece la imagen como ï¿½cono de la ventana
         if (toolBarImg != null) {
             setIconImage(toolBarImg);
         }
@@ -1163,7 +1163,7 @@ public class AdminView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Hour", "Status", "Cancel"
+                "Court", "Hour", "Status", "Date"
             }
         ) {
             Class[] types = new Class [] {

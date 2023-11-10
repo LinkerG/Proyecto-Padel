@@ -175,6 +175,13 @@ public class Booking {
         }
     }
 
+    public static ArrayList getBookingsByUser(String email) {
+
+        String sql = "SELECT * FROM booking WHERE email = '" + email + "'";
+        ArrayList<Booking> bookingsList = getBookings(sql);
+        return bookingsList;
+        
+    }
     
     public static ArrayList getBookingsByDay(String day) {
 

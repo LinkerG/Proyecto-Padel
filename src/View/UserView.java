@@ -97,6 +97,7 @@ public class UserView extends javax.swing.JFrame {
         MonthDayLabel = new javax.swing.JLabel();
         HourChooser = new javax.swing.JComboBox<>();
         influxLabel = new javax.swing.JLabel();
+        HourIcon = new javax.swing.JLabel();
         DefaultPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -343,6 +344,11 @@ public class UserView extends javax.swing.JFrame {
         influxLabel.setText("0% inf");
         BookingsPanel.add(influxLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
+        HourIcon.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        HourIcon.setForeground(new java.awt.Color(255, 255, 255));
+        HourIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clock.png"))); // NOI18N
+        BookingsPanel.add(HourIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 137, -1, -1));
+
         BookingsContainer.add(BookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 290));
 
         DefaultPanel.setBackground(new java.awt.Color(0, 115, 105));
@@ -541,6 +547,7 @@ public class UserView extends javax.swing.JFrame {
     private javax.swing.JPanel DefaultPanel;
     private javax.swing.JPanel Header;
     private javax.swing.JComboBox<String> HourChooser;
+    private javax.swing.JLabel HourIcon;
     private javax.swing.JLabel HourPanelIcon;
     private javax.swing.JLabel HourPanelLabel;
     private javax.swing.JLabel LabelCompleteName;
