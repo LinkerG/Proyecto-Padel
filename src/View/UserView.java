@@ -624,7 +624,20 @@ public class UserView extends javax.swing.JFrame {
                 }
             } else {
                 // BOOKING IS FROM OTHER USER
-                if(Controller.getInflux(date)>50){
+                int influx = Controller.getInflux(date);
+                if(influx == 100){
+                    Component redComponent = component[day + dayValue + 6];
+                    redComponent.setBackground(new java.awt.Color(119,0,0));
+                    redComponent.addMouseListener(new MouseAdapter() {
+                        public void mouseEntered(java.awt.event.MouseEvent evt) {                                            
+                            redComponent.setBackground(new java.awt.Color(85,0,0));
+                        }                                           
+
+                        public void mouseExited(java.awt.event.MouseEvent evt) {                                           
+                            redComponent.setBackground(new java.awt.Color(119,0,0));
+                        }
+                    });
+                }else if(influx>=50){
                     Component yellowComponent = component[day + dayValue + 6];
                     yellowComponent.setBackground(new java.awt.Color(237,197,66));
                     yellowComponent.addMouseListener(new MouseAdapter() {
@@ -636,7 +649,7 @@ public class UserView extends javax.swing.JFrame {
                             yellowComponent.setBackground(new java.awt.Color(237,197,66));
                         }   
                     });
-                }
+                } 
             }
         }
         
