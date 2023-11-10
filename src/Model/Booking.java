@@ -1,8 +1,10 @@
 package Model;
 
+import Controller.Controller;
 import static Controller.Controller.statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,6 +78,62 @@ public class Booking {
     
     
     // Methods
+    public void payBooking(){
+        String update = "";
+        if(this.status.getStatus().equals("NOTPAID")){
+            update = "UPDATE booking SET status = 'PAID' WHERE bookingId = '" + this.bookingId + "';";
+            
+        } else if(this.status.getStatus().equals("PAID")) {
+            update = "UPDATE booking SET status = 'NOTPAID' WHERE bookingId = '" + this.bookingId + "';";
+        }
+        
+        if(!update.equals("")){
+            try(PreparedStatement prepareQuery = Controller.statement.getConnection().prepareStatement(update)){
+            // Execute the query
+        	int rowsInserted = prepareQuery.executeUpdate();
+
+        	if (rowsInserted > 0) {
+            	// Successfully inserted
+                    System.out.print("updated");
+        	} else {
+            	// Error in database
+                    System.out.print("not updated");
+        	}
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    public void cancelBooking() {
+        String update = "";
+        System.out.println("hola");
+        if(this.status.getStatus().equals("NOTPAID") || this.status.getStatus().equals("PAID")){
+            update = "UPDATE booking SET status = 'CANCELLED' WHERE bookingId = '" + this.bookingId + "';";
+            
+        } else if(this.status.getStatus().equals("CANCELLED")) {
+            update = "UPDATE booking SET status = 'NOTPAID' WHERE bookingId = '" + this.bookingId + "';";
+            System.out.println("hola");
+        }
+        
+        if(!update.equals("")){
+            try(PreparedStatement prepareQuery = Controller.statement.getConnection().prepareStatement(update)){
+            // Execute the query
+        	int rowsInserted = prepareQuery.executeUpdate();
+
+        	if (rowsInserted > 0) {
+            	// Successfully inserted
+                    System.out.print("updated");
+        	} else {
+            	// Error in database
+                    System.out.print("not updated");
+        	}
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     public static boolean createBooking(String userEmail, int courtId, String day, String hour) {
         String sql = 
             "INSERT INTO booking (email, courtId, day, hour, status) VALUES (?, ?, ?, ?, 'NOTPAID')";
@@ -120,7 +178,7 @@ public class Booking {
     
     public static ArrayList getBookingsByDay(String day) {
 
-        String sql = "SELECT * FROM booking WHERE day = '" + day + "'";
+        String sql = "SELECT * FROM booking WHERE day = '" + day + "' AND status != 'CANCELLED'";
         ArrayList<Booking> bookingsList = getBookings(sql);
         return bookingsList;
         

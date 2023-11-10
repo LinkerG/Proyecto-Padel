@@ -144,7 +144,8 @@ public class AdminView extends javax.swing.JFrame {
         UserInfoBtnSave = new javax.swing.JButton();
         UserBookingsLabel = new javax.swing.JLabel();
         UserBookingsPanel = new javax.swing.JPanel();
-        WIPtext = new javax.swing.JLabel();
+        UserBookings = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         ChangePasswordToggle = new javax.swing.JCheckBox();
         ChangeDniToggle = new javax.swing.JCheckBox();
         Header = new javax.swing.JPanel();
@@ -604,14 +605,14 @@ public class AdminView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Hour", "Status", "Cancel"
+                "Booking ID", "Name", "Hour", "Status", "Cancel"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1144,10 +1145,63 @@ public class AdminView extends javax.swing.JFrame {
         UserBookingsPanel.setMinimumSize(new java.awt.Dimension(341, 230));
         UserBookingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        WIPtext.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
-        WIPtext.setForeground(new java.awt.Color(255, 255, 255));
-        WIPtext.setText("WIP");
-        UserBookingsPanel.add(WIPtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        UserBookings.setBackground(new java.awt.Color(0, 144, 102));
+        UserBookings.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        UserBookings.setToolTipText("");
+        UserBookings.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        UserBookings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));
+        CourtBookings.setBorder(BorderFactory.createEmptyBorder());
+
+        jTable2.setAutoCreateRowSorter(true);
+        jTable2.setBackground(new java.awt.Color(0, 144, 102));
+        jTable2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        jTable2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTable2.setForeground(new java.awt.Color(255, 255, 255));
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Hour", "Status", "Cancel"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setToolTipText("");
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable2.setAutoscrolls(false);
+        jTable2.setFocusable(false);
+        jTable2.setGridColor(new java.awt.Color(0, 144, 102));
+        jTable2.setMaximumSize(new java.awt.Dimension(525, 0));
+        jTable2.setMinimumSize(new java.awt.Dimension(525, 0));
+        jTable2.setRequestFocusEnabled(false);
+        jTable2.setRowHeight(40);
+        jTable2.setSelectionBackground(new java.awt.Color(0, 144, 102));
+        jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jTable2.setTableHeader(cb_header);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
+        UserBookings.setViewportView(jTable2);
+
+        UserBookingsPanel.add(UserBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 230));
+        CourtBookings.setVisible(false);
 
         UserInfoContent.add(UserBookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 330, 225));
 
@@ -1544,8 +1598,67 @@ int a = 0;
     }//GEN-LAST:event_CourtBookingDatePropertyChange
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        int row = UsersTable.rowAtPoint(evt.getPoint());
+        int column = UsersTable.columnAtPoint(evt.getPoint());
+        
+        Date selectedDate = CourtBookingDate.getDate();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(selectedDate);
+
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+
+        String formattedDate = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
+        int courtId = Integer.parseInt(CourtInfoIDLabel.getText().split(" ")[1]);
+        
+        if(column == 2){
+            Object objId = jTable1.getValueAt(row, 0);
+            int id = Integer.parseInt(objId.toString());
+            ArrayList<Booking> bookingList = BookingController.getBookings("day", formattedDate);
+            for(Booking booking : bookingList){
+                if(booking.getBookingId() == id){
+                    BookingController.payBooking(booking);
+                } 
+            }
+            
+            updateCourtBookingTable(formattedDate, courtId);
+        }
+        
+        if(column == 3){
+            Object objId = jTable1.getValueAt(row, 0);
+            int id = Integer.parseInt(objId.toString());
+            ArrayList<Booking> bookingList = BookingController.getBookings("day", formattedDate);
+            for(Booking booking : bookingList){
+                if(booking.getBookingId() == id){
+                    BookingController.cancelBooking(booking);
+                } 
+            }
+            
+            updateCourtBookingTable(formattedDate, courtId);
+        }
+        
+        if (row >= 0 && column >= 0) {
+            // Esto sirve para printar el valor de la celda clicada
+            
+            //Object value = UsersTable.getValueAt(row, column);
+            //System.out.println("Clicked on cell: " + value);
+            System.out.println("Row: "+row+" Col: "+column);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        int row = UsersTable.rowAtPoint(evt.getPoint());
+        int column = UsersTable.columnAtPoint(evt.getPoint());
+        
+        if (row >= 0 && column >= 0) {
+            // Esto sirve para printar el valor de la celda clicada
+            
+            //Object value = UsersTable.getValueAt(row, column);
+            //System.out.println("Clicked on cell: " + value);
+            System.out.println("Row: "+row+" Col: "+column);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1563,19 +1676,19 @@ int a = 0;
     public javax.swing.JCheckBox ChangeDniToggle;
     public javax.swing.JCheckBox ChangePasswordToggle;
     public javax.swing.JPanel Content;
-    private com.toedter.calendar.JDateChooser CourtBookingDate;
+    public static com.toedter.calendar.JDateChooser CourtBookingDate;
     private javax.swing.JLabel CourtBookingDateLabel;
     private javax.swing.JLabel CourtBookingLabel;
-    private javax.swing.JScrollPane CourtBookings;
-    private javax.swing.JPanel CourtBookingsDefault;
+    public static javax.swing.JScrollPane CourtBookings;
+    public static javax.swing.JPanel CourtBookingsDefault;
     private javax.swing.JLabel CourtBookingsDefaultLabel;
-    private javax.swing.JPanel CourtBookingsInfo;
+    public static javax.swing.JPanel CourtBookingsInfo;
     private javax.swing.JPanel CourtButtons;
     private javax.swing.JScrollPane CourtButtonsScrollPane;
     private javax.swing.JLabel CourtID;
     private javax.swing.JLabel CourtIdLabel;
     public static javax.swing.JPanel CourtInfo;
-    private javax.swing.JPanel CourtInfoContent;
+    public static javax.swing.JPanel CourtInfoContent;
     public static javax.swing.JLabel CourtInfoIDLabel;
     private javax.swing.JLabel CourtInfoIncorrectNotesLabel;
     public static javax.swing.JTextArea CourtInfoNotes;
@@ -1638,6 +1751,7 @@ int a = 0;
     public javax.swing.JTextField TxtboxNameUserInfo;
     public javax.swing.JPasswordField TxtboxPasswordCreateUser;
     public javax.swing.JPasswordField TxtboxPasswordUserInfo;
+    private javax.swing.JScrollPane UserBookings;
     private javax.swing.JLabel UserBookingsLabel;
     private javax.swing.JPanel UserBookingsPanel;
     private javax.swing.JLabel UserImageCreateUser;
@@ -1659,8 +1773,8 @@ int a = 0;
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
-    private javax.swing.JLabel WIPtext;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
         CourtButtons.removeAll();
@@ -1718,7 +1832,7 @@ int a = 0;
         model.setRowCount(0);
         ArrayList<Booking> bookingList = BookingController.getBookings(date, courtId);
         for(Booking booking : bookingList) {
-            Object[] rowData = {booking.getUserEmail(), booking.getHour().getTimeString(), booking.getStatus().getStatus(), "cancel"};
+            Object[] rowData = {booking.getBookingId(), booking.getUserEmail(), booking.getHour().getTimeString(), booking.getStatus().getStatus(), "cancel"};
             model.addRow(rowData);
         }
     }

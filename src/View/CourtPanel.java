@@ -21,6 +21,8 @@ public class CourtPanel extends javax.swing.JPanel {
                 // Llama a la función que desees cuando se hace clic en el JPanel
                 Court.getSelectedCourt(court);
                 AdminView.Courts.setVisible(false);
+                AdminView.CourtBookingsDefault.setVisible(true);
+                AdminView.CourtBookings.setVisible(false);
                 AdminView.CourtInfo.setVisible(true);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {                                            

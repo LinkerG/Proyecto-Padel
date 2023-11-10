@@ -31,4 +31,12 @@ public class BookingController {
         return Booking.createBooking(email, courtId, day, hour);
     }
     
+    public static void payBooking(Booking booking) {
+        booking.payBooking();
+    }
+    
+    public static void cancelBooking(Booking booking) {
+        booking.cancelBooking();
+    }
+    
 }
