@@ -158,21 +158,29 @@ public class Booking {
 
     
     public static boolean deleteBooking(int bookingId) {
-        String sql = "UPDATE booking SET status = 'CANCELLED' WHERE bookingId = ?";
+        String sql = "UPDATE booking SET status = 'BLOCKED' WHERE bookingId = ?";
         try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
             prepareQuery.setInt(1, bookingId);
             int rowsUpdated = prepareQuery.executeUpdate(); // Use executeUpdate() for UPDATE statements
             if (rowsUpdated > 0) {
-                System.out.println("DELETE Realizado");
+                System.out.println("Bloqueo Realizado");
                 return true;
             } else {
-                System.out.println("DELETE NO Realizado");
+                System.out.println("Bloqueo NO Realizado");
                 return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public static ArrayList getBookingsById(String id) {
+
+        String sql = "SELECT * FROM booking WHERE bookingId = '" + id + "'";
+        ArrayList<Booking> bookingsList = getBookings(sql);
+        return bookingsList;
+        
     }
 
     public static ArrayList getBookingsByUser(String email) {

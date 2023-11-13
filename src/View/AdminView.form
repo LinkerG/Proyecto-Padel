@@ -1235,7 +1235,7 @@
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                               <SubComponents>
-                                <Component class="javax.swing.JTable" name="jTable1">
+                                <Component class="javax.swing.JTable" name="CourtBookingsJTable">
                                   <Properties>
                                     <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -1318,7 +1318,7 @@
                                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                       <Color blue="66" green="90" red="0" type="rgb"/>
                                     </Property>
-                                    <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="javax.swing.table.JTableHeader cb_header = jTable1.getTableHeader();&#xa;javax.swing.table.DefaultTableCellRenderer cb_newRenderer = new javax.swing.table.DefaultTableCellRenderer();&#xa;cb_newRenderer.setBackground(new Color(0,144,102));&#xa;cb_newRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;cb_newRenderer.setFont(new Font(&quot;Arial&quot;, 0, 14));&#xa;cb_newRenderer.setHorizontalAlignment(SwingConstants.LEFT);&#xa;cb_newRenderer.setForeground(Color.WHITE);&#xa;cb_header.setDefaultRenderer(cb_newRenderer);&#xa;cb_header.setResizingAllowed(false);&#xa;cb_header.setReorderingAllowed(false);">
+                                    <Property name="selectionForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="javax.swing.table.JTableHeader cb_header = CourtBookingsJTable.getTableHeader();&#xa;javax.swing.table.DefaultTableCellRenderer cb_newRenderer = new javax.swing.table.DefaultTableCellRenderer();&#xa;cb_newRenderer.setBackground(new Color(0,144,102));&#xa;cb_newRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;cb_newRenderer.setFont(new Font(&quot;Arial&quot;, 0, 14));&#xa;cb_newRenderer.setHorizontalAlignment(SwingConstants.LEFT);&#xa;cb_newRenderer.setForeground(Color.WHITE);&#xa;cb_header.setDefaultRenderer(cb_newRenderer);&#xa;cb_header.setResizingAllowed(false);&#xa;cb_header.setReorderingAllowed(false);">
                                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                                     </Property>
                                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -1326,7 +1326,7 @@
                                     </Property>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+                                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CourtBookingsJTableMouseClicked"/>
                                   </Events>
                                 </Component>
                               </SubComponents>

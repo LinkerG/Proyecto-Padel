@@ -2,6 +2,7 @@ package View;
 
 import Controller.*;
 import Model.*;
+import static View.UserView.calendar;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -90,7 +91,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingDate = new com.toedter.calendar.JDateChooser();
         CourtBookingDateLabel = new javax.swing.JLabel();
         CourtBookings = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        CourtBookingsJTable = new javax.swing.JTable();
         CourtBookingsDefault = new javax.swing.JPanel();
         CourtBookingsDefaultLabel = new javax.swing.JLabel();
         CourtInfoIncorrectNotesLabel = new javax.swing.JLabel();
@@ -595,12 +596,12 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));
         CourtBookings.setBorder(BorderFactory.createEmptyBorder());
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBackground(new java.awt.Color(0, 144, 102));
-        jTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        CourtBookingsJTable.setAutoCreateRowSorter(true);
+        CourtBookingsJTable.setBackground(new java.awt.Color(0, 144, 102));
+        CourtBookingsJTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 10, 5, 10));
+        CourtBookingsJTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CourtBookingsJTable.setForeground(new java.awt.Color(255, 255, 255));
+        CourtBookingsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -623,18 +624,18 @@ public class AdminView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setAutoscrolls(false);
-        jTable1.setFocusable(false);
-        jTable1.setGridColor(new java.awt.Color(0, 144, 102));
-        jTable1.setMaximumSize(new java.awt.Dimension(525, 0));
-        jTable1.setMinimumSize(new java.awt.Dimension(525, 0));
-        jTable1.setRequestFocusEnabled(false);
-        jTable1.setRowHeight(40);
-        jTable1.setSelectionBackground(new java.awt.Color(0, 144, 102));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        javax.swing.table.JTableHeader cb_header = jTable1.getTableHeader();
+        CourtBookingsJTable.setToolTipText("");
+        CourtBookingsJTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        CourtBookingsJTable.setAutoscrolls(false);
+        CourtBookingsJTable.setFocusable(false);
+        CourtBookingsJTable.setGridColor(new java.awt.Color(0, 144, 102));
+        CourtBookingsJTable.setMaximumSize(new java.awt.Dimension(525, 0));
+        CourtBookingsJTable.setMinimumSize(new java.awt.Dimension(525, 0));
+        CourtBookingsJTable.setRequestFocusEnabled(false);
+        CourtBookingsJTable.setRowHeight(40);
+        CourtBookingsJTable.setSelectionBackground(new java.awt.Color(0, 144, 102));
+        CourtBookingsJTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.table.JTableHeader cb_header = CourtBookingsJTable.getTableHeader();
         javax.swing.table.DefaultTableCellRenderer cb_newRenderer = new javax.swing.table.DefaultTableCellRenderer();
         cb_newRenderer.setBackground(new Color(0,144,102));
         cb_newRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -644,13 +645,13 @@ public class AdminView extends javax.swing.JFrame {
         cb_header.setDefaultRenderer(cb_newRenderer);
         cb_header.setResizingAllowed(false);
         cb_header.setReorderingAllowed(false);
-        jTable1.setTableHeader(cb_header);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        CourtBookingsJTable.setTableHeader(cb_header);
+        CourtBookingsJTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                CourtBookingsJTableMouseClicked(evt);
             }
         });
-        CourtBookings.setViewportView(jTable1);
+        CourtBookings.setViewportView(CourtBookingsJTable);
 
         CourtBookingsInfo.add(CourtBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 480, 150));
         CourtBookings.setVisible(false);
@@ -1596,7 +1597,7 @@ int a = 0;
         }
     }//GEN-LAST:event_CourtBookingDatePropertyChange
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void CourtBookingsJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CourtBookingsJTableMouseClicked
         int row = UsersTable.rowAtPoint(evt.getPoint());
         int column = UsersTable.columnAtPoint(evt.getPoint());
         
@@ -1612,7 +1613,7 @@ int a = 0;
         int courtId = Integer.parseInt(CourtInfoIDLabel.getText().split(" ")[1]);
         
         if(column == 2){
-            Object objId = jTable1.getValueAt(row, 0);
+            Object objId = CourtBookingsJTable.getValueAt(row, 0);
             int id = Integer.parseInt(objId.toString());
             ArrayList<Booking> bookingList = BookingController.getBookings("day", formattedDate);
             for(Booking booking : bookingList){
@@ -1625,7 +1626,7 @@ int a = 0;
         }
         
         if(column == 3){
-            Object objId = jTable1.getValueAt(row, 0);
+            Object objId = CourtBookingsJTable.getValueAt(row, 0);
             int id = Integer.parseInt(objId.toString());
             ArrayList<Booking> bookingList = BookingController.getBookings("day", formattedDate);
             for(Booking booking : bookingList){
@@ -1644,18 +1645,48 @@ int a = 0;
             //System.out.println("Clicked on cell: " + value);
             System.out.println("Row: "+row+" Col: "+column);
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_CourtBookingsJTableMouseClicked
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        int row = UsersTable.rowAtPoint(evt.getPoint());
-        int column = UsersTable.columnAtPoint(evt.getPoint());
-        
+        int row = CourtBookingsJTable.rowAtPoint(evt.getPoint());
+        int column = CourtBookingsJTable.columnAtPoint(evt.getPoint());
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+                    
+        String formattedDate = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
+        int courtId = Integer.valueOf(CourtInfoIDLabel.getText().split(" ")[1]);
         if (row >= 0 && column >= 0) {
             // Esto sirve para printar el valor de la celda clicada
             
             //Object value = UsersTable.getValueAt(row, column);
             //System.out.println("Clicked on cell: " + value);
             System.out.println("Row: "+row+" Col: "+column);
+        }
+        
+        
+        if(column == 3){
+            ArrayList<Booking> bookings = Booking.getBookingsByCourtDate(formattedDate, courtId);
+            Object bookingId = UsersTable.getValueAt(row, 3);
+            String intId = bookingId.toString();
+            for (Booking booking : bookings) {
+                if (Integer.toString(booking.getBookingId()).equals(intId)) {
+                    booking.cancelBooking();
+                    updateCourtBookingTable(formattedDate, courtId);
+                }
+            }
+        }
+        
+        if(column == 4){
+            ArrayList<Booking> bookings = Booking.getBookingsByCourtDate(formattedDate, courtId);
+            Object bookingId = UsersTable.getValueAt(row, 3);
+            String intId = bookingId.toString();
+            for (Booking booking : bookings) {
+                if (Integer.toString(booking.getBookingId()).equals(intId)) {
+                    Booking.deleteBooking(booking.getBookingId());
+                    updateCourtBookingTable(formattedDate, courtId);
+                }
+            }
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
@@ -1682,6 +1713,7 @@ int a = 0;
     public static javax.swing.JPanel CourtBookingsDefault;
     private javax.swing.JLabel CourtBookingsDefaultLabel;
     public static javax.swing.JPanel CourtBookingsInfo;
+    private javax.swing.JTable CourtBookingsJTable;
     private javax.swing.JPanel CourtButtons;
     private javax.swing.JScrollPane CourtButtonsScrollPane;
     private javax.swing.JLabel CourtID;
@@ -1772,7 +1804,6 @@ int a = 0;
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
@@ -1827,22 +1858,32 @@ int a = 0;
     }
     
     private void updateCourtBookingTable(String date, int courtId){
-        javax.swing.table.DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) CourtBookingsJTable.getModel();
+        CourtBookingsJTable.getColumnModel().getColumn(4).setCellRenderer(new ImageRenderer());
+        CourtBookingsJTable.getColumnModel().getColumn(3).setCellRenderer(new ImageRenderer());
         model.setRowCount(0);
         ArrayList<Booking> bookingList = BookingController.getBookings(date, courtId);
         
         for(Booking booking : bookingList) {
             String status = booking.getStatus().getStatus();
-            BufferedImage activeImage = null;
-            String image = (status == "CANCELLED" || status == "BLOCKED") ? "active" : "inactive";
+            BufferedImage statusImage = null;
+            BufferedImage blockImage = null;
+            ImageIcon statusIcon = null;
+            ImageIcon blockIcon = null;
+            String statusImageStr = "";
+            if("PAID".equals(status)) statusImageStr = "active";
+            else if ("NOTPAID".equals(status)) statusImageStr = "grey-tick";
+            else statusImageStr = "inactive";
             try {
-                activeImage = ImageIO.read(new File("src/img/" + image + ".png"));
+                statusImage = ImageIO.read(new File("src/img/" + statusImageStr + ".png"));
+                statusIcon = new ImageIcon(statusImage);
+                
+                blockImage = ImageIO.read(new File("src/img/inactive.png"));
+                blockIcon = new ImageIcon(blockImage);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Error loading image: " + e.getMessage());
             }
-            ImageIcon activeIcon = new ImageIcon(activeImage);
-            
-            Object[] rowData = {booking.getBookingId(), booking.getUserEmail(), booking.getHour().getTimeString(), activeIcon, "cancel"};
+            Object[] rowData = {booking.getBookingId(), booking.getUserEmail(), booking.getHour().getTimeString(), statusIcon, blockIcon};
             model.addRow(rowData);
         }
     }
