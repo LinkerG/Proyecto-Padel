@@ -1163,14 +1163,14 @@ public class AdminView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Court", "Hour", "Status", "Date"
+                "Day", "Hour", "Court"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1192,7 +1192,6 @@ public class AdminView extends javax.swing.JFrame {
         jTable2.setRowHeight(40);
         jTable2.setSelectionBackground(new java.awt.Color(0, 144, 102));
         jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setTableHeader(cb_header);
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
