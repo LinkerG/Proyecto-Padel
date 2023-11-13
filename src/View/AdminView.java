@@ -1831,8 +1831,19 @@ int a = 0;
         javax.swing.table.DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         ArrayList<Booking> bookingList = BookingController.getBookings(date, courtId);
+        
         for(Booking booking : bookingList) {
-            Object[] rowData = {booking.getBookingId(), booking.getUserEmail(), booking.getHour().getTimeString(), booking.getStatus().getStatus(), "cancel"};
+            String status = booking.getStatus().getStatus();
+            BufferedImage activeImage = null;
+            String image = (status == "CANCELLED" || status == "BLOCKED") ? "active" : "inactive";
+            try {
+                activeImage = ImageIO.read(new File("src/img/" + image + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ImageIcon activeIcon = new ImageIcon(activeImage);
+            
+            Object[] rowData = {booking.getBookingId(), booking.getUserEmail(), booking.getHour().getTimeString(), activeIcon, "cancel"};
             model.addRow(rowData);
         }
     }
