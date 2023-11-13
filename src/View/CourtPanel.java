@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import Controller.*;
 import Model.BookingStatus;
+import static View.UserView.calendar;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Calendar;
 import javax.swing.SwingConstants;
 
 public class CourtPanel extends javax.swing.JPanel {
@@ -137,10 +139,14 @@ public class CourtPanel extends javax.swing.JPanel {
                 courtText = "Book";
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
-                        Controller.createBookingReference(court.getID(), day, hour);
-                        javax.swing.JFrame confirm = new ConfirmCreateBooking();
-                        confirm.setVisible(true);
-                        System.out.println("Intenta reservar");
+                        if(Controller.isOnDate(day)) {
+                            Controller.createBookingReference(court.getID(), day, hour);
+                            javax.swing.JFrame confirm = new ConfirmCreateBooking();
+                            confirm.setVisible(true);
+                        } else {
+                            javax.swing.JFrame error = new ErrorPopUp();
+                            error.setVisible(true);
+                        }
                     }
                 });
             }

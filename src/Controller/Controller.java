@@ -5,12 +5,15 @@ import Model.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 
 public class Controller {
     public static Statement statement = connectToDatabase();
@@ -325,4 +328,26 @@ public class Controller {
     public static void createBookingIdReference(int _bookingId){
         bookingId = _bookingId;
     }
+    
+    public boolean dateIsOnRange(String inputDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        try {
+            // Obtener la fecha actual
+            Calendar currentDate = Calendar.getInstance();
+            
+            // Parsear la fecha de entrada
+            Date dateToCheck = (Date) dateFormat.parse(inputDate);
+            
+            // Añadir 14 días a la fecha actual
+            currentDate.add(Calendar.DATE, 14);
+            Date futureDate = (Date) currentDate.getTime();
+            
+            // Verificar si la fecha está dentro del rango
+            return !dateToCheck.after(futureDate);
+        } catch (ParseException e) {
+            // Manejar la excepción si hay un problema al analizar la fecha
+            return false;
+        }
+    }
+
 }
