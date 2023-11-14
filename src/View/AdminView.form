@@ -2686,6 +2686,11 @@
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="66" green="90" red="0" type="rgb"/>
                             </Property>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                                <EmptyBorder bottom="0" left="0" right="0" top="0"/>
+                              </Border>
+                            </Property>
                             <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
                             <Property name="toolTipText" type="java.lang.String" value=""/>
                             <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -2696,10 +2701,11 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Arial" size="14" style="0"/>
                             </Property>
+                            <Property name="opaque" type="boolean" value="false"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="CourtBookings.setVisible(false);"/>
-                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="CourtBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));&#xa;CourtBookings.setBorder(BorderFactory.createEmptyBorder());"/>
+                            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="UserBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));&#xa;UserBookings.setBorder(BorderFactory.createEmptyBorder());"/>
                           </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -2709,7 +2715,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTable" name="jTable2">
+                            <Component class="javax.swing.JTable" name="UserBookingsJTable">
                               <Properties>
                                 <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -2728,9 +2734,9 @@
                                 </Property>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                                   <Table columnCount="3" rowCount="0">
-                                    <Column editable="false" title="Day" type="java.lang.String"/>
-                                    <Column editable="false" title="Hour" type="java.lang.String"/>
-                                    <Column editable="false" title="Court" type="java.lang.Object"/>
+                                    <Column editable="false" title="         Day  " type="java.lang.String"/>
+                                    <Column editable="false" title="         Hour   " type="java.lang.String"/>
+                                    <Column editable="false" title="         Court   " type="java.lang.String"/>
                                   </Table>
                                 </Property>
                                 <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -2770,6 +2776,7 @@
                                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                                   <Dimension value="[525, 0]"/>
                                 </Property>
+                                <Property name="opaque" type="boolean" value="false"/>
                                 <Property name="requestFocusEnabled" type="boolean" value="false"/>
                                 <Property name="rowHeight" type="int" value="40"/>
                                 <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -2783,8 +2790,11 @@
                                 </Property>
                               </Properties>
                               <Events>
-                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable2MouseClicked"/>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UserBookingsJTableMouseClicked"/>
                               </Events>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="javax.swing.table.JTableHeader ub_header = UserBookingsJTable.getTableHeader();&#xa;javax.swing.table.DefaultTableCellRenderer ub_newRenderer = new javax.swing.table.DefaultTableCellRenderer();&#xa;ub_newRenderer.setBackground(new Color(0,144,102));&#xa;ub_newRenderer.setHorizontalAlignment(JLabel.CENTER);&#xa;ub_newRenderer.setFont(new Font(&quot;Arial&quot;, 0, 14));&#xa;ub_newRenderer.setHorizontalAlignment(SwingConstants.LEFT);&#xa;ub_newRenderer.setForeground(Color.WHITE);&#xa;ub_header.setDefaultRenderer(ub_newRenderer);&#xa;ub_header.setResizingAllowed(false);&#xa;ub_header.setReorderingAllowed(false);"/>
+                              </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>

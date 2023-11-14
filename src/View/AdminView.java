@@ -146,7 +146,7 @@ public class AdminView extends javax.swing.JFrame {
         UserBookingsLabel = new javax.swing.JLabel();
         UserBookingsPanel = new javax.swing.JPanel();
         UserBookings = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        UserBookingsJTable = new javax.swing.JTable();
         ChangePasswordToggle = new javax.swing.JCheckBox();
         ChangeDniToggle = new javax.swing.JCheckBox();
         Header = new javax.swing.JPanel();
@@ -1147,28 +1147,30 @@ public class AdminView extends javax.swing.JFrame {
         UserBookingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         UserBookings.setBackground(new java.awt.Color(0, 144, 102));
+        UserBookings.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         UserBookings.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         UserBookings.setToolTipText("");
         UserBookings.setViewportBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         UserBookings.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        CourtBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));
-        CourtBookings.setBorder(BorderFactory.createEmptyBorder());
+        UserBookings.setOpaque(false);
+        UserBookings.getViewport().setBackground(new java.awt.Color(0, 144, 102));
+        UserBookings.setBorder(BorderFactory.createEmptyBorder());
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setBackground(new java.awt.Color(0, 144, 102));
-        jTable2.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        jTable2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        UserBookingsJTable.setAutoCreateRowSorter(true);
+        UserBookingsJTable.setBackground(new java.awt.Color(0, 144, 102));
+        UserBookingsJTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        UserBookingsJTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        UserBookingsJTable.setForeground(new java.awt.Color(255, 255, 255));
+        UserBookingsJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Day", "Hour", "Court"
+                "         Day  ", "         Hour   ", "         Court   "
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -1182,23 +1184,34 @@ public class AdminView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setToolTipText("");
-        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable2.setAutoscrolls(false);
-        jTable2.setFocusable(false);
-        jTable2.setGridColor(new java.awt.Color(0, 144, 102));
-        jTable2.setMaximumSize(new java.awt.Dimension(525, 0));
-        jTable2.setMinimumSize(new java.awt.Dimension(525, 0));
-        jTable2.setRequestFocusEnabled(false);
-        jTable2.setRowHeight(40);
-        jTable2.setSelectionBackground(new java.awt.Color(0, 144, 102));
-        jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+        UserBookingsJTable.setToolTipText("");
+        UserBookingsJTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        UserBookingsJTable.setAutoscrolls(false);
+        UserBookingsJTable.setFocusable(false);
+        UserBookingsJTable.setGridColor(new java.awt.Color(0, 144, 102));
+        UserBookingsJTable.setMaximumSize(new java.awt.Dimension(525, 0));
+        UserBookingsJTable.setMinimumSize(new java.awt.Dimension(525, 0));
+        UserBookingsJTable.setOpaque(false);
+        UserBookingsJTable.setRequestFocusEnabled(false);
+        UserBookingsJTable.setRowHeight(40);
+        UserBookingsJTable.setSelectionBackground(new java.awt.Color(0, 144, 102));
+        UserBookingsJTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        javax.swing.table.JTableHeader ub_header = UserBookingsJTable.getTableHeader();
+        javax.swing.table.DefaultTableCellRenderer ub_newRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        ub_newRenderer.setBackground(new Color(0,144,102));
+        ub_newRenderer.setHorizontalAlignment(JLabel.CENTER);
+        ub_newRenderer.setFont(new Font("Arial", 0, 14));
+        ub_newRenderer.setHorizontalAlignment(SwingConstants.LEFT);
+        ub_newRenderer.setForeground(Color.WHITE);
+        ub_header.setDefaultRenderer(ub_newRenderer);
+        ub_header.setResizingAllowed(false);
+        ub_header.setReorderingAllowed(false);
+        UserBookingsJTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
+                UserBookingsJTableMouseClicked(evt);
             }
         });
-        UserBookings.setViewportView(jTable2);
+        UserBookings.setViewportView(UserBookingsJTable);
 
         UserBookingsPanel.add(UserBookings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 230));
         CourtBookings.setVisible(false);
@@ -1488,6 +1501,7 @@ public class AdminView extends javax.swing.JFrame {
             System.out.println(stringDni);
             for (User user : userList) {
                 if (user.getDni().equals(stringDni)) {
+                    updateUserBookingTable(user);
                     userInfoByDni(user);
                 }
             }
@@ -1647,7 +1661,7 @@ int a = 0;
         }
     }//GEN-LAST:event_CourtBookingsJTableMouseClicked
 
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+    private void UserBookingsJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserBookingsJTableMouseClicked
         int row = CourtBookingsJTable.rowAtPoint(evt.getPoint());
         int column = CourtBookingsJTable.columnAtPoint(evt.getPoint());
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -1688,7 +1702,7 @@ int a = 0;
                 }
             }
         }
-    }//GEN-LAST:event_jTable2MouseClicked
+    }//GEN-LAST:event_UserBookingsJTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1783,6 +1797,7 @@ int a = 0;
     public javax.swing.JPasswordField TxtboxPasswordCreateUser;
     public javax.swing.JPasswordField TxtboxPasswordUserInfo;
     private javax.swing.JScrollPane UserBookings;
+    private javax.swing.JTable UserBookingsJTable;
     private javax.swing.JLabel UserBookingsLabel;
     private javax.swing.JPanel UserBookingsPanel;
     private javax.swing.JLabel UserImageCreateUser;
@@ -1804,7 +1819,6 @@ int a = 0;
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
         CourtButtons.removeAll();
@@ -1898,6 +1912,13 @@ int a = 0;
         TxtboxNameUserInfo.setText(user.getName());
         TxtboxLastnamesUserInfo.setText(user.getSurnames());
         UserInfoEmailContent.setText(user.getEmail());
+    }
+    
+    private void updateUserBookingTable(User user){
+        javax.swing.table.DefaultTableModel model = (DefaultTableModel) UserBookingsJTable.getModel();
+        model.setRowCount(0);
+        
+        
     }
 }
 
