@@ -45,7 +45,7 @@ public class BookingController {
     }
     
     public static boolean blockCourt(int courtId, String startDay, String startHour, String endDay, String endHour){
-        return (Booking.blockCourt(courtId, startDay, startHour, endDay, endHour));
+        return Booking.blockCourt(courtId, startDay, startHour, endDay, endHour);
     }
     
     public static ArrayList<Booking> getBookingsByIntervalDate(int courtId, String startDay, String startHour, String endDay, String endHour){

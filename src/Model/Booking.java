@@ -2,10 +2,13 @@ package Model;
 
 import Controller.Controller;
 import static Controller.Controller.statement;
+import java.lang.reflect.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -264,13 +267,12 @@ public class Booking {
     }
     
     public static ArrayList<Booking> getBookingsByIntervalDate(int courtId, String startDay, String startHour, String endDay, String endHour){
-        System.out.println("Hola");
         ArrayList<Booking> bookingList = new ArrayList<>();
         String sql = "SELECT * FROM booking WHERE "
                 + "(courtId = ?) AND "
                 + "((day = ? AND STR_TO_DATE(hour, '%H:%i') >= STR_TO_DATE(?, '%H:%i')) OR "
                 + "(day > ? AND day < ?) OR "
-                + "(day = ? AND STR_TO_DATE(hour, '%H:%i') <= STR_TO_DATE(?, '%H:%i'))) AND status!='CANCELLED' AND status!='BLOCKED'";
+                + "(day = ? AND STR_TO_DATE(hour, '%H:%i') <= STR_TO_DATE(?, '%H:%i'))) AND status!='CANCELLED'";
         try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
 
             // Establecer los parámetros
@@ -309,14 +311,70 @@ public class Booking {
     }
     
     public static boolean blockCourt(int courtId, String startDay, String startHour, String endDay, String endHour){
+        String[] hoursArray = {"08:00","09:30","11:00","12:30","15:00","16:30","18:00","19:30","21:00"};
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String sql = "INSERT INTO booking (email, courtId, day, hour, status) VALUES ";
+        String[] date = startDay.split("-");
+        String[] dateEnd = endDay.split("-");
         ArrayList<Booking> bookingList = getBookingsByIntervalDate(courtId, startDay, startHour, endDay, endHour);
-        return blockCourt(sql);
+        LocalDate dateIteration = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+        LocalDate startDateLD = LocalDate.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
+        LocalDate endDateLD = LocalDate.of(Integer.parseInt(dateEnd[0]), Integer.parseInt(dateEnd[1]), Integer.parseInt(dateEnd[2]));
+        
+        while(dateIteration.isBefore(endDateLD.plusDays(1))) {
+            int i;
+            Boolean isFromAdmin = false;
+            if(dateIteration.equals(startDateLD)){
+                for (i = java.util.Arrays.asList(hoursArray).indexOf(startHour); i < hoursArray.length; i++) {
+                    
+                    for(Booking booking : bookingList) {
+                        if(booking.getDay().equals(dateIteration.format(formatter)) && booking.getHour().getTimeString().equals(hoursArray[i])){
+                            if(booking.getUserEmail().equals("admin@gmail.com")) isFromAdmin = true;
+                            else booking.cancelBooking();
+                        }
+                    }
+                    if(!isFromAdmin) sql = sql.concat("('admin@gmail.com', '" + courtId + "', '" + dateIteration.format(formatter) + "', '" + hoursArray[i] + "', 'BLOCKED'), ");
+                }
+            } else if(dateIteration.equals(endDateLD)) {
+                for (i = 0; i < java.util.Arrays.asList(hoursArray).indexOf(endHour)+1; i++) {
+                    for(Booking booking : bookingList) {
+                        if(booking.getDay().equals(dateIteration.format(formatter)) && booking.getHour().getTimeString().equals(hoursArray[i])){
+                            if(booking.getUserEmail().equals("admin@gmail.com")) isFromAdmin = true;
+                            else booking.cancelBooking();
+                        }
+                    }
+                    if(i == java.util.Arrays.asList(hoursArray).indexOf(endHour)) {
+                        if(!isFromAdmin) sql = sql.concat("('admin@gmail.com', '" + courtId + "', '" + dateIteration.format(formatter) + "', '" + hoursArray[i] + "', 'BLOCKED')");
+                    } else {
+                        if(!isFromAdmin) sql = sql.concat("('admin@gmail.com', '" + courtId + "', '" + dateIteration.format(formatter) + "', '" + hoursArray[i] + "', 'BLOCKED'), ");
+                    }
+                    
+                }
+            } else {
+                for (i = 0; i< hoursArray.length; i++) {
+                    for(Booking booking : bookingList) {
+                        if(booking.getDay().equals(dateIteration.format(formatter)) && booking.getHour().getTimeString().equals(hoursArray[i])){
+                            if(booking.getUserEmail().equals("admin@gmail.com")) isFromAdmin = true;
+                            else booking.cancelBooking();
+                        }
+                    }
+                    if(!isFromAdmin) sql = sql.concat("('admin@gmail.com', '" + courtId + "', '" + dateIteration.format(formatter) + "', '" + hoursArray[i] + "', 'BLOCKED'), ");
+                }
+                
+            }
+            dateIteration = dateIteration.plusDays(1);
+        }
+        
+        if(sql.equals("INSERT INTO booking (email, courtId, day, hour, status) VALUES ")) {
+            return true;
+        } else {
+            return blockCourt(sql);
+        }
     }
     
     public static boolean blockCourt(String sql){
         try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
-            int rowsInserted = prepareQuery.executeUpdate(); // Use executeUpdate() for INSERT statements
+            int rowsInserted = prepareQuery.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("INSERT Realizado");
                 return true;

@@ -1674,10 +1674,7 @@ int a = 0;
     }//GEN-LAST:event_UserBookingsJTableMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ArrayList<Booking> bookingList = BookingController.getBookingsByIntervalDate(1, "2023-11-02", "11:00", "2023-11-05", "09:30");
-        for(Booking booking : bookingList){
-            System.out.println(booking.getBookingId());
-        }
+        BookingController.blockCourt(1, "2023-11-02", "11:00", "2023-11-05", "09:30");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
