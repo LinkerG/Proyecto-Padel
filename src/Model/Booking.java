@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -183,9 +184,30 @@ public class Booking {
         
     }
 
-    public static ArrayList getBookingsByUser(String email) {
-
-        String sql = "SELECT * FROM booking WHERE email = '" + email + "'";
+    public static ArrayList getBookingsByUser(String email, Boolean onlyFuture, Boolean notCancelled) {
+        
+        String sql;
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DATE);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        String date = Integer.toString(year) + "-" + Integer.toString(month) + "-" + Integer.toString(day);
+        
+        if(onlyFuture) {
+            if(notCancelled){
+                sql = "SELECT * FROM booking WHERE email = '" + email + "' AND day > '" + date + "' AND status != 'CANCELLED'";
+            } else {
+                sql = "SELECT * FROM booking WHERE email = '" + email + "' AND day > '" + date + "'";
+            }
+        }
+        else {
+            if(notCancelled){
+                sql = "SELECT * FROM booking WHERE email = '" + email + "' AND status != 'CANCELLED'";
+            } else {
+                sql = "SELECT * FROM booking WHERE email = '" + email + "'";
+            }
+        }
+        
         ArrayList<Booking> bookingsList = getBookings(sql);
         return bookingsList;
         

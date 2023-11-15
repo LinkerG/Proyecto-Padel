@@ -4,8 +4,6 @@ import Controller.*;
 import Model.Booking;
 import Model.BookingStatus;
 import Model.Court;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,17 +11,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Calendar;
 import java.awt.Component;
-import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 public class UserView extends javax.swing.JFrame {
     private int posX, posY;

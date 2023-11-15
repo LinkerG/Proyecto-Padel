@@ -1,5 +1,6 @@
 package Controller;
 import Model.Booking;
+import Model.User;
 import java.util.ArrayList;
 
 public class BookingController {
@@ -21,6 +22,10 @@ public class BookingController {
     
     public static ArrayList<Booking> getBookings(String date, int courtId){
         return Booking.getBookingsByCourtDate(date, courtId);
+    }
+    
+    public static ArrayList<Booking> getBookings(User user, Boolean onlyFuture, Boolean notCancelled){
+        return Booking.getBookingsByUser(user.getEmail(), onlyFuture, notCancelled);
     }
     
     public static boolean deleteBooking(int bookingId){

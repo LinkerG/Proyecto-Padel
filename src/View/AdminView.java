@@ -1166,7 +1166,7 @@ public class AdminView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "         Day  ", "         Hour   ", "         Court   "
+                "Day", "Hour", "Court"
             }
         ) {
             Class[] types = new Class [] {
@@ -1662,46 +1662,7 @@ int a = 0;
     }//GEN-LAST:event_CourtBookingsJTableMouseClicked
 
     private void UserBookingsJTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserBookingsJTableMouseClicked
-        int row = CourtBookingsJTable.rowAtPoint(evt.getPoint());
-        int column = CourtBookingsJTable.columnAtPoint(evt.getPoint());
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int year = calendar.get(Calendar.YEAR);
-                    
-        String formattedDate = String.valueOf(year)+"-"+String.valueOf(month)+"-"+String.valueOf(day);
-        int courtId = Integer.valueOf(CourtInfoIDLabel.getText().split(" ")[1]);
-        if (row >= 0 && column >= 0) {
-            // Esto sirve para printar el valor de la celda clicada
-            
-            //Object value = UsersTable.getValueAt(row, column);
-            //System.out.println("Clicked on cell: " + value);
-            System.out.println("Row: "+row+" Col: "+column);
-        }
-        
-        
-        if(column == 3){
-            ArrayList<Booking> bookings = Booking.getBookingsByCourtDate(formattedDate, courtId);
-            Object bookingId = UsersTable.getValueAt(row, 3);
-            String intId = bookingId.toString();
-            for (Booking booking : bookings) {
-                if (Integer.toString(booking.getBookingId()).equals(intId)) {
-                    booking.cancelBooking();
-                    updateCourtBookingTable(formattedDate, courtId);
-                }
-            }
-        }
-        
-        if(column == 4){
-            ArrayList<Booking> bookings = Booking.getBookingsByCourtDate(formattedDate, courtId);
-            Object bookingId = UsersTable.getValueAt(row, 3);
-            String intId = bookingId.toString();
-            for (Booking booking : bookings) {
-                if (Integer.toString(booking.getBookingId()).equals(intId)) {
-                    Booking.deleteBooking(booking.getBookingId());
-                    updateCourtBookingTable(formattedDate, courtId);
-                }
-            }
-        }
+
     }//GEN-LAST:event_UserBookingsJTableMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1918,7 +1879,11 @@ int a = 0;
         javax.swing.table.DefaultTableModel model = (DefaultTableModel) UserBookingsJTable.getModel();
         model.setRowCount(0);
         
-        
+        ArrayList<Booking> bookingList = BookingController.getBookings(user, true, true);
+        for(Booking booking : bookingList) {
+            Object[] rowData = {booking.getDay(), booking.getHour().getTimeString(), booking.getCourtId()};
+            model.addRow(rowData);
+        }
     }
 }
 
