@@ -2,7 +2,6 @@ package View;
 
 import Controller.*;
 import Model.*;
-import static View.UserView.calendar;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -55,6 +54,7 @@ public class AdminView extends javax.swing.JFrame {
         LabelCourtImage = new javax.swing.JLabel();
         LabelCourtState = new javax.swing.JLabel();
         BtnCourt = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         Selector = new javax.swing.JPanel();
         PanelBtnCourts = new javax.swing.JPanel();
         LabelCourts = new javax.swing.JLabel();
@@ -260,6 +260,14 @@ public class AdminView extends javax.swing.JFrame {
         CourtsContent.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, -1, -1));
 
         Courts.add(CourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        Courts.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
 
         Content.add(Courts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
@@ -1665,6 +1673,13 @@ int a = 0;
 
     }//GEN-LAST:event_UserBookingsJTableMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ArrayList<Booking> bookingList = BookingController.getBookingsByIntervalDate(1, "2023-11-02", "11:00", "2023-11-05", "09:30");
+        for(Booking booking : bookingList){
+            System.out.println(booking.getBookingId());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
     private javax.swing.JButton BtnAdd;
@@ -1780,6 +1795,7 @@ int a = 0;
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
         CourtButtons.removeAll();

@@ -262,4 +262,71 @@ public class Booking {
             return bookingsList;
         }
     }
+    
+    public static ArrayList<Booking> getBookingsByIntervalDate(int courtId, String startDay, String startHour, String endDay, String endHour){
+        System.out.println("Hola");
+        ArrayList<Booking> bookingList = new ArrayList<>();
+        String sql = "SELECT * FROM booking WHERE "
+                + "(courtId = ?) AND "
+                + "((day = ? AND STR_TO_DATE(hour, '%H:%i') >= STR_TO_DATE(?, '%H:%i')) OR "
+                + "(day > ? AND day < ?) OR "
+                + "(day = ? AND STR_TO_DATE(hour, '%H:%i') <= STR_TO_DATE(?, '%H:%i'))) AND status!='CANCELLED' AND status!='BLOCKED'";
+        try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+
+            // Establecer los parámetros
+            prepareQuery.setInt(1, courtId);
+            prepareQuery.setString(2, startDay);
+            prepareQuery.setString(3, startHour);
+            prepareQuery.setString(4, startDay);
+            prepareQuery.setString(5, endDay);
+            prepareQuery.setString(6, endDay);
+            prepareQuery.setString(7, endHour);
+
+            // Ejecutar la consulta
+            ResultSet rs = prepareQuery.executeQuery();
+
+            // Procesar el resultado si es necesario
+            while (rs.next()) {
+                int id = rs.getInt("bookingId");
+                String email = rs.getString("email");
+                int court = rs.getInt("courtId");
+                String day = rs.getString("day");
+                
+                String strHour = rs.getString("hour");
+                BookingHour bHour = BookingHour.fromString(strHour);
+                
+                String strStatus = rs.getString("status");
+                BookingStatus bStatus = BookingStatus.fromString(strStatus);
+                
+                Booking newBooking = new Booking(id, email, court, day, bHour, bStatus);
+                bookingList.add(newBooking);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bookingList;
+    }
+    
+    public static boolean blockCourt(int courtId, String startDay, String startHour, String endDay, String endHour){
+        String sql = "INSERT INTO booking (email, courtId, day, hour, status) VALUES ";
+        ArrayList<Booking> bookingList = getBookingsByIntervalDate(courtId, startDay, startHour, endDay, endHour);
+        return blockCourt(sql);
+    }
+    
+    public static boolean blockCourt(String sql){
+        try (PreparedStatement prepareQuery = statement.getConnection().prepareStatement(sql)) {
+            int rowsInserted = prepareQuery.executeUpdate(); // Use executeUpdate() for INSERT statements
+            if (rowsInserted > 0) {
+                System.out.println("INSERT Realizado");
+                return true;
+            } else {
+                System.out.println("INSERT NO Realizado");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

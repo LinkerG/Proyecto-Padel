@@ -44,4 +44,12 @@ public class BookingController {
         booking.cancelBooking();
     }
     
+    public static boolean blockCourt(int courtId, String startDay, String startHour, String endDay, String endHour){
+        return (Booking.blockCourt(courtId, startDay, startHour, endDay, endHour));
+    }
+    
+    public static ArrayList<Booking> getBookingsByIntervalDate(int courtId, String startDay, String startHour, String endDay, String endHour){
+        return Booking.getBookingsByIntervalDate(courtId, startDay, startHour, endDay, endHour);
+    }
+    
 }
