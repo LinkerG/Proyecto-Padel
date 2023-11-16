@@ -234,7 +234,7 @@ public class Booking {
     
     public static ArrayList getBookingsByCourtDate(String date, int courtId) {
 
-        String sql = "SELECT * FROM booking WHERE day = '" + date + "' AND courtId = '" + String.valueOf(courtId) + "' ORDER BY hour ASC";
+        String sql = "SELECT * FROM booking WHERE day = '" + date + "' AND courtId = '" + String.valueOf(courtId) + "' AND status != 'BLOCKED' ORDER BY hour ASC";
         ArrayList<Booking> bookingsList = getBookings(sql);
         return bookingsList;
     }
