@@ -325,6 +325,10 @@ public class Controller {
         hour = _hour;
     }
     
+    public static void createCourtIdReference(int _courtId){
+        courtId = _courtId;
+    }
+    
     public static void createBookingIdReference(int _bookingId){
         bookingId = _bookingId;
     }

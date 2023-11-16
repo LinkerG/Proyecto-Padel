@@ -54,7 +54,6 @@ public class AdminView extends javax.swing.JFrame {
         LabelCourtImage = new javax.swing.JLabel();
         LabelCourtState = new javax.swing.JLabel();
         BtnCourt = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         Selector = new javax.swing.JPanel();
         PanelBtnCourts = new javax.swing.JPanel();
         LabelCourts = new javax.swing.JLabel();
@@ -94,6 +93,7 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingsJTable = new javax.swing.JTable();
         CourtBookingsDefault = new javax.swing.JPanel();
         CourtBookingsDefaultLabel = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         CourtInfoIncorrectNotesLabel = new javax.swing.JLabel();
         CreateUsers = new javax.swing.JPanel();
         BtnReturn2 = new javax.swing.JButton();
@@ -260,14 +260,6 @@ public class AdminView extends javax.swing.JFrame {
         CourtsContent.add(CourtSample, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, -1, -1));
 
         Courts.add(CourtsContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 940, 360));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        Courts.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
 
         Content.add(Courts, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, -1, -1));
 
@@ -674,6 +666,18 @@ public class AdminView extends javax.swing.JFrame {
         CourtBookingsDefault.add(CourtBookingsDefaultLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
 
         CourtBookingsInfo.add(CourtBookingsDefault, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 480, 150));
+
+        jButton2.setBackground(new java.awt.Color(0, 144, 102));
+        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Set in maintenance");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        CourtBookingsInfo.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 140, 40));
 
         CourtInfoPanel.add(CourtBookingsInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 17, -1, 280));
 
@@ -1673,9 +1677,12 @@ int a = 0;
 
     }//GEN-LAST:event_UserBookingsJTableMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        BookingController.blockCourt(1, "2023-11-02", "11:00", "2023-11-05", "09:30");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int courtId = Integer.parseInt(CourtInfoIDLabel.getText().split(" ")[1]);
+        Controller.createCourtIdReference(courtId);
+        javax.swing.JFrame maintenance = new MaintenancePopUp();
+        maintenance.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddCourtButton;
@@ -1792,7 +1799,7 @@ int a = 0;
     private javax.swing.JPanel UsersContent;
     private javax.swing.JTable UsersTable;
     private javax.swing.JScrollPane UsersTableScrollPane;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
     private void generateCourtButtons(ArrayList<Court> courtList){
         CourtButtons.removeAll();
