@@ -31,7 +31,14 @@ CREATE TABLE booking(
 );
 
 INSERT INTO user (name, email, password, isActive, isAdmin) 
-VALUES("admin", "admin@gmail.com", md5("admin"), 1, 1);
+VALUES('admin', 'admin@gmail.com', md5('admin'), 1, 1);
 
 INSERT INTO `user` (`name`, `surname`, `DNI`, `email`, `password`, `isActive`, `isAdmin`) 
-VALUES ('Name', 'Lastnames', '54545454B', 'user@gmail.com', md5('user'), '1', '0')
+VALUES ('Name', 'Lastname1 Lastname2', '54545454B', 'user@gmail.com', md5('user'), '1', '0');
+
+INSERT INTO `user` (`name`, `surname`, `DNI`, `email`, `password`, `isActive`, `isAdmin`)
+VALUES ('Nombre', 'Apellido1 Apellido2', '12345678C', 'user2@gmail.com', md5('user2'), '1', '0');
+
+INSERT INTO court (notes, isAvailable) VALUES ('Cancha 1', 1);
+INSERT INTO court (notes, isAvailable) VALUES ('Cancha 2', 1);
+INSERT INTO court (notes, isAvailable) VALUES ('Cancha 3', 1);
