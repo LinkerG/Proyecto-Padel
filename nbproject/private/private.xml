@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Model/Booking.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/Controller/Controller.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/UserView.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/AdminView.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/ConfirmCreateBooking.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/ErrorPopUp.java</file>
-            <file>file:/C:/Users/isard/Desktop/JavaPadel/src/View/CourtPanel.java</file>
+            <file>file:/C:/Users/linke/Documents/NetBeansProjects/Proyecto-Padel/src/Controller/BookingController.java</file>
+            <file>file:/C:/Users/linke/Documents/NetBeansProjects/Proyecto-Padel/src/Model/Booking.java</file>
+            <file>file:/C:/Users/linke/Documents/NetBeansProjects/Proyecto-Padel/src/View/MaintenancePopUp.java</file>
+            <file>file:/C:/Users/linke/Documents/NetBeansProjects/Proyecto-Padel/src/View/AdminView.java</file>
         </group>
     </open-files>
 </project-private>

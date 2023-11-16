@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import Controller.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -155,10 +156,16 @@ public class MaintenancePopUp extends javax.swing.JFrame {
             javax.swing.JFrame error = new ErrorPopUpMaintenance("Select both dates");
             error.setVisible(true);
         } else{
-            LocalDate startDate = LocalDate.parse(startDay);
-            LocalDate endDate = LocalDate.parse(endDay);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+            LocalDate startDate = LocalDate.parse(startDay, formatter);
+            LocalDate endDate = LocalDate.parse(endDay, formatter);
+            LocalDate today = LocalDate.now();
             
-            if(startDate.isAfter(endDate)){
+            if (startDate.isBefore(today)){
+                javax.swing.JFrame error = new ErrorPopUpMaintenance("Start date cant be in past");
+                error.setVisible(true);
+            }
+            else if(startDate.isAfter(endDate)){
                 javax.swing.JFrame error = new ErrorPopUpMaintenance("Start date cant be after end date");
                 error.setVisible(true);
             } else if(endDate.isBefore(startDate)){
@@ -171,12 +178,9 @@ public class MaintenancePopUp extends javax.swing.JFrame {
                 javax.swing.JFrame error = new ErrorPopUpMaintenance("Select both hours");
                 error.setVisible(true);
             } else {
-                if(BookingController.blockCourt(Controller.courtId, startDay, startHour, endDay, endHour)){
-                    dispose();
-                } else {
-                    javax.swing.JFrame error = new ErrorPopUpMaintenance("Error on blocking");
-                    error.setVisible(true);
-                }
+                javax.swing.JFrame confirm = new ConfirmMaintenance(Controller.courtId, startDay, startHour, endDay, endHour);
+                confirm.setVisible(true);
+                dispose();
             }
         } 
     }//GEN-LAST:event_jButton1ActionPerformed
