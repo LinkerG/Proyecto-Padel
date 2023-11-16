@@ -8,7 +8,8 @@ import Controller.*;
 import Model.*;
 
 public class ConfirmCreateBooking extends javax.swing.JFrame {
-
+    private int posX, posY;
+    
     public ConfirmCreateBooking() {
         initComponents();
         setLocationRelativeTo(null);
@@ -24,7 +25,7 @@ public class ConfirmCreateBooking extends javax.swing.JFrame {
             setIconImage(iconImage);
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,6 +47,16 @@ public class ConfirmCreateBooking extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(335, 300));
         setUndecorated(true);
         setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 140, 129));
         jPanel1.setMaximumSize(new java.awt.Dimension(335, 300));
@@ -164,7 +175,19 @@ public class ConfirmCreateBooking extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
-  
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        posX = evt.getXOnScreen() - getX();
+        posY = evt.getYOnScreen() - getY();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int newX = evt.getXOnScreen() - posX;
+        int newY = evt.getYOnScreen() - posY;
+
+        setLocation(newX, newY);
+    }//GEN-LAST:event_formMouseDragged
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ConfirmBookingLabel;
     private javax.swing.JLabel CourtIdLabel;

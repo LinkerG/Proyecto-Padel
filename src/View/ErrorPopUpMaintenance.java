@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 public class ErrorPopUpMaintenance extends javax.swing.JFrame {
     private String messageString;
+    private int posX, posY;
     public ErrorPopUpMaintenance(String message) {
         this.messageString = message;
         initComponents();
@@ -38,6 +39,16 @@ public class ErrorPopUpMaintenance extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(335, 202));
         setUndecorated(true);
         setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 140, 129));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -87,6 +98,18 @@ public class ErrorPopUpMaintenance extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        posX = evt.getXOnScreen() - getX();
+        posY = evt.getYOnScreen() - getY();
+    }//GEN-LAST:event_formMousePressed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int newX = evt.getXOnScreen() - posX;
+        int newY = evt.getYOnScreen() - posY;
+
+        setLocation(newX, newY);
+    }//GEN-LAST:event_formMouseDragged
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel ConfirmBookingLabel;

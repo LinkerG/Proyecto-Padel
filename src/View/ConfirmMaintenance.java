@@ -8,7 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ConfirmMaintenance extends javax.swing.JFrame {
-    private int courtId;
+    private int courtId, posX, posY;
     private String startDay, endDay, startHour, endHour;
     public ConfirmMaintenance(int courtId, String startDay, String endDay, String startHour, String endHour) {
         this.courtId = courtId;
@@ -46,6 +46,16 @@ public class ConfirmMaintenance extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(335, 202));
         setUndecorated(true);
         setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 140, 129));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -116,6 +126,18 @@ public class ConfirmMaintenance extends javax.swing.JFrame {
             error.setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int newX = evt.getXOnScreen() - posX;
+        int newY = evt.getYOnScreen() - posY;
+
+        setLocation(newX, newY);
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        posX = evt.getXOnScreen() - getX();
+        posY = evt.getYOnScreen() - getY();
+    }//GEN-LAST:event_formMousePressed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel ConfirmBookingLabel;

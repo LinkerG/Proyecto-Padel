@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class MaintenancePopUp extends javax.swing.JFrame {
     private String startDay="", endDay = "", startHour = "", endHour = "";
+    private int posX, posY;
 
     public MaintenancePopUp() {
         initComponents();
@@ -50,6 +51,16 @@ public class MaintenancePopUp extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(335, 300));
         setUndecorated(true);
         setResizable(false);
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 140, 129));
         jPanel1.setMaximumSize(new java.awt.Dimension(335, 300));
@@ -244,6 +255,18 @@ int b = 0;
             b++;
         }
     }//GEN-LAST:event_EndDateChooserPropertyChange
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        int newX = evt.getXOnScreen() - posX;
+        int newY = evt.getYOnScreen() - posY;
+
+        setLocation(newX, newY);
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        posX = evt.getXOnScreen() - getX();
+        posY = evt.getYOnScreen() - getY();
+    }//GEN-LAST:event_formMousePressed
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ConfirmBookingLabel;
