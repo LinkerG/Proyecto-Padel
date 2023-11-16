@@ -8,8 +8,9 @@ import Controller.*;
 import Model.*;
 
 public class ConfirmDeleteBooking extends javax.swing.JFrame {
-
-    public ConfirmDeleteBooking() {
+    private Booking booking;
+    public ConfirmDeleteBooking(Booking booking) {
+        this.booking = booking;
         initComponents();
         setLocationRelativeTo(null);
         BufferedImage iconImage = null;
@@ -145,19 +146,9 @@ public class ConfirmDeleteBooking extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        if(BookingController.deleteBooking(Controller.bookingId) == true){
-            UserView.refreshCalendar();
-            dispose();
-        } else {
-            CourtIdLabel.setVisible(false);
-            DateLabel.setVisible(false);
-            DateLabel1.setVisible(false);
-            jButton1.setVisible(false);
-            jButton2.setVisible(false);
-            ErrorLabel.setVisible(true);
-            ErrorLabel1.setVisible(true);
-            jButton3.setVisible(true);
-        }
+        BookingController.cancelBooking(booking);
+        UserView.refreshCalendar();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

@@ -164,7 +164,10 @@ public class MaintenancePopUp extends javax.swing.JFrame {
             } else if(endDate.isBefore(startDate)){
                 javax.swing.JFrame error = new ErrorPopUpMaintenance("End date cant be before end date");
                 error.setVisible(true);
-            }else if (startHour.equals("") || endHour.equals("")) {
+            } else if(startDate.equals(endDate)){
+                javax.swing.JFrame error = new ErrorPopUpMaintenance("Both dates must be different");
+                error.setVisible(true);
+            } else if (startHour.equals("") || endHour.equals("")) {
                 javax.swing.JFrame error = new ErrorPopUpMaintenance("Select both hours");
                 error.setVisible(true);
             } else {

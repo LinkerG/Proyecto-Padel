@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import Controller.*;
 import Model.BookingStatus;
-import static View.UserView.calendar;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.Calendar;
 import javax.swing.SwingConstants;
 
 public class CourtPanel extends javax.swing.JPanel {
@@ -85,13 +83,13 @@ public class CourtPanel extends javax.swing.JPanel {
             // Add image
             JLabel LabelCourtImage = new javax.swing.JLabel();
             Boolean isFromUser = false, isFull = false;
-            int[] bookingIdHolder = { -1 };
+            Booking[] bookingHolder = { new Booking() };
             for(Booking booking : bookingListByDay){
                 if(booking.getHour().getTimeString().equals(hour)) {
                     if(court.getID() == booking.getCourtId() && booking.getUserEmail().equals(Controller.currentUser.getEmail())) {
                         if (booking.getStatus() != BookingStatus.CANCELLED){
                             isFromUser = true;
-                            bookingIdHolder[0] = booking.getBookingId();
+                            bookingHolder[0] = booking;
                         }
                     } else if(court.getID() == booking.getCourtId()) {
                         isFull = true;
@@ -115,9 +113,7 @@ public class CourtPanel extends javax.swing.JPanel {
                 courtText = "Cancel";
                 addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
-                        Controller.createBookingReference(court.getID(), day, hour);
-                        Controller.createBookingIdReference(bookingIdHolder[0]);
-                        javax.swing.JFrame confirm = new ConfirmDeleteBooking();
+                        javax.swing.JFrame confirm = new ConfirmDeleteBooking(bookingHolder[0]);
                         confirm.setVisible(true);
                         System.out.println("Intenta cancelar");
                     }

@@ -2,16 +2,13 @@ package Model;
 
 import Controller.Controller;
 import static Controller.Controller.statement;
-import java.lang.reflect.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class Booking {
@@ -22,6 +19,10 @@ public class Booking {
     private BookingHour hour;
     private BookingStatus status;
 
+    public Booking(){
+        
+    }
+    
     public Booking(int bookingId, String userEmail, int courtId, String day, BookingHour hour, BookingStatus status) {
         this.bookingId = bookingId;
         this.userEmail = userEmail;
