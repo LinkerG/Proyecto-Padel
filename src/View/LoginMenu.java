@@ -81,7 +81,6 @@ public class LoginMenu extends javax.swing.JFrame {
         TxtboxEmail.setBackground(new java.awt.Color(0, 90, 91));
         TxtboxEmail.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         TxtboxEmail.setForeground(new java.awt.Color(255, 255, 255));
-        TxtboxEmail.setText("admin@gmail.com");
         TxtboxEmail.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
         TxtboxEmail.setPreferredSize(new java.awt.Dimension(236, 50));
         TxtboxEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +97,6 @@ public class LoginMenu extends javax.swing.JFrame {
 
         TxtboxPassword.setBackground(new java.awt.Color(0, 90, 91));
         TxtboxPassword.setForeground(new java.awt.Color(255, 255, 255));
-        TxtboxPassword.setText("admin");
         TxtboxPassword.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 15, 1, 15));
         TxtboxPassword.setPreferredSize(new java.awt.Dimension(236, 50));
         TxtboxPassword.addActionListener(new java.awt.event.ActionListener() {
